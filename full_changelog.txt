@@ -1,0 +1,38 @@
+# >>>>>>>>>>>>>>>>>>>>>>>>
+# Current Objectives
+# >>>>>>>>>>>>>>>>>>>>>>>>
+
+- resize screen
+- organise folders
+> silenced background music temporarily
+
+
+###########################################
+# 0.1 Javadocs and File Structure 13/11/20
+###########################################
+
+- javadocs 'docs' folder
+- file structure reorganisation
+    > made src/java/frogger as content root directory
+    > put all the non-java files into "resources" folder
+        > further sub-categorized according to resource type
+    > Main.java updating major resource's links
+- resized GameBackground to 600x800
+- deleted redundant files
+    > old README.md
+    > frog background-20170521-151438.piskel
+    > smiiling-big-eyed-green-frog-clipart-6926.jpg
+    > small-red-car-3858-0.png
+    > frog background.png
+    > icon-frogger-pixel-512x512.png
+    > arcade.png
+
+
+
+#########################
+# Initial Commit 12/11/20
+#########################
+
+- set up workspace
+- build files folder
+- ensured build files
