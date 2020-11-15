@@ -10,6 +10,7 @@ import javafx.scene.input.KeyEvent;
 
 
 public class Animal extends Actor {
+	// Sprites
 	Image imgW1;
 	Image imgA1;
 	Image imgS1;
@@ -18,32 +19,50 @@ public class Animal extends Actor {
 	Image imgA2;
 	Image imgS2;
 	Image imgD2;
+
+	// TODO: score kept locally -> to move to global?
 	int points = 0;
+	/** how many frogs at the end */
 	int end = 0;
+	/** whether in second animation frame. no use */
 	private boolean second = false;
+	/** whether to restrict movement */
 	boolean noMove = false;
+
+	/** Movements Y and X? */
 	double movement = 13.3333333*2;
 	double movementX = 10.666666*2;
+
+	/** width of sprite */
 	int imgSize = 40;
+
+	/** cause of death */
 	boolean carDeath = false;
 	boolean waterDeath = false;
+
+	/** no clear usage. Player reaches end? */
 	boolean stop = false;
+	/** whether score has changed. no use */
 	boolean changeScore = false;
+	/** death animation frame (for both car and water) */
 	int carD = 0;
+	/** y-coord tracker. Decreases with each step but no use */
 	double w = 800;
+	/** ArrayList of intersecting End objects */
 	ArrayList<End> inter = new ArrayList<End>();
+
 	public Animal(String imageLink) {
 		setImage(new Image(imageLink, imgSize, imgSize, true, true));
 		setX(300);
 		setY(679.8+movement);
-		imgW1 = new Image("file:src/main/resources/frog/froggerUp.png", imgSize, imgSize, true, true);
-		imgA1 = new Image("file:src/main/resources/frog/froggerLeft.png", imgSize, imgSize, true, true);
-		imgS1 = new Image("file:src/main/resources/frog/froggerDown.png", imgSize, imgSize, true, true);
-		imgD1 = new Image("file:src/main/resources/frog/froggerRight.png", imgSize, imgSize, true, true);
-		imgW2 = new Image("file:src/main/resources/frog/froggerUpJump.png", imgSize, imgSize, true, true);
-		imgA2 = new Image("file:src/main/resources/frog/froggerLeftJump.png", imgSize, imgSize, true, true);
-		imgS2 = new Image("file:src/main/resources/frog/froggerDownJump.png", imgSize, imgSize, true, true);
-		imgD2 = new Image("file:src/main/resources/frog/froggerRightJump.png", imgSize, imgSize, true, true);
+		imgW1 = new Image("file:src/main/resources/frogger/frog/froggerUp.png", imgSize, imgSize, true, true);
+		imgA1 = new Image("file:src/main/resources/frogger/frog/froggerLeft.png", imgSize, imgSize, true, true);
+		imgS1 = new Image("file:src/main/resources/frogger/frog/froggerDown.png", imgSize, imgSize, true, true);
+		imgD1 = new Image("file:src/main/resources/frogger/frog/froggerRight.png", imgSize, imgSize, true, true);
+		imgW2 = new Image("file:src/main/resources/frogger/frog/froggerUpJump.png", imgSize, imgSize, true, true);
+		imgA2 = new Image("file:src/main/resources/frogger/frog/froggerLeftJump.png", imgSize, imgSize, true, true);
+		imgS2 = new Image("file:src/main/resources/frogger/frog/froggerDownJump.png", imgSize, imgSize, true, true);
+		imgD2 = new Image("file:src/main/resources/frogger/frog/froggerRightJump.png", imgSize, imgSize, true, true);
 		setOnKeyPressed(new EventHandler<KeyEvent>() {
 			public void handle(KeyEvent event){
 				if (noMove) {
@@ -147,20 +166,20 @@ public class Animal extends Actor {
 				carD++;
 			}
 			if (carD==1) {
-				setImage(new Image("file:src/main/resources/death/cardeath1.png", imgSize, imgSize, true, true));
+				setImage(new Image("file:src/main/resources/frogger/death/cardeath1.png", imgSize, imgSize, true, true));
 			}
 			if (carD==2) {
-				setImage(new Image("file:src/main/resources/death/cardeath2.png", imgSize, imgSize, true, true));
+				setImage(new Image("file:src/main/resources/frogger/death/cardeath2.png", imgSize, imgSize, true, true));
 			}
 			if (carD==3) {
-				setImage(new Image("file:src/main/resources/death/cardeath3.png", imgSize, imgSize, true, true));
+				setImage(new Image("file:src/main/resources/frogger/death/cardeath3.png", imgSize, imgSize, true, true));
 			}
 			if (carD == 4) {
 				setX(300);
 				setY(679.8+movement);
 				carDeath = false;
 				carD = 0;
-				setImage(new Image("file:src/main/resources/frog/froggerUp.png", imgSize, imgSize, true, true));
+				setImage(new Image("file:src/main/resources/frogger/frog/froggerUp.png", imgSize, imgSize, true, true));
 				noMove = false;
 				if (points>50) {
 					points-=50;
@@ -175,23 +194,23 @@ public class Animal extends Actor {
 				carD++;
 			}
 			if (carD==1) {
-				setImage(new Image("file:src/main/resources/death/waterdeath1.png", imgSize,imgSize , true, true));
+				setImage(new Image("file:src/main/resources/frogger/death/waterdeath1.png", imgSize,imgSize , true, true));
 			}
 			if (carD==2) {
-				setImage(new Image("file:src/main/resources/death/waterdeath2.png", imgSize,imgSize , true, true));
+				setImage(new Image("file:src/main/resources/frogger/death/waterdeath2.png", imgSize,imgSize , true, true));
 			}
 			if (carD==3) {
-				setImage(new Image("file:src/main/resources/death/waterdeath3.png", imgSize,imgSize , true, true));
+				setImage(new Image("file:src/main/resources/frogger/death/waterdeath3.png", imgSize,imgSize , true, true));
 			}
 			if (carD == 4) {
-				setImage(new Image("file:src/main/resources/death/waterdeath4.png", imgSize,imgSize , true, true));
+				setImage(new Image("file:src/main/resources/frogger/death/waterdeath4.png", imgSize,imgSize , true, true));
 			}
 			if (carD == 5) {
 				setX(300);
 				setY(679.8+movement);
 				waterDeath = false;
 				carD = 0;
-				setImage(new Image("file:src/main/resources/frog/froggerUp.png", imgSize, imgSize, true, true));
+				setImage(new Image("file:src/main/resources/frogger/frog/froggerUp.png", imgSize, imgSize, true, true));
 				noMove = false;
 				if (points>50) {
 					points-=50;

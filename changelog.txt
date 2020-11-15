@@ -2,9 +2,24 @@
 # Current Objectives
 # >>>>>>>>>>>>>>>>>>>>>>>>
 
+- frogger subfolder resources
 - resize screen
-- organise folders
-> silenced background music temporarily
+- refactor java files
+- resources
+
+
+
+###########################################
+# 0.2 Basic Project Organisation 15/11/20
+###########################################
+
+- updated .gitignore and removed .DS_Store from repo. Hope it works
+- set up resource file, and added frogger subfolder
+    > refactored code to accommodate subfolder
+- deleted (java)docs folder
+- renamed changelog file
+- cleaned up Main.java file's obstacle bulk
+
 
 
 ###########################################
@@ -13,10 +28,10 @@
 
 - javadocs 'docs' folder
 - file structure reorganisation
-    > made src/java/frogger as content root directory
+    > made src/java/frogger as source root directory
     > put all the non-java files into "resources" folder
         > further sub-categorized according to resource type
-    > Main.java updating major resource's links
+    > Refactored links/path of methods that use resources
 - resized GameBackground to 600x800
 - deleted redundant files
     > old README.md
