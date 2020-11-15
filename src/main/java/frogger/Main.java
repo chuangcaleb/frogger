@@ -36,7 +36,7 @@ public class Main extends Application {
 		animal = new Animal("file:src/main/resources/frogger/frog/froggerUp.png");
 		background.add(animal);
 
-		/*
+
 		background.add(new Log("file:src/main/resources/frogger/log/log3.png", 150, 0, 166, 0.75));
 		background.add(new Log("file:src/main/resources/frogger/log/log3.png", 150, 220, 166, 0.75));
 		background.add(new Log("file:src/main/resources/frogger/log/log3.png", 150, 440, 166, 0.75));
@@ -91,7 +91,7 @@ public class Main extends Application {
 		background.add(new Obstacle("file:src/main/resources/frogger/truck/truck2Right.png", 0, 540, 1, 200, 200));
 		background.add(new Obstacle("file:src/main/resources/frogger/truck/truck2Right.png", 500, 540, 1, 200, 200));
 		background.add(new Obstacle("file:src/main/resources/frogger/car/car1Left.png", 500, 490, -5, 50, 50));
-		*/
+
 		background.add(new Digit(0, 30, 360, 25));
 
 
@@ -120,6 +120,7 @@ public class Main extends Application {
             		background.stopMusic();
             		stop();
             		background.stop();
+
             		Alert alert = new Alert(AlertType.INFORMATION);
             		alert.setTitle("You Have Won The Game!");
             		alert.setHeaderText("Your High Score: "+animal.getPoints()+"!");
