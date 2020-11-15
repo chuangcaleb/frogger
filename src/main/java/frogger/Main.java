@@ -24,7 +24,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 
 	    background = new MyStage();
-	    Scene scene  = new Scene(background,600,800);
+	    Scene scene  = new Scene(background,460,548);
 
 		//Obstacle obstacle = new Obstacle("file:src/main/resources/frogger/truck/truck1Right.png", 25, 25, 3);
 		//Obstacle obstacle1 = new Obstacle("file:src/main/resources/frogger/truck/truck2Right.png", 100, 100,2 );
@@ -36,7 +36,7 @@ public class Main extends Application {
 		animal = new Animal("file:src/main/resources/frogger/frog/froggerUp.png");
 		background.add(animal);
 
-
+		/*
 		background.add(new Log("file:src/main/resources/frogger/log/log3.png", 150, 0, 166, 0.75));
 		background.add(new Log("file:src/main/resources/frogger/log/log3.png", 150, 220, 166, 0.75));
 		background.add(new Log("file:src/main/resources/frogger/log/log3.png", 150, 440, 166, 0.75));
@@ -99,9 +99,10 @@ public class Main extends Application {
 		//background.add(obstacle1);
 		//background.add(obstacle2);
 		//background.start();
+		 */
 
-		primaryStage.setTitle("Frogger");
 		primaryStage.setResizable(false);
+		primaryStage.setTitle("Frogger");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 

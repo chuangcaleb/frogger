@@ -8,8 +8,11 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
-
 public class Animal extends Actor {
+
+	public static final int STARTING_X = 214;
+	public static final int STARTING_Y = 464;
+
 	// Sprites
 	Image imgW1;
 	Image imgA1;
@@ -30,11 +33,11 @@ public class Animal extends Actor {
 	boolean noMove = false;
 
 	/** Movements Y and X? */
-	double movement = 13.3333333*2;
-	double movementX = 10.666666*2;
+	double movement = 17;
+	double movementX = 17;
 
 	/** width of sprite */
-	int imgSize = 40;
+	int imgSize = 32;
 
 	/** cause of death */
 	boolean carDeath = false;
@@ -53,8 +56,8 @@ public class Animal extends Actor {
 
 	public Animal(String imageLink) {
 		setImage(new Image(imageLink, imgSize, imgSize, true, true));
-		setX(300);
-		setY(679.8+movement);
+		setX(STARTING_X);
+		setY(STARTING_Y +movement);
 		imgW1 = new Image("file:src/main/resources/frogger/frog/froggerUp.png", imgSize, imgSize, true, true);
 		imgA1 = new Image("file:src/main/resources/frogger/frog/froggerLeft.png", imgSize, imgSize, true, true);
 		imgS1 = new Image("file:src/main/resources/frogger/frog/froggerDown.png", imgSize, imgSize, true, true);
@@ -154,8 +157,8 @@ public class Animal extends Actor {
 	public void act(long now) {
 		int bounds = 0;
 		if (getY()<0 || getY()>734) {
-			setX(300);
-			setY(679.8+movement);
+			setX(STARTING_X);
+			setY(STARTING_Y +movement);
 		}
 		if (getX()<0) {
 			move(movement*2, 0);
@@ -175,8 +178,8 @@ public class Animal extends Actor {
 				setImage(new Image("file:src/main/resources/frogger/death/cardeath3.png", imgSize, imgSize, true, true));
 			}
 			if (carD == 4) {
-				setX(300);
-				setY(679.8+movement);
+				setX(STARTING_X);
+				setY(STARTING_Y +movement);
 				carDeath = false;
 				carD = 0;
 				setImage(new Image("file:src/main/resources/frogger/frog/froggerUp.png", imgSize, imgSize, true, true));
@@ -206,8 +209,8 @@ public class Animal extends Actor {
 				setImage(new Image("file:src/main/resources/frogger/death/waterdeath4.png", imgSize,imgSize , true, true));
 			}
 			if (carD == 5) {
-				setX(300);
-				setY(679.8+movement);
+				setX(STARTING_X);
+				setY(STARTING_Y +movement);
 				waterDeath = false;
 				carD = 0;
 				setImage(new Image("file:src/main/resources/frogger/frog/froggerUp.png", imgSize, imgSize, true, true));

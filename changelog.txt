@@ -3,20 +3,26 @@
 # >>>>>>>>>>>>>>>>>>>>>>>>
 
 
-- resize screen
 - refactor java files
 - resources
-- remove .idea from gitHub
+- Still need to do boundary wrap checking and fitting
 
 ###########################################
-# 0.3  16/11/20
+# 0.3 Element Sizes 16/11/20
 ###########################################
 
-
+- resize scene/stage to have a proper grid-like pattern
+    H: 40 + 32 + 5*32=160 + 32 + (2+32+2)*5=180 + 52 + 52 == 548
+    W: 22 + 13*32 + 22 = 460
+- Resized GameBackground.png
+- Animal.java
+    > both movement directions to have speed of 17
+    > static final int for starting coordinates
+>> Still need to do boundary wrap checking and fitting
 
 
 ###########################################
-# 0.2 Basic Project Organisation 15/11/20
+# 0.2 Project Workspace Cleanup 15/11/20
 ###########################################
 
 - updated .gitignore and removed .DS_Store from repo. Hope it works
