@@ -3,9 +3,29 @@
 # >>>>>>>>>>>>>>>>>>>>>>>>
 
 
-- refactor java files
+- document
 - resources
 - Still need to do boundary wrap checking and fitting
+
+- if player spams downwards on bottom boundary, will misalign with grid because of second animation
+
+###########################################
+# 0.4 Frog Movement and Cleanup /11/20
+###########################################
+
+- Actor.java
+    > STAGE_HEIGHT and STAGE_WIDTH constants
+    > Javadoc comments
+- Animal.java
+    > Javadoc comments
+    > WATER_HEIGHT
+    > GRID_UNIT_L
+    > changed rebound value from 2*movement to just movement. Follows the grid.
+    > player rebounds on top and bottom boundary
+    ! if player spams downwards on any boundary, will misalign with grid because of second animation
+- Refactored Animal class renamed to Frog
+- Main.java: Renamed animal to frog
+
 
 ###########################################
 # 0.3 Element Sizes 16/11/20
@@ -39,7 +59,7 @@
 ###########################################
 
 - javadocs 'docs' folder
-- file structure reorganisation
+- file structure reorganisation according to MVC pattern
     > made src/java/frogger as source root directory
     > put all the non-java files into "resources" folder
         > further sub-categorized according to resource type

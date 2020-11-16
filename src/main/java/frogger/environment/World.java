@@ -16,8 +16,11 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
-
+/**
+ * The {@code World} class is an object that
+ */
 public abstract class World extends Pane {
+
     private AnimationTimer timer;
     
     public World() {
