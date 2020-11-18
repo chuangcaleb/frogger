@@ -2,15 +2,31 @@
 # Current Objectives
 # >>>>>>>>>>>>>>>>>>>>>>>>
 
-
 - document
 - resources
-- Still need to do boundary wrap checking and fitting
+- refactor out BackgroundImage
+- might need more refactoring for World
 
-- if player spams downwards on bottom boundary, will misalign with grid because of second animation
+! if player spams downwards on bottom boundary, will misalign with grid because of second animation
 
 ###########################################
-# 0.4 Frog Movement and Cleanup /11/20
+# 0.5 First MVC Module and Music 18/11/20
+###########################################
+
+- cleaned up Main.java
+- under java/frogger, introduced folders const, util, controller and view
+- new HomeView.java and HomeController.java to handle main menu page display and logic respectively (according to MVC pattern)
+- Refactored out MyStage
+    > HomeView to handle its World extension
+    > MusicPlayer to handle music methods
+
+- new MusicPlayer.java as a singleton to handle background music
+    > Instead of singleton object, made it as singleton class
+- Renamed main/resources/frogger/sound folder to music
+
+
+###########################################
+# 0.4 Frog Movement and Cleanup 16/11/20
 ###########################################
 
 - Actor.java
@@ -28,7 +44,7 @@
 
 
 ###########################################
-# 0.3 Element Sizes 16/11/20
+# 0.3 Element Sizes 15/11/20
 ###########################################
 
 - resize scene/stage to have a proper grid-like pattern

@@ -17,7 +17,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
 /**
- * The {@code World} class is an object that
+ * {@code World} class is an abstract object that extends to all Views.
+ *
+ * Timer (to migrate to individual models?), keystroke events, etc.
+ *
  */
 public abstract class World extends Pane {
 
