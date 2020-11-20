@@ -1,12 +1,12 @@
 package frogger.model.actor;
 
+import java.net.FileNameMap;
 import java.util.ArrayList;
 
-import javafx.event.EventHandler;
+import frogger.constant.Direction;
 
+import frogger.constant.FilePath;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 
 
 public class Frog extends Actor {
@@ -15,11 +15,14 @@ public class Frog extends Actor {
 	/** Starting x-coordinate of player */
 	public static final int STARTING_X = 214;
 	/** Starting y-coordinate of player */
-	public static final int STARTING_Y = 464;
+	public static final int STARTING_Y = 481;
 	/** bottom y-coordinate river */
 	public static final int WATER_HEIGHT = 252;
 	/** sprite width */
 	public static final int GRID_UNIT_L = 32;
+
+	private ArrayList<Image> facingSprites;
+	private ArrayList<Image> leapingSprites;
 
 	// Sprites
 	Image imgW1;
@@ -35,8 +38,8 @@ public class Frog extends Actor {
 	int points = 0;
 	/** how many frogs at the end */
 	int end = 0;
-	/** whether in second animation frame. no use */
-	private boolean second = false;
+	/** whether to prompt the second animation frame.*/
+	private boolean isJumping = false;
 	/** whether to restrict movement */
 	boolean noMove = false;
 
@@ -54,21 +57,26 @@ public class Frog extends Actor {
 	boolean changeScore = false;
 	/** death animation frame (for both car and water) */
 	int carD = 0;
-	/** y-coord tracker. Decreases with each step but no use */
+	/** y-coord tracker. Decreases with each step but no use... to increment score? */
 	double w = STAGE_HEIGHT;
 	/** ArrayList of intersecting End objects */
-	ArrayList<End> inter = new ArrayList<End>();
+	ArrayList<End> inter = new ArrayList<>();
+
+	boolean hasMoved = false;
 
 	public Frog(String imageLink) {
 
 		// set image of sprite by passing parameters
-		setImage(new Image(imageLink, GRID_UNIT_L, GRID_UNIT_L, true, true));
+		//setImage(new Image(imageLink, GRID_UNIT_L, GRID_UNIT_L, true, true));
+		super(imageLink, STARTING_X, STARTING_Y, GRID_UNIT_L, GRID_UNIT_L);
+		initSprites();
 
 		// set starting coords
-		setX(STARTING_X);
-		setY(STARTING_Y + movement);
+//		setX(STARTING_X);
+//		setY(STARTING_Y);
 
 		// load all the sprites
+		/*
 		imgW1 = new Image("file:src/main/resources/frogger/frog/froggerUp.png", GRID_UNIT_L, GRID_UNIT_L, true, true);
 		imgA1 = new Image("file:src/main/resources/frogger/frog/froggerLeft.png", GRID_UNIT_L, GRID_UNIT_L, true, true);
 		imgS1 = new Image("file:src/main/resources/frogger/frog/froggerDown.png", GRID_UNIT_L, GRID_UNIT_L, true, true);
@@ -77,98 +85,158 @@ public class Frog extends Actor {
 		imgA2 = new Image("file:src/main/resources/frogger/frog/froggerLeftJump.png", GRID_UNIT_L, GRID_UNIT_L, true, true);
 		imgS2 = new Image("file:src/main/resources/frogger/frog/froggerDownJump.png", GRID_UNIT_L, GRID_UNIT_L, true, true);
 		imgD2 = new Image("file:src/main/resources/frogger/frog/froggerRightJump.png", GRID_UNIT_L, GRID_UNIT_L, true, true);
+		 */
 
-		// handles key press events
-		setOnKeyPressed(new EventHandler<KeyEvent>() {
-			public void handle(KeyEvent event){
-				if (noMove) {
-					
-				}
-				else {
-				if (second) {
-					if (event.getCode() == KeyCode.W) {	  
-		                move(0, -movement);
-		                changeScore = false;
-		                setImage(imgW1);
-		                second = false;
-		            }
-		            else if (event.getCode() == KeyCode.A) {	            	
-		            	 move(-movementX, 0);
-		            	 setImage(imgA1);
-		            	 second = false;
-		            }
-		            else if (event.getCode() == KeyCode.S) {	            	
-		            	 move(0, movement);
-		            	 setImage(imgS1);
-		            	 second = false;
-		            }
-		            else if (event.getCode() == KeyCode.D) {	            	
-		            	 move(movementX, 0);
-		            	 setImage(imgD1);
-		            	 second = false;
-		            }
-				}
-				else if (event.getCode() == KeyCode.W) {	            	
-	                move(0, -movement);
-	                setImage(imgW2);
-	                second = true;
-	            }
-	            else if (event.getCode() == KeyCode.A) {	            	
-	            	 move(-movementX, 0);
-	            	 setImage(imgA2);
-	            	 second = true;
-	            }
-	            else if (event.getCode() == KeyCode.S) {	            	
-	            	 move(0, movement);
-	            	 setImage(imgS2);
-	            	 second = true;
-	            }
-	            else if (event.getCode() == KeyCode.D) {	            	
-	            	 move(movementX, 0);
-	            	 setImage(imgD2);
-	            	 second = true;
-	            }
-	        }
-			}
-		});
-
-		// handles key release event
-		setOnKeyReleased(new EventHandler<KeyEvent>() {
-			public void handle(KeyEvent event) {
-				if (noMove) {}
-				else {
-				if (event.getCode() == KeyCode.W) {	  
-					if (getY() < w) {
-						changeScore = true;
-						w = getY();
-						points+=10;
-					}
-	                move(0, -movement);
-	                setImage(imgW1);
-	                second = false;
-	            }
-	            else if (event.getCode() == KeyCode.A) {	            	
-	            	 move(-movementX, 0);
-	            	 setImage(imgA1);
-	            	 second = false;
-	            }
-	            else if (event.getCode() == KeyCode.S) {	            	
-	            	 move(0, movement);
-	            	 setImage(imgS1);
-	            	 second = false;
-	            }
-	            else if (event.getCode() == KeyCode.D) {	            	
-	            	 move(movementX, 0);
-	            	 setImage(imgD1);
-	            	 second = false;
-	            }
-	        }
-			}
-			
-		});
+//		// handles key press events
+//		setOnKeyPressed(new EventHandler<KeyEvent>() {
+//			public void handle(KeyEvent event){
+//				if (noMove) {
+//
+//				}
+//				else {
+//				if (second) {
+//					if (event.getCode() == KeyCode.W) {
+//		                move(0, -movement);
+//		                changeScore = false;
+//		                setImage(imgW1);
+//		                second = false;
+//		            }
+//		            else if (event.getCode() == KeyCode.A) {
+//		            	 move(-movementX, 0);
+//		            	 setImage(imgA1);
+//		            	 second = false;
+//		            }
+//		            else if (event.getCode() == KeyCode.S) {
+//		            	 move(0, movement);
+//		            	 setImage(imgS1);
+//		            	 second = false;
+//		            }
+//		            else if (event.getCode() == KeyCode.D) {
+//		            	 move(movementX, 0);
+//		            	 setImage(imgD1);
+//		            	 second = false;
+//		            }
+//				}
+//				else if (event.getCode() == KeyCode.W) {
+//	                move(0, -movement);
+//	                setImage(imgW2);
+//	                second = true;
+//	            }
+//	            else if (event.getCode() == KeyCode.A) {
+//	            	 move(-movementX, 0);
+//	            	 setImage(imgA2);
+//	            	 second = true;
+//	            }
+//	            else if (event.getCode() == KeyCode.S) {
+//	            	 move(0, movement);
+//	            	 setImage(imgS2);
+//	            	 second = true;
+//	            }
+//	            else if (event.getCode() == KeyCode.D) {
+//	            	 move(movementX, 0);
+//	            	 setImage(imgD2);
+//	            	 second = true;
+//	            }
+//	        }
+//			}
+//		});
+//
+//		// handles key release event
+//		setOnKeyReleased(new EventHandler<KeyEvent>() {
+//			public void handle(KeyEvent event) {
+//				if (noMove) {}
+//				else {
+//				if (event.getCode() == KeyCode.W) {
+//					if (getY() < w) {
+//						changeScore = true;
+//						w = getY();
+//						points+=10;
+//					}
+//	                move(0, -movement);
+//	                setImage(imgW1);
+//	                second = false;
+//	            }
+//	            else if (event.getCode() == KeyCode.A) {
+//	            	 move(-movementX, 0);
+//	            	 setImage(imgA1);
+//	            	 second = false;
+//	            }
+//	            else if (event.getCode() == KeyCode.S) {
+//	            	 move(0, movement);
+//	            	 setImage(imgS1);
+//	            	 second = false;
+//	            }
+//	            else if (event.getCode() == KeyCode.D) {
+//	            	 move(movementX, 0);
+//	            	 setImage(imgD1);
+//	            	 second = false;
+//	            }
+//	        }
+//			}
+//
+//		});
 	}
 
-	// tick updates
+	public void leap(Direction dir, boolean keyPressed) {
+
+		// escape if not yet made a move when key is being released
+		if (!hasMoved && !keyPressed) return;
+		// escape if movement is locked and in stationary frame
+		if (noMove && !isJumping) return;
+
+		switch (dir) {
+			case UP -> {
+				move(0, -movement);
+				setImage((isJumping) ? facingSprites.get(0) : leapingSprites.get(0));
+			}
+			case LEFT -> {
+				move(-movement, 0);
+				setImage((isJumping) ? facingSprites.get(1) : leapingSprites.get(1));
+			}
+			case RIGHT -> {
+				move(movement, 0);
+				setImage((isJumping) ? facingSprites.get(2) : leapingSprites.get(2));
+			}
+			case DOWN -> {
+				if (getY() < 476) {
+					move(0, movement);
+					setImage((isJumping) ? facingSprites.get(3) : leapingSprites.get(3));
+				}
+			}
+		}
+
+		// if key pressed, flip isJumping; else false
+		isJumping = keyPressed && !isJumping;
+		// if key pressed, then flag hasMoved (to make more efficient?)
+		if (keyPressed) hasMoved = true;
+
+	}
+
+	private void initSprites() {
+
+		facingSprites =
+			new ArrayList<>() {
+				{
+					add(new Image(FilePath.IMAGE_FROG_PATH + "Up.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
+					add(new Image(FilePath.IMAGE_FROG_PATH + "Left.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
+					add(new Image(FilePath.IMAGE_FROG_PATH + "Right.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
+					add(new Image(FilePath.IMAGE_FROG_PATH + "Down.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
+				}
+			};
+
+		leapingSprites =
+			new ArrayList<>() {
+				{
+					add(new Image(FilePath.IMAGE_FROG_PATH + "UpJump.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
+					add(new Image(FilePath.IMAGE_FROG_PATH + "LeftJump.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
+					add(new Image(FilePath.IMAGE_FROG_PATH + "RightJump.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
+					add(new Image(FilePath.IMAGE_FROG_PATH + "DownJump.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
+				}
+			};
+	}
+
+
+		// tick updates
 	@Override
 	public void act(long now) {
 
@@ -318,6 +386,7 @@ public class Frog extends Actor {
 			//setY(679.8+movement);
 		}
 	}
+
 	public boolean getStop() {
 		return end==5;
 	}

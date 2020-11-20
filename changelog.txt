@@ -6,8 +6,39 @@
 - resources
 - refactor out BackgroundImage
 - might need more refactoring for World
+- am going to try to make a Builder design pattern
 
 ! if player spams downwards on bottom boundary, will misalign with grid because of second animation
+
+#####################################################
+# 0.6 Refactored Structure and Frog Movement 20/11/20
+#####################################################
+
+REFACTORED STRUCTURE
+- removed HomeController and HomeView (they are still there, commented out, if there might be use for them)
+- made Main.java call a new class, SceneSwitcher, a singleton that handles switching scenes
+- SceneSwitcher has switchScene() which takes a World and sets its Scene for Main.primaryStage, besides assigning event handler for keystrokes to the World
+- World has two methods, keyPressed and keyReleased as the event handler methods which calls frog.leap
+
+CONSTANTS
+- Direction.java is an enum that keeps the list of cardinal directions
+- Keystroke.java is a class that has a HashMap that matches the WASD KeyCode to their direction
+- FilePath.java is a class that stores public static final Strings of the filepaths of resources
+
+FROG SPRITES AND MOVEMENT REDESIGNED
+- changed Frog's constructor to include starting co-ords and image size
+- two new ArrayLists, facingSprites and leapingSprites
+- initSprites() loads these arrays with newly instantiated Images
+- leap() takes in direction and which key event is coming in
+    > handles exceptions
+    > switch statement for each scenario
+        > checks for ignoring key events that try to escape boundaries
+
+
+MISC
+- added more parameters to Actor's constructor (+ double startX, double startY, int width, int height)
+- cleaned up temporary debug code
+- general documentation for all affected code
 
 ###########################################
 # 0.5 First MVC Module and Music 18/11/20

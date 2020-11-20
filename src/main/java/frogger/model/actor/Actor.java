@@ -1,8 +1,8 @@
 package frogger.model.actor;
 
-import frogger.environment.World;
+import frogger.model.state.World;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.InputEvent;
 
 import java.util.ArrayList;
 
@@ -15,6 +15,17 @@ public abstract class Actor extends ImageView{
     public static final int STAGE_WIDTH = 460;
     /** Stage height */
     public static final int STAGE_HEIGHT = 548;
+
+    public Actor() {
+
+    }
+
+    public Actor(String imageLink, double startX, double startY, int width, int height) {
+
+        setImage(new Image(imageLink, width, height,true,true));
+        move(startX,startY);
+
+    }
 
     /**
      * Moves the actor by dx/dy coordinates
@@ -52,7 +63,7 @@ public abstract class Actor extends ImageView{
      * @return Array of intersecting objects
      */
     public <A extends Actor> java.util.List<A> getIntersectingObjects(java.lang.Class<A> cls){
-        ArrayList<A> someArray = new ArrayList<A>();
+        ArrayList<A> someArray = new ArrayList<>();
         for (A actor: getWorld().getObjects(cls)) {
             if (actor != this && actor.intersects(this.getBoundsInLocal())) {
                 someArray.add(actor);

@@ -1,8 +1,7 @@
 package frogger;
 
-import frogger.controller.*;
 import frogger.util.MusicPlayer;
-import frogger.view.*;
+import frogger.util.SceneSwitcher;
 import frogger.environment.*;
 import frogger.model.actor.*;
 
@@ -28,15 +27,16 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 
-		Scene scene  = new Scene(new HomeController(primaryStage).getView());
+		//Scene scene  = new Scene(new HomeController(primaryStage).getView());
 
+		Main.primaryStage = primaryStage;
 		primaryStage.setResizable(false);
 		primaryStage.setTitle("Frogger");
-		primaryStage.setScene(scene);
-		primaryStage.show();
 
 		// TODO: unmute the music later before final product
-		//MusicPlayer.INSTANCE.playMusic();
+//		MusicPlayer.INSTANCE.playMusic();
+		SceneSwitcher.INSTANCE.switchToHome();
+
 	}
 
 	// Can be deleted?
