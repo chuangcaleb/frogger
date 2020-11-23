@@ -26,7 +26,7 @@ public enum SceneSwitcher {
 		Main.getPrimaryStage().setScene(scene);
 		Main.getPrimaryStage().show();
 
-		// add event heandlers for this scene
+		// add event handlers for this scene
 		scene.addEventHandler(KeyEvent.KEY_PRESSED, world::keyPressed);
 		scene.addEventHandler(KeyEvent.KEY_RELEASED, world::keyReleased);
 

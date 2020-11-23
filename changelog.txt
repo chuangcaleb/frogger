@@ -3,12 +3,43 @@
 # >>>>>>>>>>>>>>>>>>>>>>>>
 
 - document
-- resources
-- refactor out BackgroundImage
-- might need more refactoring for World
-- am going to try to make a Builder design pattern
+- load sprites in
+- use a decorator design pattern? State design for scenes?
+- identifier parameter for what log/car type
+
+LONG-TERM OBJECTIVES
+- README
+- high level class diagram
+- Javadocs
+- Video
+- Start Screen w/ picture -> Info button
+- High Score popup at the end of every round, showing scores from each round, highest at the top
+- Refactor code w/ design patterns
+- Organize the code to adhere to the MVC pattern
+- Create a permanent high score list (using a file to store scores)
+- Add interesting levels to the game (either follow the original Frogger game levels or come up with your own ideas)
+- Add meaningful JUnit tests
+- Use build files (Ant or Maven or Gradle)
 
 ! if player spams downwards on bottom boundary, will misalign with grid because of second animation
+
+
+######################################################
+# 0.7 Resources, DyanamicActors and Obstacles 23/11/20
+######################################################
+
+- Deleted BackgroundImage
+- Renamed Actor into DynamicActor and made it inherit a new class called Actor
+    > Actor is for all general sprite objects to add into World
+    > DynamicActor are for non-static sprites that need to have tick updates and collision checks
+- updated Actor, DynamicActor and World to have their declarations and methods to use the new proper class types
+    > applied Liskov's Substitution Principle: Actor can be replaced with DynamicActor
+- removed the String imageLink parameter for all constructors of the subclasses of Actor, since they all have their own default sprite (except log and car)
+- updated the constructors and some FilePaths for obstacles
+- animation methods for Turtles
+- added class Car.java, similar to Log
+
+- renamed WetTurtles images
 
 #####################################################
 # 0.6 Refactored Structure and Frog Movement 20/11/20
@@ -34,11 +65,11 @@ FROG SPRITES AND MOVEMENT REDESIGNED
     > switch statement for each scenario
         > checks for ignoring key events that try to escape boundaries
 
-
 MISC
 - added more parameters to Actor's constructor (+ double startX, double startY, int width, int height)
 - cleaned up temporary debug code
 - general documentation for all affected code
+
 
 ###########################################
 # 0.5 First MVC Module and Music 18/11/20

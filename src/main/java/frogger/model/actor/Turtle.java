@@ -1,43 +1,51 @@
 package frogger.model.actor;
 
+import frogger.constant.FilePath;
 import javafx.scene.image.Image;
 
-public class Turtle extends Actor{
-	Image turtle1;
-	Image turtle2;
-	Image turtle3;
-	private int speed;
-	int i = 1;
-	boolean bool = true;
+import java.util.ArrayList;
+
+/**
+ * {@code Turtle} is an Obstacle that moves horizontally in water.
+ */
+public class Turtle extends Obstacle {
+
+	/** Array of sprites */
+	private ArrayList<Image> sprites;
+
+	public Turtle(int size, int x, int y, double speed) {
+		super(FilePath.IMG_TURTLE_1,x, y, size,size, speed);
+		initSprites(size);
+	}
+
 	@Override
 	public void act(long now) {
 
-				if (now/900000000  % 3 ==0) {
-					setImage(turtle2);
-					
-				}
-				else if (now/900000000 % 3 == 1) {
-					setImage(turtle1);
-					
-				}
-				else if (now/900000000 %3 == 2) {
-					setImage(turtle3);
-					
-				}
-			
-		move(speed , 0);
-		if (getX() > 600 && speed>0)
-			setX(-200);
-		if (getX() < -75 && speed<0)
-			setX(600);
+		animation(now);
+		super.act(now);
+
 	}
-	public Turtle(int xpos, int ypos, int s, int w, int h) {
-		turtle1 = new Image("file:src/main/resources/frogger/turtle/TurtleAnimation1.png", w, h, true, true);
-		turtle2 = new Image("file:src/main/resources/frogger/turtle/TurtleAnimation2.png", w, h, true, true);
-		turtle3 = new Image("file:src/main/resources/frogger/turtle/TurtleAnimation3.png", w, h, true, true);
-		setX(xpos);
-		setY(ypos);
-		speed = s;
-		setImage(turtle2);
+
+	/**
+	 * Handles animation of Turtle.
+	 */
+	public void animation(long now) {
+		int frame = (int) (now / 900000000 % 3);
+		setImage(sprites.get(frame));
 	}
+
+	private void initSprites(int size) {
+
+		sprites =
+			new ArrayList<>() {
+				{
+					add(new Image(FilePath.IMG_TURTLE_1, size, size, true, true));
+					add(new Image(FilePath.IMG_TURTLE_2, size, size, true, true));
+					add(new Image(FilePath.IMG_TURTLE_3, size, size, true, true));
+					add(new Image(FilePath.IMG_TURTLE_4, size, size, true, true));
+				}
+			};
+
+	}
+
 }

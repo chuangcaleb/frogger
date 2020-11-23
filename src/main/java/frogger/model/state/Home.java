@@ -6,6 +6,9 @@ package frogger.model.state;
 public class Home extends State {
 
 	public Home() {
+
+
+
 	}
 
 }

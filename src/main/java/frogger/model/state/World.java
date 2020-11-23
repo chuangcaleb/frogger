@@ -4,22 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import frogger.constant.Keystroke;
-import frogger.environment.BackgroundImage;
 import frogger.model.actor.Actor;
 import frogger.constant.FilePath;
 
+import frogger.model.actor.DynamicActor;
 import frogger.model.actor.Frog;
 import javafx.animation.AnimationTimer;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 
 /**
  * {@code World} class is an object that extends the root, has a State as well as handles timer and keyEvents.
@@ -29,7 +22,7 @@ import javafx.scene.layout.StackPane;
  */
 public class World extends Pane {
 
-	BackgroundImage froggerback;
+	Actor froggerback;
 	Frog frog;
 	private State state;
 
@@ -39,10 +32,11 @@ public class World extends Pane {
 
 		this.state = state;
 
-		froggerback = new BackgroundImage(FilePath.IMAGE_BG);
+		// Always have the main background
+		froggerback = new Actor(FilePath.IMG_BG, 0,0,460, 548);
         add(froggerback);
-
-        frog = new Frog(FilePath.IMAGE_FROG_ROOT);
+		// Always have frog
+        frog = new Frog();
         add(frog);
 
     	//sceneProperty().addListener(new ChangeListener<Scene>() {
@@ -94,10 +88,10 @@ public class World extends Pane {
             @Override
             public void handle(long now) {
                 //act(now);
-                List<Actor> actors = getObjects(Actor.class);
+                List<DynamicActor> sprites = getObjects(DynamicActor.class);
 
-                for (Actor anActor: actors) {
-                	anActor.act(now);
+                for (DynamicActor aSprite : sprites) {
+                	aSprite.act(now);
                 }
 
             }
@@ -114,13 +108,12 @@ public class World extends Pane {
     }
 
     // move add and remove and get objects to StateLoader
-
-	public void add(Actor actor) {
-        getChildren().add(actor);
+	public void add(Actor Actor) {
+        getChildren().add(Actor);
     }
 
-    public void remove(Actor actor) {
-        getChildren().remove(actor);
+    public void remove(Actor Actor) {
+        getChildren().remove(Actor);
     }
 
     public <A extends Actor> List<A> getObjects(Class<A> cls) {

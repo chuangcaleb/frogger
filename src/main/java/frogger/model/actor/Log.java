@@ -1,27 +1,15 @@
 package frogger.model.actor;
 
-import javafx.scene.image.Image;
+import frogger.constant.FilePath;
 
-public class Log extends Actor {
-
-	private double speed;
-	@Override
-	public void act(long now) {
-		move(speed , 0);
-		if (getX()>600 && speed>0)
-			setX(-180);
-		if (getX()<-300 && speed<0)
-			setX(700);
-	}
+/**
+ * {@code Log} is an Obstacle that moves horizontally in water.
+ */
+public class Log extends Obstacle {
 	
-	public Log(String imageLink, int size, int xpos, int ypos, double s) {
-		setImage(new Image(imageLink, size,size, true, true));
-		setX(xpos);
-		setY(ypos);
-		speed = s;
+	public Log(int size, int x, int y, double speed) {
+		super(FilePath.IMG_LOG_MED,x, y, size,size, speed);
 		
 	}
-	public boolean getLeft() {
-		return speed < 0;
-	}
+
 }

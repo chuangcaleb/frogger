@@ -1,6 +1,5 @@
 package frogger.model.actor;
 
-import java.net.FileNameMap;
 import java.util.ArrayList;
 
 import frogger.constant.Direction;
@@ -9,7 +8,7 @@ import frogger.constant.FilePath;
 import javafx.scene.image.Image;
 
 
-public class Frog extends Actor {
+public class Frog extends DynamicActor {
 
 	// TODO: move to a dedicated constant .java folder?
 	/** Starting x-coordinate of player */
@@ -21,18 +20,9 @@ public class Frog extends Actor {
 	/** sprite width */
 	public static final int GRID_UNIT_L = 32;
 
+	/** Array of sprites */
 	private ArrayList<Image> facingSprites;
 	private ArrayList<Image> leapingSprites;
-
-	// Sprites
-	Image imgW1;
-	Image imgA1;
-	Image imgS1;
-	Image imgD1;
-	Image imgW2;
-	Image imgA2;
-	Image imgS2;
-	Image imgD2;
 
 	// TODO: score kept locally -> to move to global?
 	int points = 0;
@@ -64,117 +54,12 @@ public class Frog extends Actor {
 
 	boolean hasMoved = false;
 
-	public Frog(String imageLink) {
+	public Frog() {
 
 		// set image of sprite by passing parameters
-		//setImage(new Image(imageLink, GRID_UNIT_L, GRID_UNIT_L, true, true));
-		super(imageLink, STARTING_X, STARTING_Y, GRID_UNIT_L, GRID_UNIT_L);
+		super(FilePath.IMG_FROG_ROOT, STARTING_X, STARTING_Y, GRID_UNIT_L, GRID_UNIT_L);
 		initSprites();
 
-		// set starting coords
-//		setX(STARTING_X);
-//		setY(STARTING_Y);
-
-		// load all the sprites
-		/*
-		imgW1 = new Image("file:src/main/resources/frogger/frog/froggerUp.png", GRID_UNIT_L, GRID_UNIT_L, true, true);
-		imgA1 = new Image("file:src/main/resources/frogger/frog/froggerLeft.png", GRID_UNIT_L, GRID_UNIT_L, true, true);
-		imgS1 = new Image("file:src/main/resources/frogger/frog/froggerDown.png", GRID_UNIT_L, GRID_UNIT_L, true, true);
-		imgD1 = new Image("file:src/main/resources/frogger/frog/froggerRight.png", GRID_UNIT_L, GRID_UNIT_L, true, true);
-		imgW2 = new Image("file:src/main/resources/frogger/frog/froggerUpJump.png", GRID_UNIT_L, GRID_UNIT_L, true, true);
-		imgA2 = new Image("file:src/main/resources/frogger/frog/froggerLeftJump.png", GRID_UNIT_L, GRID_UNIT_L, true, true);
-		imgS2 = new Image("file:src/main/resources/frogger/frog/froggerDownJump.png", GRID_UNIT_L, GRID_UNIT_L, true, true);
-		imgD2 = new Image("file:src/main/resources/frogger/frog/froggerRightJump.png", GRID_UNIT_L, GRID_UNIT_L, true, true);
-		 */
-
-//		// handles key press events
-//		setOnKeyPressed(new EventHandler<KeyEvent>() {
-//			public void handle(KeyEvent event){
-//				if (noMove) {
-//
-//				}
-//				else {
-//				if (second) {
-//					if (event.getCode() == KeyCode.W) {
-//		                move(0, -movement);
-//		                changeScore = false;
-//		                setImage(imgW1);
-//		                second = false;
-//		            }
-//		            else if (event.getCode() == KeyCode.A) {
-//		            	 move(-movementX, 0);
-//		            	 setImage(imgA1);
-//		            	 second = false;
-//		            }
-//		            else if (event.getCode() == KeyCode.S) {
-//		            	 move(0, movement);
-//		            	 setImage(imgS1);
-//		            	 second = false;
-//		            }
-//		            else if (event.getCode() == KeyCode.D) {
-//		            	 move(movementX, 0);
-//		            	 setImage(imgD1);
-//		            	 second = false;
-//		            }
-//				}
-//				else if (event.getCode() == KeyCode.W) {
-//	                move(0, -movement);
-//	                setImage(imgW2);
-//	                second = true;
-//	            }
-//	            else if (event.getCode() == KeyCode.A) {
-//	            	 move(-movementX, 0);
-//	            	 setImage(imgA2);
-//	            	 second = true;
-//	            }
-//	            else if (event.getCode() == KeyCode.S) {
-//	            	 move(0, movement);
-//	            	 setImage(imgS2);
-//	            	 second = true;
-//	            }
-//	            else if (event.getCode() == KeyCode.D) {
-//	            	 move(movementX, 0);
-//	            	 setImage(imgD2);
-//	            	 second = true;
-//	            }
-//	        }
-//			}
-//		});
-//
-//		// handles key release event
-//		setOnKeyReleased(new EventHandler<KeyEvent>() {
-//			public void handle(KeyEvent event) {
-//				if (noMove) {}
-//				else {
-//				if (event.getCode() == KeyCode.W) {
-//					if (getY() < w) {
-//						changeScore = true;
-//						w = getY();
-//						points+=10;
-//					}
-//	                move(0, -movement);
-//	                setImage(imgW1);
-//	                second = false;
-//	            }
-//	            else if (event.getCode() == KeyCode.A) {
-//	            	 move(-movementX, 0);
-//	            	 setImage(imgA1);
-//	            	 second = false;
-//	            }
-//	            else if (event.getCode() == KeyCode.S) {
-//	            	 move(0, movement);
-//	            	 setImage(imgS1);
-//	            	 second = false;
-//	            }
-//	            else if (event.getCode() == KeyCode.D) {
-//	            	 move(movementX, 0);
-//	            	 setImage(imgD1);
-//	            	 second = false;
-//	            }
-//	        }
-//			}
-//
-//		});
 	}
 
 	public void leap(Direction dir, boolean keyPressed) {
@@ -190,11 +75,11 @@ public class Frog extends Actor {
 				setImage((isJumping) ? facingSprites.get(0) : leapingSprites.get(0));
 			}
 			case LEFT -> {
-				move(-movement, 0);
+				if (getX() > 8) move(-movement, 0);
 				setImage((isJumping) ? facingSprites.get(1) : leapingSprites.get(1));
 			}
 			case RIGHT -> {
-				move(movement, 0);
+				if (getX() < 428) move(movement, 0);
 				setImage((isJumping) ? facingSprites.get(2) : leapingSprites.get(2));
 			}
 			case DOWN -> {
@@ -217,30 +102,28 @@ public class Frog extends Actor {
 		facingSprites =
 			new ArrayList<>() {
 				{
-					add(new Image(FilePath.IMAGE_FROG_PATH + "Up.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
-					add(new Image(FilePath.IMAGE_FROG_PATH + "Left.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
-					add(new Image(FilePath.IMAGE_FROG_PATH + "Right.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
-					add(new Image(FilePath.IMAGE_FROG_PATH + "Down.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
+					add(new Image(FilePath.IMG_FROG_PATH + "Up.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
+					add(new Image(FilePath.IMG_FROG_PATH + "Left.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
+					add(new Image(FilePath.IMG_FROG_PATH + "Right.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
+					add(new Image(FilePath.IMG_FROG_PATH + "Down.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
 				}
 			};
 
 		leapingSprites =
 			new ArrayList<>() {
 				{
-					add(new Image(FilePath.IMAGE_FROG_PATH + "UpJump.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
-					add(new Image(FilePath.IMAGE_FROG_PATH + "LeftJump.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
-					add(new Image(FilePath.IMAGE_FROG_PATH + "RightJump.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
-					add(new Image(FilePath.IMAGE_FROG_PATH + "DownJump.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
+					add(new Image(FilePath.IMG_FROG_PATH + "UpJump.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
+					add(new Image(FilePath.IMG_FROG_PATH + "LeftJump.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
+					add(new Image(FilePath.IMG_FROG_PATH + "RightJump.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
+					add(new Image(FilePath.IMG_FROG_PATH + "DownJump.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
 				}
 			};
 	}
 
 
-		// tick updates
+	// tick updates
 	@Override
 	public void act(long now) {
-
-		int bounds = 0;
 
 
 		// BOUNDARY CHECK
@@ -332,59 +215,59 @@ public class Frog extends Actor {
 
 		}
 
-		// death by car
-		if (getIntersectingObjects(Obstacle.class).size() >= 1) {
-			carDeath = true;
-		}
-		// what does this do??
-		if (getX() == 240 && getY() == 82) {
-			stop = true;
-		}
-
-		// riding logs
-		if (getIntersectingObjects(Log.class).size() >= 1 && !noMove) {
-
-			// check direction of log
-			if(getIntersectingObjects(Log.class).get(0).getLeft())
-				move(-2,0);
-			else
-				move (.75,0);
-		} // riding turtles
-		else if (getIntersectingObjects(Turtle.class).size() >= 1 && !noMove) {
-			move(-1,0);
-		} // riding wetTurtles. To aggregate with Turtles
-		else if (getIntersectingObjects(WetTurtle.class).size() >= 1) {
-			if (getIntersectingObjects(WetTurtle.class).get(0).isSunk()) {
-				waterDeath = true;
-			} else {
-				move(-1, 0);
-			}
-		}
-		// reaching the end
-		else if (getIntersectingObjects(End.class).size() >= 1) {
-			inter = (ArrayList<End>) getIntersectingObjects(End.class);
-
-			// if the End is already activated
-			if (getIntersectingObjects(End.class).get(0).isActivated()) {
-				// to neutralise the function?
-				end--;
-				points-=50;
-			}
-
-			points+=50;
-			changeScore = true;
-			w=STAGE_HEIGHT;
-			getIntersectingObjects(End.class).get(0).setEnd();
-			end++;
-			setX(STARTING_X);
-			setY(STARTING_Y+movement);
-		}
-		// else if not on floating object but is in water, then die
-		else if (getY()<WATER_HEIGHT){
-			waterDeath = true;
-			//setX(300);
-			//setY(679.8+movement);
-		}
+//		// death by car
+//		if (getIntersectingObjects(Obstacle.class).size() >= 1) {
+//			carDeath = true;
+//		}
+//		// what does this do??
+//		if (getX() == 240 && getY() == 82) {
+//			stop = true;
+//		}
+//
+//		// riding logs
+//		if (getIntersectingObjects(Log.class).size() >= 1 && !noMove) {
+//
+////			// check direction of log
+////			if(getIntersectingObjects(Log.class).get(0).getLeft())
+////				move(-2,0);
+////			else
+////				move (.75,0);
+//		} // riding turtles
+//		else if (getIntersectingObjects(Turtle.class).size() >= 1 && !noMove) {
+//			move(-1,0);
+//		} // riding wetTurtles. To aggregate with Turtles
+//		else if (getIntersectingObjects(WetTurtle.class).size() >= 1) {
+//			if (getIntersectingObjects(WetTurtle.class).get(0).isSunk()) {
+//				waterDeath = true;
+//			} else {
+//				move(-1, 0);
+//			}
+//		}
+//		// reaching the end
+//		else if (getIntersectingObjects(End.class).size() >= 1) {
+//			inter = (ArrayList<End>) getIntersectingObjects(End.class);
+//
+//			// if the End is already activated
+//			if (getIntersectingObjects(End.class).get(0).isActivated()) {
+//				// to neutralise the function?
+//				end--;
+//				points-=50;
+//			}
+//
+//			points+=50;
+//			changeScore = true;
+//			w=STAGE_HEIGHT;
+//			getIntersectingObjects(End.class).get(0).setEnd();
+//			end++;
+//			setX(STARTING_X);
+//			setY(STARTING_Y+movement);
+//		}
+//		// else if not on floating object but is in water, then die
+//		else if (getY()<WATER_HEIGHT){
+//			waterDeath = true;
+//			//setX(300);
+//			//setY(679.8+movement);
+//		}
 	}
 
 	public boolean getStop() {

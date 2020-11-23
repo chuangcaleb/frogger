@@ -1,7 +1,7 @@
 //package frogger.view;
 //
 //import frogger.controller.HomeController;
-//import frogger.environment.BackgroundImage;
+//import frogger.model.actor.BackgroundImage;
 //import frogger.model.actor.World;
 //import frogger.model.actor.Frog;
 //

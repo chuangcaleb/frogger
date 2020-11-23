@@ -1,8 +1,9 @@
 package frogger.model.actor;
 
+import frogger.constant.FilePath;
 import javafx.scene.image.Image;
 
-public class End extends Actor{
+public class End extends DynamicActor {
 	boolean activated = false;
 	@Override
 	public void act(long now) {
@@ -10,13 +11,11 @@ public class End extends Actor{
 	}
 	
 	public End(int x, int y) {
-		setX(x);
-		setY(y);
-		setImage(new Image("file:src/main/resources/frogger/bg/End.png", 60, 60, true, true));
+		super(FilePath.IMG_END,x, y, 60, 60);
 	}
-	
+
 	public void setEnd() {
-		setImage(new Image("file:src/main/resources/frogger/bg/FrogEnd.png", 70, 70, true, true));
+		setImage(new Image(FilePath.IMG_END_A, 70, 70, true, true));
 		activated = true;
 	}
 	
