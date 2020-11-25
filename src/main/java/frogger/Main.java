@@ -1,10 +1,9 @@
 package frogger;
 
 import frogger.util.MusicPlayer;
-import frogger.util.SceneSwitcher;
-import frogger.environment.*;
 import frogger.model.actor.*;
 
+import frogger.util.SceneSwitcher;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -31,7 +30,7 @@ public class Main extends Application {
 
 		Main.primaryStage = primaryStage;
 		primaryStage.setResizable(false);
-		primaryStage.setTitle("Frogger");
+		primaryStage.setTitle("Caleb's Frogger");
 
 		// TODO: unmute the music later before final product
 //		MusicPlayer.INSTANCE.playMusic();

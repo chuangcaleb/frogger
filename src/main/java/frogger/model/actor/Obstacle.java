@@ -1,5 +1,7 @@
 package frogger.model.actor;
 
+import frogger.constant.Global;
+
 public abstract class Obstacle extends DynamicActor {
 
 	private int width;
@@ -17,15 +19,15 @@ public abstract class Obstacle extends DynamicActor {
 	 * @param now current frame's timestamp in nanoseconds
 	 */
 	@Override
-	public void act(long now) {
+	public void tick(long now) {
 		// move horizontally according to their velocity
 		move(speed, 0);
 
 		// wrap them back to the opposite side of screen
-		if (getX() > STAGE_WIDTH && speed>0)
+		if (getX() > Global.STAGE_WIDTH && speed>0)
 			setX(-width);
 		if (getX() < (-width) && speed<0)
-			setX(STAGE_WIDTH);
+			setX(Global.STAGE_WIDTH);
 	}
 
 }

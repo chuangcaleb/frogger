@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import frogger.constant.Direction;
 
 import frogger.constant.FilePath;
+import frogger.constant.Global;
 import javafx.scene.image.Image;
 
 
@@ -48,7 +49,7 @@ public class Frog extends DynamicActor {
 	/** death animation frame (for both car and water) */
 	int carD = 0;
 	/** y-coord tracker. Decreases with each step but no use... to increment score? */
-	double w = STAGE_HEIGHT;
+	double w = Global.STAGE_HEIGHT;
 	/** ArrayList of intersecting End objects */
 	ArrayList<End> inter = new ArrayList<>();
 
@@ -123,7 +124,7 @@ public class Frog extends DynamicActor {
 
 	// tick updates
 	@Override
-	public void act(long now) {
+	public void tick(long now) {
 
 
 		// BOUNDARY CHECK
@@ -133,7 +134,7 @@ public class Frog extends DynamicActor {
 			move(0, movement);
 		}
 		// rebound bottom wall
-		if (getY() > (STAGE_HEIGHT-(GRID_UNIT_L*2))) {
+		if (getY() > (Global.STAGE_HEIGHT-(GRID_UNIT_L*2))) {
 			move(0, -movement);
 		}
 		// rebound left wall
@@ -141,11 +142,11 @@ public class Frog extends DynamicActor {
 			move(movement, 0);
 		}
 		// rebound right wall
-		if ((getX() + GRID_UNIT_L) > STAGE_WIDTH) {
+		if ((getX() + GRID_UNIT_L) > Global.STAGE_WIDTH) {
 			move(-movement, 0);
 		}
 		// if frog moves out of vertical bounds (shouldn't come here)
-		if (getY() < 0 || getY() > STAGE_HEIGHT) {
+		if (getY() < 0 || getY() > Global.STAGE_HEIGHT) {
 			setX(STARTING_X);
 			setY(STARTING_Y + movement);
 			System.out.println("Out of bounds");

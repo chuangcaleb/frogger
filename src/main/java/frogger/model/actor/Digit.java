@@ -7,7 +7,7 @@ public class Digit extends DynamicActor {
 	int dim;
 //	Image im1;
 	@Override
-	public void act(long now) {
+	public void tick(long now) {
 		// TODO Auto-generated method stub
 		
 	}

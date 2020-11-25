@@ -1,5 +1,5 @@
 # >>>>>>>>>>>>>>>>>>>>>>>>
-# Current Objectives
+# Current Objectives // 460 548
 # >>>>>>>>>>>>>>>>>>>>>>>>
 
 - document
@@ -12,7 +12,7 @@ LONG-TERM OBJECTIVES
 - high level class diagram
 - Javadocs
 - Video
-- Start Screen w/ picture -> Info button
+- Start Screen w/ picture -> Info button explaining game op
 - High Score popup at the end of every round, showing scores from each round, highest at the top
 - Refactor code w/ design patterns
 - Organize the code to adhere to the MVC pattern
@@ -22,7 +22,28 @@ LONG-TERM OBJECTIVES
 - Use build files (Ant or Maven or Gradle)
 
 ! if player spams downwards on bottom boundary, will misalign with grid because of second animation
+! if player does a diagonal combo, the frog will be stuck in second state
 
+###############################
+# 0.8 JavaFXML and MVC 25/11/20
+###############################
+
+- Used SceneBuilder to create game.fxml, home.fxml and info.fxml
+- changed SceneSwitcher to pass fxml files instead of Worlds, and uses fxml to load each root, and makes a Scene with that root
+- properly made Controller classes to handle events of buttons from the view, that calls switchScene()
+- added the Game model to handle the data and logic during the game
+
+- added constant/Global.java to keep track of global variables if they needed to be changed
+- renamed act() to tick()
+
+- moved all the images under resources/images ###
+- resources/view
+- resources/css
+- added resources/fonts/EarlyGameboy.ttf for custom fonts
+- Removed iKogsKW.png
+
+- commented out Home.java and State.java
+- renamed World.java to Level.java
 
 ######################################################
 # 0.7 Resources, DyanamicActors and Obstacles 23/11/20
@@ -40,6 +61,7 @@ LONG-TERM OBJECTIVES
 - added class Car.java, similar to Log
 
 - renamed WetTurtles images
+
 
 #####################################################
 # 0.6 Refactored Structure and Frog Movement 20/11/20
@@ -171,6 +193,7 @@ MISC
 Main Menu
 > Play
     > Difficulty Select
+> Info
 > Toggle Music/Sound
 > High Scores
 > Quit

@@ -2,13 +2,13 @@
 //
 //import frogger.controller.HomeController;
 //import frogger.model.actor.BackgroundImage;
-//import frogger.model.actor.World;
+//import frogger.model.actor.Level;
 //import frogger.model.actor.Frog;
 //
 ///**
 // * {@code Homeview} is a View that handles display of elements in the Home state
 // */
-//public class HomeView extends World {
+//public class HomeView extends Level {
 //
 //    public HomeView(final HomeController homeController) {
 //

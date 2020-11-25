@@ -6,7 +6,7 @@ import javafx.scene.image.Image;
 public class End extends DynamicActor {
 	boolean activated = false;
 	@Override
-	public void act(long now) {
+	public void tick(long now) {
 		// TODO Auto-generated method st
 	}
 	

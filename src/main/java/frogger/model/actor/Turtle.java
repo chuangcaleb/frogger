@@ -19,10 +19,10 @@ public class Turtle extends Obstacle {
 	}
 
 	@Override
-	public void act(long now) {
+	public void tick(long now) {
 
 		animation(now);
-		super.act(now);
+		super.tick(now);
 
 	}
 

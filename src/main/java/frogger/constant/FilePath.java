@@ -5,36 +5,40 @@ package frogger.constant;
  */
 public class FilePath {
 
-	public static final String IMG_BG = "frogger/bg/GameBackground.png";
+	public static final String FXML_HOME = "/frogger/view/home.fxml";
+	public static final String FXML_INFO = "/frogger/view/info.fxml";
+	public static final String FXML_GAME = "/frogger/view/game.fxml";
 
-	public static final String IMG_FROG_PATH = "frogger/frog/frogger";
-	public static final String IMG_FROG_ROOT = "frogger/frog/froggerUp.png";
+	public static final String IMG_BG = "/frogger/images/bg/GameBackground.png";
 
-	public static final String IMG_END = "frogger/bg/End.png";
-	public static final String IMG_END_A = "frogger/bg/FrogEnd.png";
+	public static final String IMG_FROG_PATH = "/frogger/images/frog/frogger";
+	public static final String IMG_FROG_ROOT = "/frogger/images/frog/froggerUp.png";
 
-	public static final String IMG_DIGIT = "/frogger/text/";
-	
-	public static final String IMG_CAR_L = "frogger/car/carLeft";
-	public static final String IMG_CAR_R = "frogger/car/carRight";
+	public static final String IMG_END = "/frogger/images/bg/End.png";
+	public static final String IMG_END_A = "/frogger/images/bg/FrogEnd.png";
 
-	public static final String IMG_TRUCK_SHORT_L = "frogger/truck/truck1Left";
-	public static final String IMG_TRUCK_SHORT_R = "frogger/truck/truck1Right";
-	public static final String IMG_TRUCK_LONG_L = "frogger/truck/truck2Left";
-	public static final String IMG_TRUCK_LONG_R = "frogger/truck/truck2Right";
+	public static final String IMG_DIGIT = "/frogger/images/text/";
 
-	public static final String IMG_LOG_LONG = "frogger/log/log_long";
-	public static final String IMG_LOG_MED = "frogger/log/log_med";
-	public static final String IMG_LOG_SHORT = "frogger/log/log_short";
+	public static final String IMG_CAR_L = "/frogger/images/car/carLeft.png";
+	public static final String IMG_CAR_R = "/frogger/images/car/carRight.png";
 
-	public static final String IMG_TURTLE_1 = "frogger/TurtleAnimation1";
-	public static final String IMG_TURTLE_2 = "frogger/TurtleAnimation2";
-	public static final String IMG_TURTLE_3 = "frogger/TurtleAnimation3";
-	public static final String IMG_TURTLE_4 = "frogger/TurtleAnimation4";
+	public static final String IMG_TRUCK_SHORT_L = "/frogger/images/truck/truck1Left.png";
+	public static final String IMG_TRUCK_SHORT_R = "/frogger/images/truck/truck1Right.png";
+	public static final String IMG_TRUCK_LONG_L = "/frogger/images/truck/truck2Left.png";
+	public static final String IMG_TRUCK_LONG_R = "/frogger/images/truck/truck2Right.png";
 
-	public static final String IMG_WET_TURTLE_1 = "frogger/WetTurtleAnimation1";
-	public static final String IMG_WET_TURTLE_2 = "frogger/WetTurtleAnimation2";
-	public static final String IMG_WET_TURTLE_3 = "frogger/WetTurtleAnimation3";
-	public static final String IMG_WET_TURTLE_4 = "frogger/WetTurtleAnimation4";
+	public static final String IMG_LOG_LONG = "/frogger/images/log/log_long.png";
+	public static final String IMG_LOG_MED = "/frogger/images/log/log_med.png";
+	public static final String IMG_LOG_SHORT = "/frogger/images/log/log_short.png";
+
+	public static final String IMG_TURTLE_1 = "/frogger/images/TurtleAnimation1.png";
+	public static final String IMG_TURTLE_2 = "/frogger/images/TurtleAnimation2.png";
+	public static final String IMG_TURTLE_3 = "/frogger/images/TurtleAnimation3.png";
+	public static final String IMG_TURTLE_4 = "/frogger/images/TurtleAnimation4.png";
+
+	public static final String IMG_WET_TURTLE_1 = "/frogger/images/WetTurtleAnimation1.png";
+	public static final String IMG_WET_TURTLE_2 = "/frogger/images/WetTurtleAnimation2.png";
+	public static final String IMG_WET_TURTLE_3 = "/frogger/images/WetTurtleAnimation3.png";
+	public static final String IMG_WET_TURTLE_4 = "/frogger/images/WetTurtleAnimation4.png";
 
 }

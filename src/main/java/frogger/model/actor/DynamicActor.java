@@ -1,6 +1,6 @@
 package frogger.model.actor;
 
-import frogger.model.state.World;
+import frogger.constant.Global;
 
 import java.util.ArrayList;
 
@@ -8,11 +8,6 @@ import java.util.ArrayList;
  *  The {@code DynamicActor} is an abstract class that extends as moving objects during gameplay that also check for collision.
  */
 public abstract class DynamicActor extends Actor {
-
-    /** Stage width */
-    public static final int STAGE_WIDTH = 460;
-    /** Stage height */
-    public static final int STAGE_HEIGHT = 548;
 
 //    public DynamicActor(String imageLink) {
 //        super(imageLink);
@@ -35,8 +30,8 @@ public abstract class DynamicActor extends Actor {
         setY(getY() + dy);
     }
 
-//    public World getWorld() {
-//        return (World) getParent();
+//    public Level getWorld() {
+//        return (Level) getParent();
 //    }
 
     /* Presumably to get width and height of objects. Unused, to delete
@@ -53,7 +48,7 @@ public abstract class DynamicActor extends Actor {
     // rework as its own utility class?
 
     /*
-     * In an ArrayList of type A, iterates through all objects in World, and if in bound, then add to list
+     * In an ArrayList of type A, iterates through all objects in Level, and if in bound, then add to list
      *
      * @param cls Classname of object. To perform abstraction?
      * @param <A> An array of A, of any class that extends DynamicActor
@@ -95,7 +90,6 @@ public abstract class DynamicActor extends Actor {
      *
      * @param now current frame's timestamp in nanoseconds
      */
-
-    public void act(long now) {}
+    public void tick(long now) {}
 
 }
