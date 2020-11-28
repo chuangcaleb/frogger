@@ -6,16 +6,25 @@ import javafx.scene.image.Image;
 import java.util.ArrayList;
 
 /**
- * {@code Turtle} is an Obstacle that moves horizontally in water.
+ * {@code Turtle} is an AutoActor that moves horizontally in water.
  */
-public class Turtle extends Obstacle {
+public class Turtle extends AutoActor {
 
 	/** Array of sprites */
 	private ArrayList<Image> sprites;
 
-	public Turtle(int size, int x, int y, double speed) {
-		super(FilePath.IMG_TURTLE_1,x, y, size,size, speed);
-		initSprites(size);
+	public Turtle(int x, int y, double speed) {
+		super(FilePath.IMG_TURTLE_1,x, y, 96,GRID_UNIT_L, speed);
+		initSprites();
+	}
+
+	public Turtle(Turtle source) {
+		super(source);
+		initSprites();
+	}
+
+	public AutoActor clone() {
+		return new Turtle(this);
 	}
 
 	@Override
@@ -34,15 +43,14 @@ public class Turtle extends Obstacle {
 		setImage(sprites.get(frame));
 	}
 
-	private void initSprites(int size) {
+	private void initSprites() {
 
 		sprites =
 			new ArrayList<>() {
 				{
-					add(new Image(FilePath.IMG_TURTLE_1, size, size, true, true));
-					add(new Image(FilePath.IMG_TURTLE_2, size, size, true, true));
-					add(new Image(FilePath.IMG_TURTLE_3, size, size, true, true));
-					add(new Image(FilePath.IMG_TURTLE_4, size, size, true, true));
+					add(new Image(FilePath.IMG_TURTLE_1, 96, GRID_UNIT_L, true, true));
+					add(new Image(FilePath.IMG_TURTLE_2, 96, GRID_UNIT_L, true, true));
+					add(new Image(FilePath.IMG_TURTLE_3, 96, GRID_UNIT_L, true, true));
 				}
 			};
 

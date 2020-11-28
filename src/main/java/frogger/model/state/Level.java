@@ -1,9 +1,13 @@
 package frogger.model.state;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
+import frogger.constant.FilePath;
 import frogger.model.actor.*;
 
+import frogger.util.LaneConstructor;
+import frogger.util.SceneSwitcher;
 import javafx.scene.layout.Pane;
 
 /**
@@ -15,46 +19,77 @@ import javafx.scene.layout.Pane;
 public class Level {
 
 	private Pane root;
-	private int levelNumber;
+	private int levelNumber = 1;
 
-	private Actor froggerback;
 	private Frog frog;
-	private ArrayList<Obstacle> obstacles;
+	private ArrayList<AutoActor> autoActors;
 	private ArrayList<End> ends;
 
-    public Level(int levelNumber, Pane root) {
+    public Level(Pane root) {
 
 		this.root = root;
 
 		createActors();
 		resetActors();
-		drawActors();
+		drawAllActors();
 
     }
 
 	/**
-	 * Instantiates all the new Actors for the given level
+	 * Instantiates all the new Actors for the first level
 	 */
 	private void createActors() {
 
 		frog = new Frog();
-//		ends = new Ends()
+		ends = createEnds();
 
+		double xCo[] = new double[]{10,130,300};
+		autoActors = new ArrayList<>((Objects.requireNonNull(LaneConstructor.INSTANCE.construct("Turtle", 1, xCo, 1))));
 
+	}
+
+	/**
+	 * Resets Actors and makes the next stage
+	 */
+	public void advanceLevel() {
+		switch (levelNumber) {
+			case 2 -> {
+
+			}
+			case 3 -> {
+
+			}
+			default -> {
+				// if anything goes wrong here, just return Home
+				SceneSwitcher.INSTANCE.switchToHome();
+			}
+		}
 	}
 
 	/**
 	 * Resets all the current Actors in the current level
 	 */
 	private void resetActors() {
-
+		// reset Frog
+		// reset Ends
+		// remove autoActors ArrayList from root
 	}
 
 	/**
-	 * Adds al the current actors to the visible pane
+	 * Adds all the current actors to the visible pane, called during the first round
 	 */
-	private void drawActors() {
+	private void drawAllActors() {
+		root.getChildren().addAll(ends);
 		root.getChildren().add(frog);
+		drawObstacles();
+	}
+
+	/**
+	 * Adds only the autoActors to the visible pane, called after every subsequent round
+	 */
+	private void drawObstacles() {
+		root.getChildren().addAll(autoActors);
+
 	}
 
     public Frog getFrog() {
@@ -65,12 +100,39 @@ public class Level {
     	return ends;
 	}
 
-	public ArrayList<Obstacle> getObstacles() {
-		return obstacles;
+	public ArrayList<AutoActor> getObstacles() {
+		return autoActors;
 	}
 
+	/**
+	 * Initializes the ends
+	 */
+	private static ArrayList<End> createEnds() {
+		return new ArrayList<>() {
+			{
+				add(new End(8, 65));
+				add(new End(107, 65));
+				add(new End(205, 65));
+				add(new End(301, 65));
+				add(new End(400, 65));
+			}
+		};
+	}
 
-	//    public abstract void act(long now);
+	public void tick(long now) {
+
+		// frog tick
+		frog.tick(now);
+		// ends tick
+		for (End end : ends) {
+			end.tick(now);
+		}
+
+		// tick event for all dynamic actors
+		for (AutoActor anAutoActor : autoActors) {
+			anAutoActor.tick(now);
+		}
+	}
 
 
 

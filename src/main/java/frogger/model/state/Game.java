@@ -17,7 +17,7 @@ public class Game {
 	public Game(GameController gameController, Pane root) {
 
 		this.gameController = gameController;
-		this.level = new Level(1,root); // constructs level one
+		this.level = new Level(root); // constructs level one
 
 	}
 
@@ -27,13 +27,8 @@ public class Game {
 	private AnimationTimer timer = new AnimationTimer() {
 		@Override
 		public void handle(long now) {
-//				tick(now);
-//				List<DynamicActor> sprites = getObjects(DynamicActor.class);
-//
-//				for (DynamicActor aSprite : sprites) {
-//					aSprite.tick(now);
-//				}
-
+			level.tick(now);
+			//
 		}
 	};
 
@@ -43,13 +38,7 @@ public class Game {
 	public void start() {
 		timer.start();
 	}
-
-	/**
-	 * Creates a new level and shows scoreboard.
-	 */
-	public void nextLevel() {
-
-	}
+	
 
 	/**
 	 * Ends the timer, besides the end game screen; called when player loses.

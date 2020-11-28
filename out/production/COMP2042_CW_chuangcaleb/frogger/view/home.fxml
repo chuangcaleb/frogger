@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="548.0" prefWidth="460.0" stylesheets="@../css/home.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frogger.controller.HomeController">
+   <center>
+       <VBox alignment="TOP_CENTER" prefHeight="160.0" prefWidth="160.0" BorderPane.alignment="CENTER">
+           <Button fx:id="startBtn" mnemonicParsing="false" onAction="#toGame" prefHeight="30.0" prefWidth="90.0" styleClass="menu_button" text="START" />
+           <Button fx:id="infoBtn" mnemonicParsing="false" onAction="#toInfo" prefHeight="30.0" prefWidth="90.0" styleClass="menu_button" text="INFO">
+              <VBox.margin>
+                  <Insets top="10.0" />
+              </VBox.margin>
+           </Button>
+         <Button fx:id="quitBtn" mnemonicParsing="false" onAction="#quit" prefHeight="30.0" prefWidth="90.0" styleClass="menu_button" text="QUIT">
+            <VBox.margin>
+               <Insets top="10.0" />
+            </VBox.margin>
+         </Button>
+       </VBox>
+   </center>
+   <top>
+      <Pane prefHeight="115.0" prefWidth="460.0" BorderPane.alignment="CENTER">
+          <Label layoutX="55.0" layoutY="-6.0" styleClass="title" text="FROGGER" />
+      </Pane>
+   </top>
+   <left>
+      <Pane prefHeight="281.0" prefWidth="150.0" BorderPane.alignment="CENTER" />
+   </left>
+   <right>
+      <Pane prefHeight="281.0" prefWidth="150.0" BorderPane.alignment="CENTER" />
+   </right>
+   <bottom>
+      <Pane prefHeight="273.0" prefWidth="460.0" BorderPane.alignment="CENTER" />
+   </bottom>
+</BorderPane>

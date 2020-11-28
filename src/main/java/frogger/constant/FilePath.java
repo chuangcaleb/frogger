@@ -31,14 +31,13 @@ public class FilePath {
 	public static final String IMG_LOG_MED = "/frogger/images/log/log_med.png";
 	public static final String IMG_LOG_SHORT = "/frogger/images/log/log_short.png";
 
-	public static final String IMG_TURTLE_1 = "/frogger/images/TurtleAnimation1.png";
-	public static final String IMG_TURTLE_2 = "/frogger/images/TurtleAnimation2.png";
-	public static final String IMG_TURTLE_3 = "/frogger/images/TurtleAnimation3.png";
-	public static final String IMG_TURTLE_4 = "/frogger/images/TurtleAnimation4.png";
+	public static final String IMG_TURTLE_1 = "/frogger/images/turtle/TurtleAnimation1.png";
+	public static final String IMG_TURTLE_2 = "/frogger/images/turtle/TurtleAnimation2.png";
+	public static final String IMG_TURTLE_3 = "/frogger/images/turtle/TurtleAnimation3.png";
 
-	public static final String IMG_WET_TURTLE_1 = "/frogger/images/WetTurtleAnimation1.png";
-	public static final String IMG_WET_TURTLE_2 = "/frogger/images/WetTurtleAnimation2.png";
-	public static final String IMG_WET_TURTLE_3 = "/frogger/images/WetTurtleAnimation3.png";
-	public static final String IMG_WET_TURTLE_4 = "/frogger/images/WetTurtleAnimation4.png";
+	public static final String IMG_WET_TURTLE_1 = "/frogger/images/turtle/WetTurtleAnimation1.png";
+	public static final String IMG_WET_TURTLE_2 = "/frogger/images/turtle/WetTurtleAnimation2.png";
+	public static final String IMG_WET_TURTLE_3 = "/frogger/images/turtle/WetTurtleAnimation3.png";
+	public static final String IMG_WET_TURTLE_4 = "/frogger/images/turtle/WetTurtleAnimation4.png";
 
 }

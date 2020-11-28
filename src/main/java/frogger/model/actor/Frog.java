@@ -9,7 +9,7 @@ import frogger.constant.Global;
 import javafx.scene.image.Image;
 
 
-public class Frog extends DynamicActor {
+public class Frog extends MovableActor {
 
 	// TODO: move to a dedicated constant .java folder?
 	/** Starting x-coordinate of player */
@@ -18,8 +18,6 @@ public class Frog extends DynamicActor {
 	public static final int STARTING_Y = 481;
 	/** bottom y-coordinate river */
 	public static final int WATER_HEIGHT = 252;
-	/** sprite width */
-	public static final int GRID_UNIT_L = 32;
 
 	/** Array of sprites */
 	private ArrayList<Image> facingSprites;
@@ -123,34 +121,36 @@ public class Frog extends DynamicActor {
 
 
 	// tick updates
+	// overrides and overwrites boundary checking of other elements
 	@Override
 	public void tick(long now) {
+		// death frames; migrate out collision checks
 
 
-		// BOUNDARY CHECK
-
-		// TODO: rebound top wall if not touching End
-		if (getY() < 104) {
-			move(0, movement);
-		}
-		// rebound bottom wall
-		if (getY() > (Global.STAGE_HEIGHT-(GRID_UNIT_L*2))) {
-			move(0, -movement);
-		}
-		// rebound left wall
-		if (getX() < 0) {
-			move(movement, 0);
-		}
-		// rebound right wall
-		if ((getX() + GRID_UNIT_L) > Global.STAGE_WIDTH) {
-			move(-movement, 0);
-		}
-		// if frog moves out of vertical bounds (shouldn't come here)
-		if (getY() < 0 || getY() > Global.STAGE_HEIGHT) {
-			setX(STARTING_X);
-			setY(STARTING_Y + movement);
-			System.out.println("Out of bounds");
-		}
+//		// BOUNDARY CHECK (not needed since boundaries are checked in leap()
+//
+//		// TODO: rebound top wall if not touching End
+//		if (getY() < 104) {
+//			move(0, movement);
+//		}
+//		// rebound bottom wall
+//		if (getY() > (Global.STAGE_HEIGHT-(GRID_UNIT_L*2))) {
+//			move(0, -movement);
+//		}
+//		// rebound left wall
+//		if (getX() < 0) {
+//			move(movement, 0);
+//		}
+//		// rebound right wall
+//		if ((getX() + GRID_UNIT_L) > Global.STAGE_WIDTH) {
+//			move(-movement, 0);
+//		}
+//		// if frog moves out of vertical bounds (shouldn't come here)
+//		if (getY() < 0 || getY() > Global.STAGE_HEIGHT) {
+//			setX(STARTING_X);
+//			setY(STARTING_Y + movement);
+//			System.out.println("Out of bounds");
+//		}
 
 
 		// DEATH SEQUENCES
@@ -217,7 +217,7 @@ public class Frog extends DynamicActor {
 		}
 
 //		// death by car
-//		if (getIntersectingObjects(Obstacle.class).size() >= 1) {
+//		if (getIntersectingObjects(AutoActor.class).size() >= 1) {
 //			carDeath = true;
 //		}
 //		// what does this do??

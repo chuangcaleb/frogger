@@ -6,18 +6,27 @@ import javafx.scene.image.Image;
 import java.util.ArrayList;
 
 /**
- * {@code WetTurtle} is an Obstacle that moves horizontally in water, that is "sunk" every fourth frame.
+ * {@code WetTurtle} is an AutoActor that moves horizontally in water, that is "sunk" every fourth frame.
  */
-public class WetTurtle extends Obstacle {
+public class WetTurtle extends AutoActor {
 
 	/** Array of sprites */
 	private ArrayList<Image> sprites;
 	/** Flag whether isSunk */
 	private boolean sunk = false;
 
-	public WetTurtle(int size, int x, int y, double speed) {
-		super(FilePath.IMG_WET_TURTLE_2,x, y, size,size,speed);
-		initSprites(size);
+	public WetTurtle(int x, int y, double speed) {
+		super(FilePath.IMG_WET_TURTLE_1,x, y, 96,GRID_UNIT_L,speed);
+		initSprites();
+	}
+
+	public WetTurtle(WetTurtle source) {
+		super(source);
+		initSprites();
+	}
+
+	public AutoActor clone() {
+		return new WetTurtle(this);
 	}
 
 	@Override
@@ -39,15 +48,15 @@ public class WetTurtle extends Obstacle {
 		return sunk;
 	}
 
-	private void initSprites(int size) {
+	private void initSprites() {
 
 		sprites =
 				new ArrayList<>() {
 					{
-						add(new Image(FilePath.IMG_WET_TURTLE_1, size, size, true, true));
-						add(new Image(FilePath.IMG_WET_TURTLE_2, size, size, true, true));
-						add(new Image(FilePath.IMG_WET_TURTLE_3, size, size, true, true));
-						add(new Image(FilePath.IMG_WET_TURTLE_4, size, size, true, true));
+						add(new Image(FilePath.IMG_WET_TURTLE_1, 96, GRID_UNIT_L, true, true));
+						add(new Image(FilePath.IMG_WET_TURTLE_2, 96, GRID_UNIT_L, true, true));
+						add(new Image(FilePath.IMG_WET_TURTLE_3, 96, GRID_UNIT_L, true, true));
+						add(new Image(FilePath.IMG_WET_TURTLE_4, 96, GRID_UNIT_L, true, true));
 					}
 				};
 

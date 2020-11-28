@@ -38,7 +38,7 @@ public class Main extends Application {
 
 	}
 
-	// Can be deleted?
+	// Alert popup for high score
 	/*
 	public void createTimer() {
         timer = new AnimationTimer() {

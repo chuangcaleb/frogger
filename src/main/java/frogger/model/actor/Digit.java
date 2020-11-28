@@ -1,9 +1,8 @@
 package frogger.model.actor;
 
 import frogger.constant.FilePath;
-import javafx.scene.image.Image;
 
-public class Digit extends DynamicActor {
+public class Digit extends MovableActor {
 	int dim;
 //	Image im1;
 	@Override

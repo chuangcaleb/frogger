@@ -24,6 +24,44 @@ LONG-TERM OBJECTIVES
 ! if player spams downwards on bottom boundary, will misalign with grid because of second animation
 ! if player does a diagonal combo, the frog will be stuck in second state
 
+
+###############################
+# 0.9 Lane Constructor 28/11/20
+###############################
+
+- resized End.png from 62x62 to 62x70
+- re-downloaded truck1R truck2R.png and /logs
+- fixed FilePath to /turtles, removed TurtleAnim4.png
+- fixed Turtle and WetTurtle's sprite dimension parameters
+
+- Level.createEnds() to init the End Actors in position
+
+- Level
+	> drawAllActors() to only draw the obstacles, since frog and Ends already drawn
+	> advanceLevel() skeleton for eventual advancing level
+	> tick() for all Actors in Level
+
+- Refactoring the Actor hierarchy to implement the Prototype design pattern
+- MovableActor
+	> Renamed DynamicActor -> MovableActor
+	> only has move() (to remove??)
+- AutoActor
+	> Renamed Obstacle -> AutoActor
+	> prototype constructor
+	> abstr clone()
+- Each AutoActor (Car, Log, etc) now has a subclass prototype constructor and a clone() that creates a new object from source
+
+- new LaneConstructor singleton utility class that uses Prototype design pattern
+	+ since all lanes have the same objects, only differing in x-coordinate
+	+ it copies imageLink URL, y-coord height, width, speed (and x-coord, that will be overwritten)
+	- initializes lane's y coordinate according to lane number
+	- switch case to determine which AutoActor to load from prototype library, besides init the speed
+	- configure prototype
+	- Clone prototype
+	- return arraylist of lane's AutoActors
+
+
+
 ###############################
 # 0.8 JavaFXML and MVC 25/11/20
 ###############################
@@ -44,6 +82,7 @@ LONG-TERM OBJECTIVES
 
 - commented out Home.java and State.java
 - renamed World.java to Level.java
+
 
 ######################################################
 # 0.7 Resources, DyanamicActors and Obstacles 23/11/20

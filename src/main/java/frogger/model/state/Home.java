@@ -72,9 +72,9 @@
 //}
 //
 //
-////        //Obstacle obstacle = new Obstacle("file:src/main/resources/frogger/truck/truck1Right.png", 25, 25, 3);
-////        //Obstacle obstacle1 = new Obstacle("file:src/main/resources/frogger/truck/truck2Right.png", 100, 100,2 );
-////        //Obstacle obstacle2 = new Obstacle("file:src/main/resources/frogger/truck/truck1Right.png",0,  150, 1);
+////        //AutoActor obstacle = new AutoActor("file:src/main/resources/frogger/truck/truck1Right.png", 25, 25, 3);
+////        //AutoActor obstacle1 = new AutoActor("file:src/main/resources/frogger/truck/truck2Right.png", 100, 100,2 );
+////        //AutoActor obstacle2 = new AutoActor("file:src/main/resources/frogger/truck/truck1Right.png",0,  150, 1);
 ////
 ////		background.add(new Log("file:src/main/resources/frogger/log/log3.png", 150, 0, 166, 0.75));
 ////		background.add(new Log("file:src/main/resources/frogger/log/log3.png", 150, 220, 166, 0.75));
@@ -119,17 +119,17 @@
 ////		background.add(new End(141 + 141-13+141-13+1,96));
 ////		background.add(new End(141 + 141-13+141-13+141-13+3,96));
 ////
-////		background.add(new Obstacle("file:src/main/resources/frogger/truck/truck1"+"Right.png", 0, 649, 1, 120, 120));
-////		background.add(new Obstacle("file:src/main/resources/frogger/truck/truck1"+"Right.png", 300, 649, 1, 120, 120));
-////		background.add(new Obstacle("file:src/main/resources/frogger/truck/truck1"+"Right.png", 600, 649, 1, 120, 120));
-////		//background.add(new Obstacle("file:src/main/resources/frogger/truck/truck1"+"Right.png", 720, 649, 1, 120, 120));
-////		background.add(new Obstacle("file:src/main/resources/frogger/car/car1Left.png", 100, 597, -1, 50, 50));
-////		background.add(new Obstacle("file:src/main/resources/frogger/car/car1Left.png", 250, 597, -1, 50, 50));
-////		background.add(new Obstacle("file:src/main/resources/frogger/car/car1Left.png", 400, 597, -1, 50, 50));
-////		background.add(new Obstacle("file:src/main/resources/frogger/car/car1Left.png", 550, 597, -1, 50, 50));
-////		background.add(new Obstacle("file:src/main/resources/frogger/truck/truck2Right.png", 0, 540, 1, 200, 200));
-////		background.add(new Obstacle("file:src/main/resources/frogger/truck/truck2Right.png", 500, 540, 1, 200, 200));
-////		background.add(new Obstacle("file:src/main/resources/frogger/car/car1Left.png", 500, 490, -5, 50, 50));
+////		background.add(new AutoActor("file:src/main/resources/frogger/truck/truck1"+"Right.png", 0, 649, 1, 120, 120));
+////		background.add(new AutoActor("file:src/main/resources/frogger/truck/truck1"+"Right.png", 300, 649, 1, 120, 120));
+////		background.add(new AutoActor("file:src/main/resources/frogger/truck/truck1"+"Right.png", 600, 649, 1, 120, 120));
+////		//background.add(new AutoActor("file:src/main/resources/frogger/truck/truck1"+"Right.png", 720, 649, 1, 120, 120));
+////		background.add(new AutoActor("file:src/main/resources/frogger/car/car1Left.png", 100, 597, -1, 50, 50));
+////		background.add(new AutoActor("file:src/main/resources/frogger/car/car1Left.png", 250, 597, -1, 50, 50));
+////		background.add(new AutoActor("file:src/main/resources/frogger/car/car1Left.png", 400, 597, -1, 50, 50));
+////		background.add(new AutoActor("file:src/main/resources/frogger/car/car1Left.png", 550, 597, -1, 50, 50));
+////		background.add(new AutoActor("file:src/main/resources/frogger/truck/truck2Right.png", 0, 540, 1, 200, 200));
+////		background.add(new AutoActor("file:src/main/resources/frogger/truck/truck2Right.png", 500, 540, 1, 200, 200));
+////		background.add(new AutoActor("file:src/main/resources/frogger/car/car1Left.png", 500, 490, -5, 50, 50));
 ////
 ////		background.add(new Digit(0, 30, 360, 25));
 ////
