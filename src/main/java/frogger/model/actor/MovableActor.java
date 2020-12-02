@@ -1,17 +1,13 @@
 package frogger.model.actor;
 
-import frogger.constant.Global;
-
-import java.util.ArrayList;
+import frogger.constant.AutoActorDims;
 
 /**
- *  The {@code MovableActor} is an abstract class that extends to displayed objects that must receive tick events.
+ *  {@code MovableActor} is an abstract class that extends to displayed objects that must receive tick events.
  */
 public abstract class MovableActor extends Actor {
 
-    public static final int GRID_UNIT_L = 32;
-
-    private int width;
+    public static final int SPRITE_HEIGHT = AutoActorDims.SPRITE_HEIGHT;
 
     public MovableActor(String imageLink, double startX, double startY, int width, int height) {
         super(imageLink, startX, startY, width, height);

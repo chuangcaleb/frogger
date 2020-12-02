@@ -11,6 +11,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
+import static java.lang.Math.random;
+
 /**
  * The {@code Main} class of the application.
  */

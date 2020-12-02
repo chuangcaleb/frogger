@@ -12,10 +12,12 @@ import javafx.scene.image.Image;
 public class Frog extends MovableActor {
 
 	// TODO: move to a dedicated constant .java folder?
-	/** Starting x-coordinate of player */
+	/** Frog dimensions */
+	public static final int FROG_L = 22;
+	/** Frog dimensions */
 	public static final int STARTING_X = 214;
 	/** Starting y-coordinate of player */
-	public static final int STARTING_Y = 481;
+	public static final int STARTING_Y = 483;
 	/** bottom y-coordinate river */
 	public static final int WATER_HEIGHT = 252;
 
@@ -56,7 +58,7 @@ public class Frog extends MovableActor {
 	public Frog() {
 
 		// set image of sprite by passing parameters
-		super(FilePath.IMG_FROG_ROOT, STARTING_X, STARTING_Y, GRID_UNIT_L, GRID_UNIT_L);
+		super(FilePath.IMG_FROG_ROOT, STARTING_X, STARTING_Y, FROG_L, FROG_L);
 		initSprites();
 
 	}
@@ -101,20 +103,20 @@ public class Frog extends MovableActor {
 		facingSprites =
 			new ArrayList<>() {
 				{
-					add(new Image(FilePath.IMG_FROG_PATH + "Up.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
-					add(new Image(FilePath.IMG_FROG_PATH + "Left.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
-					add(new Image(FilePath.IMG_FROG_PATH + "Right.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
-					add(new Image(FilePath.IMG_FROG_PATH + "Down.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
+					add(new Image(FilePath.IMG_FROG_PATH + "Up.png", FROG_L, FROG_L, true, true));
+					add(new Image(FilePath.IMG_FROG_PATH + "Left.png", FROG_L, FROG_L, true, true));
+					add(new Image(FilePath.IMG_FROG_PATH + "Right.png", FROG_L, FROG_L, true, true));
+					add(new Image(FilePath.IMG_FROG_PATH + "Down.png", FROG_L, FROG_L, true, true));
 				}
 			};
 
 		leapingSprites =
 			new ArrayList<>() {
 				{
-					add(new Image(FilePath.IMG_FROG_PATH + "UpJump.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
-					add(new Image(FilePath.IMG_FROG_PATH + "LeftJump.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
-					add(new Image(FilePath.IMG_FROG_PATH + "RightJump.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
-					add(new Image(FilePath.IMG_FROG_PATH + "DownJump.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
+					add(new Image(FilePath.IMG_FROG_PATH + "UpJump.png", FROG_L, FROG_L, true, true));
+					add(new Image(FilePath.IMG_FROG_PATH + "LeftJump.png", FROG_L, FROG_L, true, true));
+					add(new Image(FilePath.IMG_FROG_PATH + "RightJump.png", FROG_L, FROG_L, true, true));
+					add(new Image(FilePath.IMG_FROG_PATH + "DownJump.png", FROG_L, FROG_L, true, true));
 				}
 			};
 	}
@@ -134,7 +136,7 @@ public class Frog extends MovableActor {
 //			move(0, movement);
 //		}
 //		// rebound bottom wall
-//		if (getY() > (Global.STAGE_HEIGHT-(GRID_UNIT_L*2))) {
+//		if (getY() > (Global.STAGE_HEIGHT-(FROG_L*2))) {
 //			move(0, -movement);
 //		}
 //		// rebound left wall
@@ -142,7 +144,7 @@ public class Frog extends MovableActor {
 //			move(movement, 0);
 //		}
 //		// rebound right wall
-//		if ((getX() + GRID_UNIT_L) > Global.STAGE_WIDTH) {
+//		if ((getX() + FROG_L) > Global.STAGE_WIDTH) {
 //			move(-movement, 0);
 //		}
 //		// if frog moves out of vertical bounds (shouldn't come here)
@@ -162,20 +164,20 @@ public class Frog extends MovableActor {
 				carD++;
 			}
 			if (carD==1) {
-				setImage(new Image("file:src/main/resources/frogger/death/cardeath1.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
+				setImage(new Image("file:src/main/resources/frogger/death/cardeath1.png", FROG_L, FROG_L, true, true));
 			}
 			if (carD==2) {
-				setImage(new Image("file:src/main/resources/frogger/death/cardeath2.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
+				setImage(new Image("file:src/main/resources/frogger/death/cardeath2.png", FROG_L, FROG_L, true, true));
 			}
 			if (carD==3) {
-				setImage(new Image("file:src/main/resources/frogger/death/cardeath3.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
+				setImage(new Image("file:src/main/resources/frogger/death/cardeath3.png", FROG_L, FROG_L, true, true));
 			}
 			if (carD == 4) {
 				setX(STARTING_X);
 				setY(STARTING_Y + movement);
 				carDeath = false;
 				carD = 0;
-				setImage(new Image("file:src/main/resources/frogger/frog/froggerUp.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
+				setImage(new Image("file:src/main/resources/frogger/frog/froggerUp.png", FROG_L, FROG_L, true, true));
 				noMove = false;
 				if (points > 50) {
 					points -= 50;
@@ -190,23 +192,23 @@ public class Frog extends MovableActor {
 				carD++;
 			}
 			if (carD == 1) {
-				setImage(new Image("file:src/main/resources/frogger/death/waterdeath1.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
+				setImage(new Image("file:src/main/resources/frogger/death/waterdeath1.png", FROG_L, FROG_L, true, true));
 			}
 			if (carD == 2) {
-				setImage(new Image("file:src/main/resources/frogger/death/waterdeath2.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
+				setImage(new Image("file:src/main/resources/frogger/death/waterdeath2.png", FROG_L, FROG_L, true, true));
 			}
 			if (carD == 3) {
-				setImage(new Image("file:src/main/resources/frogger/death/waterdeath3.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
+				setImage(new Image("file:src/main/resources/frogger/death/waterdeath3.png", FROG_L, FROG_L, true, true));
 			}
 			if (carD == 4) {
-				setImage(new Image("file:src/main/resources/frogger/death/waterdeath4.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
+				setImage(new Image("file:src/main/resources/frogger/death/waterdeath4.png", FROG_L, FROG_L, true, true));
 			}
 			if (carD == 5) {
 				setX(STARTING_X);
 				setY(STARTING_Y + movement);
 				waterDeath = false;
 				carD = 0;
-				setImage(new Image("file:src/main/resources/frogger/frog/froggerUp.png", GRID_UNIT_L, GRID_UNIT_L, true, true));
+				setImage(new Image("file:src/main/resources/frogger/frog/froggerUp.png", FROG_L, FROG_L, true, true));
 				noMove = false;
 				if (points > 50) {
 					points -= 50;

@@ -11,7 +11,7 @@ import javafx.scene.layout.Pane;
  */
 public class Game {
 
-	private Level level;
+	private final Level level;
 	private GameController gameController;
 
 	public Game(GameController gameController, Pane root) {
@@ -28,7 +28,6 @@ public class Game {
 		@Override
 		public void handle(long now) {
 			level.tick(now);
-			//
 		}
 	};
 

@@ -1,5 +1,6 @@
 package frogger.model.actor;
 
+import frogger.constant.AutoActorDims;
 import frogger.constant.FilePath;
 import javafx.scene.image.Image;
 
@@ -14,7 +15,7 @@ public class Turtle extends AutoActor {
 	private ArrayList<Image> sprites;
 
 	public Turtle(int x, int y, double speed) {
-		super(FilePath.IMG_TURTLE_1,x, y, 96,GRID_UNIT_L, speed);
+		super(FilePath.IMG_TURTLE_1,x, y, AutoActorDims.TURTLE_W, SPRITE_HEIGHT, speed);
 		initSprites();
 	}
 
@@ -29,9 +30,8 @@ public class Turtle extends AutoActor {
 
 	@Override
 	public void tick(long now) {
-
-		animation(now);
 		super.tick(now);
+		animation(now);
 
 	}
 
@@ -48,9 +48,9 @@ public class Turtle extends AutoActor {
 		sprites =
 			new ArrayList<>() {
 				{
-					add(new Image(FilePath.IMG_TURTLE_1, 96, GRID_UNIT_L, true, true));
-					add(new Image(FilePath.IMG_TURTLE_2, 96, GRID_UNIT_L, true, true));
-					add(new Image(FilePath.IMG_TURTLE_3, 96, GRID_UNIT_L, true, true));
+					add(new Image(FilePath.IMG_TURTLE_1, AutoActorDims.TURTLE_W, SPRITE_HEIGHT, true, true));
+					add(new Image(FilePath.IMG_TURTLE_2, AutoActorDims.TURTLE_W, SPRITE_HEIGHT, true, true));
+					add(new Image(FilePath.IMG_TURTLE_3, AutoActorDims.TURTLE_W, SPRITE_HEIGHT, true, true));
 				}
 			};
 

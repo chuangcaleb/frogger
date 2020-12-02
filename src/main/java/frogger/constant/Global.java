@@ -7,4 +7,8 @@ public class Global {
 	/** Stage height */
 	public static final int STAGE_HEIGHT = 548;
 
+
+	public static final int STAGE_WRAP = 35;
+
+
 }

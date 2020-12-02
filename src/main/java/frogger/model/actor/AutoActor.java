@@ -7,8 +7,6 @@ import frogger.constant.Global;
  */
 public abstract class AutoActor extends MovableActor {
 
-	private final static int STAGE_WRAP = 35;
-
 	private int width;
 	private double speed;
 
@@ -20,7 +18,7 @@ public abstract class AutoActor extends MovableActor {
 
 	public AutoActor(AutoActor source) {
 		// copies fields from source. startX = source.getX() is immediately overwritten, but it is good prototype practice to call it anyways
-		super(source.getImage().getUrl(),source.getX(),source.getY(),source.width,GRID_UNIT_L);
+		super(source.getImage().getUrl(),source.getX(),source.getY(),source.width, SPRITE_HEIGHT);
 		this.speed = source.speed;
 		this.width = source.width;
 	}
@@ -34,12 +32,13 @@ public abstract class AutoActor extends MovableActor {
 	@Override
 	public void tick(long now) {
 		// move horizontally according to their velocity
-		move(speed, 0);
+		// slow down speed value by 0.1
+		move(0.1 * speed, 0);
 
 		// wrap them back to the opposite side of screen
-		if (getX() > (Global.STAGE_WIDTH + STAGE_WRAP) && speed>0)
+		if (getX() > (Global.STAGE_WIDTH + Global.STAGE_WRAP) && speed>0)
 			setX(-width);
-		if (getX() < (-width - STAGE_WRAP) && speed<0)
+		if (getX() < (-width - Global.STAGE_WRAP) && speed<0)
 			setX(Global.STAGE_WIDTH);
 	}
 

@@ -3,26 +3,48 @@
 # >>>>>>>>>>>>>>>>>>>>>>>>
 
 - document
-- load sprites in
 - use a decorator design pattern? State design for scenes?
-- identifier parameter for what log/car type
+- collision handler
 
 LONG-TERM OBJECTIVES
 - README
 - high level class diagram
 - Javadocs
 - Video
-- Start Screen w/ picture -> Info button explaining game op
+X Start Screen w/ picture -> Info button explaining game op
 - High Score popup at the end of every round, showing scores from each round, highest at the top
 - Refactor code w/ design patterns
-- Organize the code to adhere to the MVC pattern
+X Organize the code to adhere to the MVC pattern
 - Create a permanent high score list (using a file to store scores)
 - Add interesting levels to the game (either follow the original Frogger game levels or come up with your own ideas)
 - Add meaningful JUnit tests
 - Use build files (Ant or Maven or Gradle)
 
+! Turtles have to be offset -3 on y-axes
 ! if player spams downwards on bottom boundary, will misalign with grid because of second animation
 ! if player does a diagonal combo, the frog will be stuck in second state
+
+###############################
+# 0.10 LevelBuilder 2/12/20
+###############################
+
+util and Actors
+- LevelBuilder is a singleton utility class that builds an ArrayList of AutoActors using LaneBuilder
+	- two levels
+- renamed LaneConstructor to LaneBuilder
+- changed the widths of all the sprites, making sure they're big enough
+- refactored the heights and widths measurements out
+x tried randomly generating x-positions for autoactors. too much code
+- stored AutoActorDims const file, which is referenced by LaneBuilder and Turtle(s) to load sprites
+- GRID_SIZE_L (renamed to SPRITE_HEIGHT) shaved down to 28
+- Frog dimensions shrunk to 22x22
+- removed width field from MovableActor
+
+const
+- DeathTypes added three more types, as well as comments
+- Global added STAGE_WRAP
+
+- deleted frogger.model.view
 
 
 ###############################

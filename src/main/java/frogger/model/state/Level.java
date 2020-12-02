@@ -1,13 +1,10 @@
 package frogger.model.state;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
-import frogger.constant.FilePath;
 import frogger.model.actor.*;
 
-import frogger.util.LaneConstructor;
-import frogger.util.SceneSwitcher;
+import frogger.util.LevelBuilder;
 import javafx.scene.layout.Pane;
 
 /**
@@ -18,8 +15,8 @@ import javafx.scene.layout.Pane;
  */
 public class Level {
 
-	private Pane root;
-	private int levelNumber = 1;
+	private final Pane root;
+	private int levelNumber = 2;
 
 	private Frog frog;
 	private ArrayList<AutoActor> autoActors;
@@ -42,9 +39,7 @@ public class Level {
 
 		frog = new Frog();
 		ends = createEnds();
-
-		double xCo[] = new double[]{10,130,300};
-		autoActors = new ArrayList<>((Objects.requireNonNull(LaneConstructor.INSTANCE.construct("Turtle", 1, xCo, 1))));
+		autoActors = LevelBuilder.INSTANCE.build(levelNumber);
 
 	}
 
@@ -52,18 +47,13 @@ public class Level {
 	 * Resets Actors and makes the next stage
 	 */
 	public void advanceLevel() {
-		switch (levelNumber) {
-			case 2 -> {
 
-			}
-			case 3 -> {
+		resetActors();
 
-			}
-			default -> {
-				// if anything goes wrong here, just return Home
-				SceneSwitcher.INSTANCE.switchToHome();
-			}
-		}
+		levelNumber++;
+		autoActors = LevelBuilder.INSTANCE.build(levelNumber);
+		drawObstacles();
+
 	}
 
 	/**
@@ -79,9 +69,9 @@ public class Level {
 	 * Adds all the current actors to the visible pane, called during the first round
 	 */
 	private void drawAllActors() {
+		drawObstacles();
 		root.getChildren().addAll(ends);
 		root.getChildren().add(frog);
-		drawObstacles();
 	}
 
 	/**
@@ -89,7 +79,6 @@ public class Level {
 	 */
 	private void drawObstacles() {
 		root.getChildren().addAll(autoActors);
-
 	}
 
     public Frog getFrog() {
@@ -102,21 +91,6 @@ public class Level {
 
 	public ArrayList<AutoActor> getObstacles() {
 		return autoActors;
-	}
-
-	/**
-	 * Initializes the ends
-	 */
-	private static ArrayList<End> createEnds() {
-		return new ArrayList<>() {
-			{
-				add(new End(8, 65));
-				add(new End(107, 65));
-				add(new End(205, 65));
-				add(new End(301, 65));
-				add(new End(400, 65));
-			}
-		};
 	}
 
 	public void tick(long now) {
@@ -134,6 +108,19 @@ public class Level {
 		}
 	}
 
-
+	/**
+	 * Initializes the ends
+	 */
+	private static ArrayList<End> createEnds() {
+		return new ArrayList<>() {
+			{
+				add(new End(8, 65));
+				add(new End(107, 65));
+				add(new End(205, 65));
+				add(new End(301, 65));
+				add(new End(400, 65));
+			}
+		};
+	}
 
 }

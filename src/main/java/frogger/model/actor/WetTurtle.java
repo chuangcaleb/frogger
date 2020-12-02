@@ -1,5 +1,6 @@
 package frogger.model.actor;
 
+import frogger.constant.AutoActorDims;
 import frogger.constant.FilePath;
 import javafx.scene.image.Image;
 
@@ -10,13 +11,15 @@ import java.util.ArrayList;
  */
 public class WetTurtle extends AutoActor {
 
+
+
 	/** Array of sprites */
 	private ArrayList<Image> sprites;
 	/** Flag whether isSunk */
 	private boolean sunk = false;
 
 	public WetTurtle(int x, int y, double speed) {
-		super(FilePath.IMG_WET_TURTLE_1,x, y, 96,GRID_UNIT_L,speed);
+		super(FilePath.IMG_WET_TURTLE_1,x, y, AutoActorDims.TURTLE_W, SPRITE_HEIGHT,speed);
 		initSprites();
 	}
 
@@ -31,8 +34,8 @@ public class WetTurtle extends AutoActor {
 
 	@Override
 	public void tick(long now) {
-		animation(now);
 		super.tick(now);
+		animation(now);
 	}
 
 	/**
@@ -53,10 +56,10 @@ public class WetTurtle extends AutoActor {
 		sprites =
 				new ArrayList<>() {
 					{
-						add(new Image(FilePath.IMG_WET_TURTLE_1, 96, GRID_UNIT_L, true, true));
-						add(new Image(FilePath.IMG_WET_TURTLE_2, 96, GRID_UNIT_L, true, true));
-						add(new Image(FilePath.IMG_WET_TURTLE_3, 96, GRID_UNIT_L, true, true));
-						add(new Image(FilePath.IMG_WET_TURTLE_4, 96, GRID_UNIT_L, true, true));
+						add(new Image(FilePath.IMG_WET_TURTLE_1, AutoActorDims.TURTLE_W, SPRITE_HEIGHT, true, true));
+						add(new Image(FilePath.IMG_WET_TURTLE_2, AutoActorDims.TURTLE_W, SPRITE_HEIGHT, true, true));
+						add(new Image(FilePath.IMG_WET_TURTLE_3, AutoActorDims.TURTLE_W, SPRITE_HEIGHT, true, true));
+						add(new Image(FilePath.IMG_WET_TURTLE_4, AutoActorDims.TURTLE_W, SPRITE_HEIGHT, true, true));
 					}
 				};
 
