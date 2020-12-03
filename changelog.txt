@@ -4,7 +4,7 @@
 
 - document
 - use a decorator design pattern? State design for scenes?
-- collision handler
+- bring back highest y
 
 LONG-TERM OBJECTIVES
 - README
@@ -23,6 +23,42 @@ X Organize the code to adhere to the MVC pattern
 ! Turtles have to be offset -3 on y-axes
 ! if player spams downwards on bottom boundary, will misalign with grid because of second animation
 ! if player does a diagonal combo, the frog will be stuck in second state
+! now does not increment by 1
+
+###############################
+# 0.10 Collision and Death 3/12/20
+###############################
+
+- initSprites Death Animation for Frog
+
+CollisionChecker
+- is a singleton utility class that checks for collisions every tick.
+- stores references to Level's Actors
+
+CollisionHandler
+- is a singleton utility class that handles the consequences of collisions.
+- handles all collision possibilities
+
+- Restructured Level to init CollisionChecker with Actors at the start of every round
+
+Frog
+- added Death sprites to initSprites()
+- all Death Sequences
+- Respawn Sequence
+- rideActor()
+- respawn()
+- reset()
+
+End
+- all implementations
+
+refactor
+- moved tick() from Actor to MovableActor
+
+misc
+- death pictures were corrupted, reimported them
+- reworded some enums of DeathType
+- resized FrogEnd.png
 
 ###############################
 # 0.10 LevelBuilder 2/12/20
@@ -36,7 +72,7 @@ util and Actors
 - refactored the heights and widths measurements out
 x tried randomly generating x-positions for autoactors. too much code
 - stored AutoActorDims const file, which is referenced by LaneBuilder and Turtle(s) to load sprites
-- GRID_SIZE_L (renamed to SPRITE_HEIGHT) shaved down to 28
+- GRID_SIZE_L (renamed to A_ACTOR_HEIGHT) shaved down to 28
 - Frog dimensions shrunk to 22x22
 - removed width field from MovableActor
 

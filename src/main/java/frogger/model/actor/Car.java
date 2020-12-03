@@ -6,7 +6,7 @@ package frogger.model.actor;
 public class Car extends AutoActor {
 
 	public Car(String imageLink, int x, int y, double speed, int width) {
-		super(imageLink,x, y, width, SPRITE_HEIGHT, speed);
+		super(imageLink,x, y, width, A_ACTOR_HEIGHT, speed);
 		
 	}
 

@@ -9,10 +9,9 @@ public class FilePath {
 	public static final String FXML_INFO = "/frogger/view/info.fxml";
 	public static final String FXML_GAME = "/frogger/view/game.fxml";
 
-	public static final String IMG_BG = "/frogger/images/bg/GameBackground.png";
-
 	public static final String IMG_FROG_PATH = "/frogger/images/frog/frogger";
 	public static final String IMG_FROG_ROOT = "/frogger/images/frog/froggerUp.png";
+	public static final String IMG_DEATH_ROOT = "/frogger/images/death/";
 
 	public static final String IMG_END = "/frogger/images/bg/End.png";
 	public static final String IMG_END_A = "/frogger/images/bg/FrogEnd.png";

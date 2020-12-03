@@ -18,7 +18,7 @@ public abstract class AutoActor extends MovableActor {
 
 	public AutoActor(AutoActor source) {
 		// copies fields from source. startX = source.getX() is immediately overwritten, but it is good prototype practice to call it anyways
-		super(source.getImage().getUrl(),source.getX(),source.getY(),source.width, SPRITE_HEIGHT);
+		super(source.getImage().getUrl(),source.getX(),source.getY(),source.width, A_ACTOR_HEIGHT);
 		this.speed = source.speed;
 		this.width = source.width;
 	}
@@ -33,21 +33,35 @@ public abstract class AutoActor extends MovableActor {
 	public void tick(long now) {
 		// move horizontally according to their velocity
 		// slow down speed value by 0.1
-		move(0.1 * speed, 0);
+		moveX(speed);
+		wrap();
 
-		// wrap them back to the opposite side of screen
+	}
+
+	/*
+	*  If outside bounds, wraps back to the opposite side of screen
+	*/
+	private void wrap() {
 		if (getX() > (Global.STAGE_WIDTH + Global.STAGE_WRAP) && speed>0)
 			setX(-width);
 		if (getX() < (-width - Global.STAGE_WRAP) && speed<0)
 			setX(Global.STAGE_WIDTH);
 	}
 
-	public void setSpeed(double speed) {
-		this.speed = speed;
+
+	// GETTER AND SETTER
+
+	public double getSpeed() {
+		return speed;
 	}
 
-	public abstract AutoActor clone();
+	public void setSpeed(double inputSpeed) {
+		this.speed = 0.1 * inputSpeed;
+	}
 
+	// ABSTRACT
+
+	public abstract AutoActor clone();
 
 
 	//    public Level getWorld() {

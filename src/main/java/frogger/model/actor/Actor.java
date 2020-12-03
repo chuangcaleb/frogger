@@ -14,11 +14,4 @@ public abstract class Actor extends ImageView {
 		setY(startY);
 	}
 
-	/**
-	 * Different functionality for each class that extends it
-	 *
-	 * @param now current frame's timestamp in nanoseconds
-	 */
-	public abstract void tick(long now);
-
 }

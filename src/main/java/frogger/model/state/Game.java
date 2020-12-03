@@ -13,7 +13,6 @@ public class Game {
 
 	private final Level level;
 	private GameController gameController;
-
 	public Game(GameController gameController, Pane root) {
 
 		this.gameController = gameController;
@@ -37,7 +36,6 @@ public class Game {
 	public void start() {
 		timer.start();
 	}
-	
 
 	/**
 	 * Ends the timer, besides the end game screen; called when player loses.
@@ -45,7 +43,6 @@ public class Game {
 	public void stop() {
 		timer.stop();
 	}
-
 
 	/**
 	 * Handles the event when key is pressed.

@@ -1,6 +1,6 @@
 package frogger.util;
 
-import frogger.constant.AutoActorDims;
+import frogger.constant.ActorDimensions;
 import frogger.constant.FilePath;
 import frogger.constant.Global;
 import frogger.model.actor.*;
@@ -36,42 +36,42 @@ public enum LaneBuilder {
 			case "Car"  -> {
 				if (speed < 0) prototype = prototypeLibrary.get(0).clone();
 				else prototype = prototypeLibrary.get(1).clone();
-//				startX = generateX(numActors,AutoActorDims.GRID_UNIT_W);
+//				startX = generateX(numActors,ActorDimensions.GRID_UNIT_W);
 			}
 			case "ShortTruck" -> {
 				if (speed < 0) prototype = prototypeLibrary.get(2).clone();
 				else prototype =  prototypeLibrary.get(3).clone();
-//				startX = generateX(numActors,AutoActorDims.SHORT_TRUCK_W);
+//				startX = generateX(numActors,ActorDimensions.SHORT_TRUCK_W);
 			}
 			case "LongTruck" -> {
 				if (speed < 0) prototype = prototypeLibrary.get(4).clone();
 				else prototype = prototypeLibrary.get(5).clone();
-//				startX = generateX(numActors,AutoActorDims.LONG_TRUCK_W);
+//				startX = generateX(numActors,ActorDimensions.LONG_TRUCK_W);
 			}
 			case "ShortLog" -> {
 				prototype = prototypeLibrary.get(6).clone();
-//				startX = generateX(numActors,AutoActorDims.SHORT_LOG_W);
+//				startX = generateX(numActors,ActorDimensions.SHORT_LOG_W);
 				speed = abs(speed);
 			}
 			case "MedLog" -> {
 				prototype = prototypeLibrary.get(7).clone();
-//				startX = generateX(numActors,AutoActorDims.MED_LOG_W);
+//				startX = generateX(numActors,ActorDimensions.MED_LOG_W);
 				speed = abs(speed);
 			}
 			case "LongLog" -> {
 				prototype = prototypeLibrary.get(8).clone();
-//				startX = generateX(numActors,AutoActorDims.LONG_LOG_W);
+//				startX = generateX(numActors,ActorDimensions.LONG_LOG_W);
 				speed = abs(speed);
 			}
 			case "Turtle" -> {
 				prototype = prototypeLibrary.get(9).clone();
-//				startX = generateX(numActors,AutoActorDims.TURTLE_W);
+//				startX = generateX(numActors,ActorDimensions.TURTLE_W);
 				speed = - abs(speed);
 				startY -= 4;
 			}
 			case "WetTurtle" -> {
 				prototype = prototypeLibrary.get(10).clone();
-//				startX = generateX(numActors,AutoActorDims.TURTLE_W);
+//				startX = generateX(numActors,ActorDimensions.TURTLE_W);
 				speed = - abs(speed);
 				startY -= 4;
 			}
@@ -126,16 +126,16 @@ public enum LaneBuilder {
 	private final ArrayList<AutoActor> prototypeLibrary =
 			new ArrayList<>() {
 				{
-					add(new Car(FilePath.IMG_CAR_L, 0, 0, 0, AutoActorDims.GRID_UNIT_W));
-					add(new Car(FilePath.IMG_CAR_R, 0, 0, 0, AutoActorDims.GRID_UNIT_W));
-					add(new Car(FilePath.IMG_TRUCK_SHORT_L, 0, 0, 0, AutoActorDims.SHORT_TRUCK_W));
-					add(new Car(FilePath.IMG_TRUCK_SHORT_R, 0, 0, 0, AutoActorDims.SHORT_TRUCK_W));
-					add(new Car(FilePath.IMG_TRUCK_LONG_L, 0, 0, 0, AutoActorDims.LONG_TRUCK_W));
-					add(new Car(FilePath.IMG_TRUCK_LONG_R, 0, 0, 0, AutoActorDims.LONG_TRUCK_W));
+					add(new Car(FilePath.IMG_CAR_L, 0, 0, 0, ActorDimensions.GRID_UNIT_W));
+					add(new Car(FilePath.IMG_CAR_R, 0, 0, 0, ActorDimensions.GRID_UNIT_W));
+					add(new Car(FilePath.IMG_TRUCK_SHORT_L, 0, 0, 0, ActorDimensions.SHORT_TRUCK_W));
+					add(new Car(FilePath.IMG_TRUCK_SHORT_R, 0, 0, 0, ActorDimensions.SHORT_TRUCK_W));
+					add(new Car(FilePath.IMG_TRUCK_LONG_L, 0, 0, 0, ActorDimensions.LONG_TRUCK_W));
+					add(new Car(FilePath.IMG_TRUCK_LONG_R, 0, 0, 0, ActorDimensions.LONG_TRUCK_W));
 
-					add(new Log(FilePath.IMG_LOG_SHORT, 0, 0, 0, AutoActorDims.SHORT_LOG_W));
-					add(new Log(FilePath.IMG_LOG_MED, 0, 0, 0, AutoActorDims.MED_LOG_W));
-					add(new Log(FilePath.IMG_LOG_LONG, 0, 0, 0, AutoActorDims.LONG_LOG_W));
+					add(new Log(FilePath.IMG_LOG_SHORT, 0, 0, 0, ActorDimensions.SHORT_LOG_W));
+					add(new Log(FilePath.IMG_LOG_MED, 0, 0, 0, ActorDimensions.MED_LOG_W));
+					add(new Log(FilePath.IMG_LOG_LONG, 0, 0, 0, ActorDimensions.LONG_LOG_W));
 
 					add(new Turtle(0, 0, 0));
 					add(new WetTurtle(0, 0, 0));

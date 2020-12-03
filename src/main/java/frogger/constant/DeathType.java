@@ -5,7 +5,8 @@ package frogger.constant;
  */
 public enum DeathType {
 
-	NONE,
+	// Frog is currently alive; default state
+	ALIVE,
 
 	// Intersects with Car
 	LAND,
@@ -19,7 +20,7 @@ public enum DeathType {
 
 	// Hop into end bush
 	// Hop into occupied End
-	OCCUPIED,
+	ENDDEATH,
 
 	// Time runs out
 	TIMER
