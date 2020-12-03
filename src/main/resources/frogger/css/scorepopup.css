@@ -3,8 +3,27 @@
 }
 
 .root {
-    -fx-background-image: url("../images/bg/GameBackground.png");
-    -fx-background-size: 100%;
+	-fx-background-color: black;
+}
+
+.header {
+ 	-fx-alignment: center;
+    -fx-padding: 5px;
+    -fx-effect: dropshadow(three-pass-box, #444444, 15, 0, 0, 0);
+    -fx-opacity: 0.90;
+    -fx-font-size: 20px;
+    -fx-text-fill: red;
+    -fx-font-family: 'Early GameBoy';
+}
+
+.subheading {
+ 	-fx-alignment: center;
+    -fx-padding: 5px;
+    -fx-effect: dropshadow(three-pass-box, #444444, 15, 0, 0, 0);
+    -fx-opacity: 0.90;
+    -fx-font-size: 15px;
+    -fx-text-fill: white;
+    -fx-font-family: 'Early GameBoy';
 }
 
 .menu_button {
@@ -24,7 +43,7 @@
     -fx-background-size: 95%;
     -fx-opacity:1;
     -fx-cursor: hand;
-	-fx-text-fill: aqua;
+    -fx-text-fill: aqua;
 }
 
 .title {

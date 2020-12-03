@@ -113,7 +113,7 @@ public class Frog extends MovableActor {
 		// sprite properties
 		setX(STARTING_X);
 		setY(STARTING_Y);
-		setImage(facingSprites.get(1));
+		setImage(facingSprites.get(0));
 		deathFrameIndex = 0;
 
 		// movement flags
@@ -149,43 +149,44 @@ public class Frog extends MovableActor {
 	private void initSprites() {
 
 		facingSprites =
-				new ArrayList<>() {
-					{
-						add(new Image(FilePath.IMG_FROG_PATH + "Up.png", FROG_L, FROG_L, true, true));
-						add(new Image(FilePath.IMG_FROG_PATH + "Left.png", FROG_L, FROG_L, true, true));
-						add(new Image(FilePath.IMG_FROG_PATH + "Right.png", FROG_L, FROG_L, true, true));
-						add(new Image(FilePath.IMG_FROG_PATH + "Down.png", FROG_L, FROG_L, true, true));
-					}
-				};
+			new ArrayList<>() {
+				{
+					add(new Image(FilePath.IMG_FROG_PATH + "Up.png", FROG_L, FROG_L, true, true));
+					add(new Image(FilePath.IMG_FROG_PATH + "Left.png", FROG_L, FROG_L, true, true));
+					add(new Image(FilePath.IMG_FROG_PATH + "Right.png", FROG_L, FROG_L, true, true));
+					add(new Image(FilePath.IMG_FROG_PATH + "Down.png", FROG_L, FROG_L, true, true));
+				}
+			};
 
 		leapingSprites =
-				new ArrayList<>() {
-					{
-						add(new Image(FilePath.IMG_FROG_PATH + "UpJump.png", FROG_L, FROG_L, true, true));
-						add(new Image(FilePath.IMG_FROG_PATH + "LeftJump.png", FROG_L, FROG_L, true, true));
-						add(new Image(FilePath.IMG_FROG_PATH + "RightJump.png", FROG_L, FROG_L, true, true));
-						add(new Image(FilePath.IMG_FROG_PATH + "DownJump.png", FROG_L, FROG_L, true, true));
-					}
-				};
+			new ArrayList<>() {
+				{
+					add(new Image(FilePath.IMG_FROG_PATH + "UpJump.png", FROG_L, FROG_L, true, true));
+					add(new Image(FilePath.IMG_FROG_PATH + "LeftJump.png", FROG_L, FROG_L, true, true));
+					add(new Image(FilePath.IMG_FROG_PATH + "RightJump.png", FROG_L, FROG_L, true, true));
+					add(new Image(FilePath.IMG_FROG_PATH + "DownJump.png", FROG_L, FROG_L, true, true));
+				}
+			};
 
 		landDeathSprites =
-				new ArrayList<>() {
-					{
-						add(new Image(FilePath.IMG_DEATH_ROOT + "cardeath1.png", FROG_L, FROG_L, true, true));
-						add(new Image(FilePath.IMG_DEATH_ROOT + "cardeath2.png", FROG_L, FROG_L, true, true));
-						add(new Image(FilePath.IMG_DEATH_ROOT + "cardeath3.png", FROG_L, FROG_L, true, true));
-					}
-				};
+			new ArrayList<>() {
+				{
+					add(new Image(FilePath.IMG_DEATH_ROOT + "cardeath1.png", FROG_L, FROG_L, true, true));
+					add(new Image(FilePath.IMG_DEATH_ROOT + "cardeath2.png", FROG_L, FROG_L, true, true));
+					add(new Image(FilePath.IMG_DEATH_ROOT + "cardeath3.png", FROG_L, FROG_L, true, true));
+				}
+			};
 
 		waterDeathSprites =
-				new ArrayList<>() {
-					{
-						add(new Image(FilePath.IMG_DEATH_ROOT + "waterdeath1.png", FROG_L, FROG_L, true, true));
-						add(new Image(FilePath.IMG_DEATH_ROOT + "waterdeath2.png", FROG_L, FROG_L, true, true));
-						add(new Image(FilePath.IMG_DEATH_ROOT + "waterdeath3.png", FROG_L, FROG_L, true, true));
-						add(new Image(FilePath.IMG_DEATH_ROOT + "waterdeath4.png", FROG_L, FROG_L, true, true));
-					}
-				};
+			new ArrayList<>() {
+				{
+					add(new Image(FilePath.IMG_DEATH_ROOT + "waterdeath1.png", FROG_L, FROG_L, true, true));
+					add(new Image(FilePath.IMG_DEATH_ROOT + "waterdeath2.png", FROG_L, FROG_L, true, true));
+					add(new Image(FilePath.IMG_DEATH_ROOT + "waterdeath3.png", FROG_L, FROG_L, true, true));
+					add(new Image(FilePath.IMG_DEATH_ROOT + "waterdeath4.png", FROG_L, FROG_L, true, true));
+				}
+			};
+
 	}
 
 	// GETTER AND SETTER

@@ -3,11 +3,14 @@ package frogger.util;
 import frogger.Main;
 import frogger.constant.FilePath;
 import frogger.controller.GameController;
+import frogger.controller.ScorePopupController;
 import frogger.model.state.Game;
+import frogger.model.state.Level;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.io.FilenameFilter;
 import java.io.IOException;
@@ -32,9 +35,6 @@ public enum SceneSwitcher {
 //	 */
 	private void changeScene(String fxml) {
 
-//		// instantiates new Scene from Level
-//		Scene scene = new Scene(world);
-
 		try {
 			this.loader = new FXMLLoader(getClass().getResource(fxml));
 			this.root = loader.load();
@@ -46,7 +46,6 @@ public enum SceneSwitcher {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 
 	}
 
@@ -79,7 +78,7 @@ public enum SceneSwitcher {
 		scene.addEventHandler(KeyEvent.KEY_RELEASED, game::keyReleased);
 
 		// Start
-		game.start();
+		game.startGame();
 	}
 
 	/**
@@ -87,6 +86,31 @@ public enum SceneSwitcher {
 	 */
 	public void switchToInfo() {
 		changeScene(FilePath.FXML_INFO);
+	}
+
+	public void popupScore(Game game, int levelNum) {
+		try {
+
+			FXMLLoader loader = new FXMLLoader((getClass().getResource(FilePath.FXML_SCORE)));
+			Pane root = loader.load();
+			Stage scorePopupStage = new Stage();
+
+			scorePopupStage.setScene(new Scene(root));
+			scorePopupStage.initOwner(Main.getPrimaryStage().getScene().getWindow());
+			scorePopupStage.setResizable(false);
+			scorePopupStage.setTitle("High Scores for Level " + levelNum);
+
+			ScorePopupController scorePopupController = loader.getController();
+			scorePopupController.setLevelNum(levelNum);
+			scorePopupController.setGame(game);
+			scorePopupController.setStage(scorePopupStage);
+			scorePopupController.init();
+
+			scorePopupStage.show();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -10,8 +10,11 @@ import javafx.scene.control.Button;
  */
 public class HomeController {
 
+	@FXML
 	public Button startBtn;
+	@FXML
 	public Button infoBtn;
+	@FXML
 	public Button quitBtn;
 
 	@FXML

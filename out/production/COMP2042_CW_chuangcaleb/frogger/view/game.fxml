@@ -3,15 +3,16 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="548.0" prefWidth="460.0" stylesheets="@../css/game.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="548.0" prefWidth="460.0" styleClass="root" stylesheets="@../css/game.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frogger.controller.GameController">
     <VBox>
         <Pane minHeight="0.0" minWidth="0.0" prefHeight="58.0" prefWidth="460.0" stylesheets="@../css/game.css">
-            <Label layoutX="157.0" layoutY="2.0" styleClass="hiscore" text="HI-SCORE"/>
-            <Text fill="RED" layoutX="169.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                  styleClass="hiscore" text="0000" wrappingWidth="120.0"/>
+            <Label layoutX="157.0" layoutY="2.0" styleClass="hiscore" text="HI-SCORE" />
+         <Label layoutX="385.0" layoutY="4.0" styleClass="level" text="LEVEL" />
+         <Label fx:id="levelNumLabel" layoutX="437.0" layoutY="21.0" styleClass="number" text="0" />
+         <Label fx:id="scoreLabel" layoutX="185.0" layoutY="21.0" styleClass="number" text="00000" />
         </Pane>
-        <Pane prefHeight="453.0" prefWidth="460.0"/>
-        <Pane prefHeight="37.0" prefWidth="460.0"/>
+        <Pane prefHeight="453.0" prefWidth="460.0" />
+        <Pane prefHeight="37.0" prefWidth="460.0" />
     </VBox>
 </Pane>

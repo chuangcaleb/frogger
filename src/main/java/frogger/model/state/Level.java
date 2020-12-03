@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import frogger.model.actor.*;
 
 import frogger.util.CollisionChecker;
+import frogger.util.CollisionHandler;
 import frogger.util.LevelBuilder;
 import javafx.scene.layout.Pane;
 
@@ -17,19 +18,23 @@ import javafx.scene.layout.Pane;
 public class Level {
 
 	private final Pane root;
-	private int levelNumber = 0;
+
+	private int levelNumber = 1;
+	private int numEndsActivated = 0;
 
 	private Frog frog;
 	private ArrayList<AutoActor> autoActors;
 	private ArrayList<End> ends;
 
-    public Level(Pane root) {
+	public Level(Pane root) {
 
+    	// link root and CollisionHandler
 		this.root = root;
+		CollisionHandler.INSTANCE.setLevel(this);
 
 		loadFrogAndEnds();
-		advanceLevel();
-		loadActors();
+		createObstacles();
+		readyNewLevel();
 
     }
 
@@ -44,27 +49,24 @@ public class Level {
 		CollisionChecker.INSTANCE.setFrog(frog);
 		CollisionChecker.INSTANCE.setEnds(ends);
 
+		root.getChildren().addAll(ends);
+		root.getChildren().add(frog);
+
 	}
 
 	/**
 	 * Resets Actors and change to the next stage
 	 */
-	public void advanceLevel() {
+	public void prepareNewLevel() {
 
+		numEndsActivated = 0;
 		levelNumber++;
 
-		resetActors();
+		root.getChildren().removeAll(autoActors);
 		createObstacles();
 
-	}
+		readyNewLevel();
 
-	/**
-	 * Resets all the current Actors in the current level
-	 */
-	private void resetActors() {
-		frog.respawn();
-		// reset Ends
-		// remove autoActors ArrayList from root
 	}
 
 	/**
@@ -73,25 +75,22 @@ public class Level {
 	private void createObstacles() {
 		autoActors = LevelBuilder.INSTANCE.build(levelNumber);
 		CollisionChecker.INSTANCE.setAutoActors(autoActors);
-
+		root.getChildren().addAll(autoActors);
 	}
 
-	// Order of adding to root determines z-coord
-	private void loadActors() {
-		root.getChildren().addAll(autoActors);
-		root.getChildren().addAll(ends);
-		root.getChildren().add(frog);
+	private void readyNewLevel() {
+
+		frog.respawn();
+		frog.toFront();
+		ends.forEach(End::reset);
+
 	}
 
 	public void tick(long now) {
 
 		// frog tick
 		frog.tick(now);
-//		// ends tick
-//		for (End end : ends) {
-//			end.tick(now);
-//		}
-		// tick event for all dynamic actors
+		// AutoActor tick
 		for (AutoActor anAutoActor : autoActors) {
 			anAutoActor.tick(now);
 		}
@@ -101,9 +100,13 @@ public class Level {
 
 	}
 
+	public void scoreEnd() {
+		numEndsActivated++;
+	}
+
 	// GETTER AND SETTER
 
-    public Frog getFrog() {
+	public Frog getFrog() {
     	return frog;
 	}
 
@@ -111,8 +114,12 @@ public class Level {
     	return ends;
 	}
 
-	public ArrayList<AutoActor> getObstacles() {
-		return autoActors;
+	public int getLevelNumber() {
+		return levelNumber;
+	}
+
+	public int getNumEndsActivated() {
+		return numEndsActivated;
 	}
 
 	// LIBRARY

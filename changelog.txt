@@ -3,8 +3,9 @@
 # >>>>>>>>>>>>>>>>>>>>>>>>
 
 - document
-- use a decorator design pattern? State design for scenes?
-- bring back highest y
+- score: bring back highest y
+- advance level -> pop up before advance
+- onClick to yellow fill
 
 LONG-TERM OBJECTIVES
 - README
@@ -25,9 +26,38 @@ X Organize the code to adhere to the MVC pattern
 ! if player does a diagonal combo, the frog will be stuck in second state
 ! now does not increment by 1
 
-###############################
+##################################
+# 0.11 Level Progression 3/12/20
+##################################
+
+New view
+- scorepopup .fxml and .css and controller
+- new SceneSwitcher method
+- refactored Game and Level to accommodate loading of new levels and waiting for popup prompt
+- continue button to call Game.nextLevel()
+
+Game and Level
+- numEndsActivated counter
+- when Game's tick detects 5 ends activated, stops game and pop up high score box
+- clicking continue will load the next consecutive level
+
+LevelBuilder
+- built three more levels
+
+Game fxml view
+- added level number display at top right
+- changed some css styles
+
+CollisionHandler
+- player will die when stood on an isSunk WetTurtle
+- scoring an End will have method call to Level
+
+misc
+- fixed water death anim by reimporting death sprites again
+
+##################################
 # 0.10 Collision and Death 3/12/20
-###############################
+##################################
 
 - initSprites Death Animation for Frog
 

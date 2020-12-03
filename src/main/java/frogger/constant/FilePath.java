@@ -8,6 +8,7 @@ public class FilePath {
 	public static final String FXML_HOME = "/frogger/view/home.fxml";
 	public static final String FXML_INFO = "/frogger/view/info.fxml";
 	public static final String FXML_GAME = "/frogger/view/game.fxml";
+	public static final String FXML_SCORE = "/frogger/view/scorepopup.fxml";
 
 	public static final String IMG_FROG_PATH = "/frogger/images/frog/frogger";
 	public static final String IMG_FROG_ROOT = "/frogger/images/frog/froggerUp.png";
