@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import static java.lang.Math.*;
 // first lane is 104
 
-/** //TODO: edit javadoc
+/**
  * {@code LaneBuilder} is a singleton utility class that uses the Prototype (and Builder?) pattern to instantiate lanes of AutoActors.
  */
 public enum LaneBuilder {
@@ -97,7 +97,8 @@ public enum LaneBuilder {
 
 	}
 
-////	private int[] generateX(int numActors, int width) {
+	// TODO: randomised x positions?
+//	private int[] generateX(int numActors, int width) {
 //
 //		final int rightBound = Global.STAGE_WIDTH + Global.STAGE_WRAP;
 //
@@ -106,7 +107,7 @@ public enum LaneBuilder {
 //		// distanceLeft is full width from right edge
 //		int distanceLeft = rightBound;
 //
-//		// for each actor in the lane, // TODO: move until they don't intersect
+//		// for each actor in the lane,
 //		for (int i = 0 ; i < numActors ; i++) {
 //
 //			// calculate offset

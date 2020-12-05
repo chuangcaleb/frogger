@@ -1,6 +1,0 @@
-.menu_button {
-    -fx-alignment: center;
-    -fx-padding: 10px;
-    -fx-effect: dropshadow(three-pass-box, #444444, 15, 0, 0, 0);
-    -fx-opacity: 0.85;
-}
