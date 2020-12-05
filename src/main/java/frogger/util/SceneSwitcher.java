@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -102,7 +103,6 @@ public enum SceneSwitcher {
 			scorePopupController.setLevelNum(levelNum);
 			scorePopupController.setGame(game);
 			scorePopupController.setStage(scorePopupStage);
-			scorePopupController.init();
 
 			scorePopupStage.show();
 

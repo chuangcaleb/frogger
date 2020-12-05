@@ -23,6 +23,13 @@ X Organize the code to adhere to the MVC pattern
 - onClick to yellow fill
 
 
+####################################
+# 0.13 Collision Refactoring 5/12/20
+####################################
+
+- changed CollisionChecker and CollisionHandler to not be singletons anymore, but rather new instances are initiated from Level
+	 this should make things tidier and remove the need for setter methods
+- changed ScorePopupController's init() to initialize(), saving a line of code in SceneSwitcher
 
 ###################################
 # 0.12 Scoring and Nickname 5/12/20

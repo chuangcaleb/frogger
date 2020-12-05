@@ -9,18 +9,25 @@ import javafx.geometry.Bounds;
 import java.util.ArrayList;
 
 /*
-* {@code CollisionChecker} is a singleton utility class that checks for collisions every tick.
+* {@code CollisionChecker} is a utility class that checks for collisions every tick.
 */
-public enum CollisionChecker {
-	INSTANCE;
+public class CollisionChecker {
 
 	/** bottom y-coordinate river */
 	public static final int WATER_HEIGHT = 252;
 	public static final int END_HEIGHT = 105;
 
+	private final CollisionHandler collisionHandler;
+
 	private Frog frog;
 	private ArrayList<End> ends;
 	private ArrayList<AutoActor> autoActors;
+
+	public CollisionChecker(Frog frog, ArrayList<End> ends, CollisionHandler collisionHandler) {
+		this.frog = frog;
+		this.ends = ends;
+		this.collisionHandler = collisionHandler;
+	}
 
 	public void tick() {
 		if (frog.getDeathType() != DeathType.ALIVE) return;
@@ -36,13 +43,13 @@ public enum CollisionChecker {
 	// AUX METHODS
 
 	private void checkOffscreen() {
-		if (frog.getX() < -ActorDimensions.FROG_L || frog.getX() > Global.STAGE_WIDTH) CollisionHandler.INSTANCE.offscreen(frog);
+		if (frog.getX() < -ActorDimensions.FROG_L || frog.getX() > Global.STAGE_WIDTH) collisionHandler.offscreen(frog);
 	}
 
 	private void checkEnd(Bounds frogBounds) {
 		for (End end : ends) {
 			Bounds endBounds = end.localToScene(end.getBoundsInLocal());
-			if (frogBounds.intersects(endBounds)) CollisionHandler.INSTANCE.collideWithEnd(frog, end);
+			if (frogBounds.intersects(endBounds)) collisionHandler.collideWithEnd(frog, end);
 		}
 	}
 
@@ -54,27 +61,28 @@ public enum CollisionChecker {
 			if (frogBounds.intersects(aActorBounds)) {
 				
 				if (autoActor instanceof Log) {
-					CollisionHandler.INSTANCE.collideWithLog(frog, (Log) autoActor);
+					collisionHandler.collideWithLog(frog, (Log) autoActor);
 					isRiding = true;
 				}
 				else if (autoActor instanceof Turtle) {
-					CollisionHandler.INSTANCE.collideWithTurtle(frog, (Turtle) autoActor);
+					collisionHandler.collideWithTurtle(frog, (Turtle) autoActor);
 					isRiding = true;
 				}
 				else if (autoActor instanceof WetTurtle) {
-					CollisionHandler.INSTANCE.collideWithWetTurtle(frog, (WetTurtle) autoActor);
+					collisionHandler.collideWithWetTurtle(frog, (WetTurtle) autoActor);
 					isRiding = true;
 				}
 				else if (autoActor instanceof Car) {
-					CollisionHandler.INSTANCE.collideWithCar(frog);
+					collisionHandler.collideWithCar(frog);
 				}
 
 			}  
 		}
 		
 		// if no contact with any AutoActors && in river zone, then drown the frog
-		if (!isRiding && inRiver() && !atEnd()) CollisionHandler.INSTANCE.drown(frog);
-		if (!isRiding && atEnd()) CollisionHandler.INSTANCE.endDeath(frog);
+		if (!isRiding && inRiver() && !atEnd()) collisionHandler.drown(frog);
+		// if no contact with any AutoActors && in in endBush past the river, then call endDeath
+		if (!isRiding && atEnd()) collisionHandler.endDeath(frog);
 
 	}
 
@@ -89,14 +97,6 @@ public enum CollisionChecker {
 	}
 
 	// SETTER METHODS
-
-	public void setFrog(Frog frog) {
-		this.frog = frog;
-	}
-
-	public void setEnds(ArrayList<End> ends) {
-		this.ends = ends;
-	}
 
 	public void setAutoActors(ArrayList<AutoActor> autoActors) {
 		this.autoActors = autoActors;

@@ -19,6 +19,8 @@ public class Level {
 
 	private final Pane root;
 
+	private CollisionChecker collisionChecker;
+
 	private Frog frog;
 	private ArrayList<AutoActor> autoActors;
 	private ArrayList<End> ends;
@@ -28,8 +30,7 @@ public class Level {
 
 	public Level(Pane root) {
 
-		CollisionHandler.INSTANCE.setLevel(this);
-    	// link root and CollisionHandler
+    	// link root
 		this.root = root;
 
 		loadFrogAndEnds();
@@ -46,8 +47,7 @@ public class Level {
 		frog = new Frog();
 		ends = createEnds();
 
-		CollisionChecker.INSTANCE.setFrog(frog);
-		CollisionChecker.INSTANCE.setEnds(ends);
+		collisionChecker = new CollisionChecker(frog,ends,new CollisionHandler(this));
 
 		root.getChildren().addAll(ends);
 		root.getChildren().add(frog);
@@ -74,7 +74,7 @@ public class Level {
 	 */
 	private void createObstacles() {
 		autoActors = LevelBuilder.INSTANCE.build(levelNumber);
-		CollisionChecker.INSTANCE.setAutoActors(autoActors);
+		collisionChecker.setAutoActors(autoActors);
 		root.getChildren().addAll(autoActors);
 	}
 
@@ -96,7 +96,7 @@ public class Level {
 		}
 
 		// Collision Handling
-		CollisionChecker.INSTANCE.tick();
+		collisionChecker.tick();
 
 	}
 

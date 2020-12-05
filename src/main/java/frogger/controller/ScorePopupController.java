@@ -17,10 +17,10 @@ public class ScorePopupController {
 
 	private int levelNum;
 
-	@FXML
-	public void init() {
+	public void initialize() {
 		levelNumLabel.setText("LEVEL " + levelNum);
 	}
+
 	@FXML
 	public void continueGame() {
 		game.nextLevel();

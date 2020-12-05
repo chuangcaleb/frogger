@@ -5,12 +5,15 @@ import frogger.model.actor.*;
 import frogger.model.Level;
 
 /*
- * {@code CollisionHandler} is a singleton utility class that handles the consequences of collisions.
+ * {@code CollisionHandler} is a utility class that handles the consequences of collisions.
  */
-public enum CollisionHandler {
-	INSTANCE;
+public class CollisionHandler {
 
 	private Level level;
+
+	public CollisionHandler(Level level) {
+		this.level = level;
+	}
 
 	public void offscreen(Frog frog) {
 		frog.setDeathType(DeathType.OFFSCREEN);
@@ -54,12 +57,6 @@ public enum CollisionHandler {
 
 	public void endDeath(Frog frog) {
 		frog.setDeathType(DeathType.ENDDEATH);
-	}
-
-	// SETTER
-
-	public void setLevel(Level level) {
-		this.level = level;
 	}
 
 }
