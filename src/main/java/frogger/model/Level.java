@@ -1,4 +1,4 @@
-package frogger.model.state;
+package frogger.model;
 
 import java.util.ArrayList;
 
@@ -10,7 +10,7 @@ import frogger.util.LevelBuilder;
 import javafx.scene.layout.Pane;
 
 /**
- * {@code Level} class is an object that handles the appearance of different Actors in each Level.
+ * {@code Level} class is submodel of {@link Game} that handles the appearance of different Actors in each Level.
  *
  * Timer (to migrate to individual models?), keystroke events, etc.
  *
@@ -19,18 +19,18 @@ public class Level {
 
 	private final Pane root;
 
-	private int levelNumber = 1;
-	private int numEndsActivated = 0;
-
 	private Frog frog;
 	private ArrayList<AutoActor> autoActors;
 	private ArrayList<End> ends;
 
+	private int levelNumber = 1;
+	private int numEndsActivated = 0;
+
 	public Level(Pane root) {
 
+		CollisionHandler.INSTANCE.setLevel(this);
     	// link root and CollisionHandler
 		this.root = root;
-		CollisionHandler.INSTANCE.setLevel(this);
 
 		loadFrogAndEnds();
 		createObstacles();
@@ -102,6 +102,7 @@ public class Level {
 
 	public void scoreEnd() {
 		numEndsActivated++;
+		frog.addScore(50);
 	}
 
 	// GETTER AND SETTER

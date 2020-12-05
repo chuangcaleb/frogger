@@ -1,10 +1,6 @@
 package frogger.controller;
 
-import frogger.model.state.Game;
-import frogger.model.state.Level;
-import frogger.util.SceneSwitcher;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
+import frogger.model.Game;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -23,7 +19,7 @@ public class ScorePopupController {
 
 	@FXML
 	public void init() {
-		levelNumLabel.setText("Level " + levelNum);
+		levelNumLabel.setText("LEVEL " + levelNum);
 	}
 	@FXML
 	public void continueGame() {

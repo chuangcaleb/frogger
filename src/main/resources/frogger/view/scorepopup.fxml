@@ -11,7 +11,7 @@
       <VBox prefHeight="72.0" prefWidth="294.0" BorderPane.alignment="CENTER">
          <children>
             <Label prefHeight="35.0" prefWidth="305.0" styleClass="header" text="HIGH SCORE" />
-            <Label fx:id="levelNumLabel" prefHeight="24.0" prefWidth="300.0" styleClass="subheading" text="Level 0" />
+            <Label fx:id="levelNumLabel" prefHeight="24.0" prefWidth="300.0" styleClass="subheading" text="LEVEL 0" />
          </children>
       </VBox>
    </top>

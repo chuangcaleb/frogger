@@ -17,8 +17,7 @@ import static java.lang.Math.random;
  * The {@code Main} class of the application.
  */
 public class Main extends Application {
-	AnimationTimer timer;
-	Frog frog;
+
 	private static Stage primaryStage;
 
 	public static void main(String[] args) {
@@ -32,7 +31,7 @@ public class Main extends Application {
 
 		Main.primaryStage = primaryStage;
 		primaryStage.setResizable(false);
-		primaryStage.setTitle("Caleb's Frogger");
+		primaryStage.setTitle("Frogger");
 
 		// TODO: unmute the music later before final product
 //		MusicPlayer.INSTANCE.playMusic();
@@ -57,8 +56,8 @@ public class Main extends Application {
 
             		Alert alert = new Alert(AlertType.INFORMATION);
             		alert.setTitle("You Have Won The Game!");
-            		alert.setHeaderText("Your High Score: "+frog.getPoints()+"!");
-            		alert.setContentText("Highest Possible Score: 800");
+            		alert.setHeaderText("Your High Scoring: "+frog.getPoints()+"!");
+            		alert.setContentText("Highest Possible Scoring: 800");
             		alert.show();
             	}
             }

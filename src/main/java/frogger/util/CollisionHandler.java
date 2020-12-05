@@ -2,7 +2,7 @@ package frogger.util;
 
 import frogger.constant.DeathType;
 import frogger.model.actor.*;
-import frogger.model.state.Level;
+import frogger.model.Level;
 
 /*
  * {@code CollisionHandler} is a singleton utility class that handles the consequences of collisions.
@@ -20,7 +20,7 @@ public enum CollisionHandler {
 	public void collideWithEnd(Frog frog, End end) {
 		if (!end.isActivated()) {
 			end.activate();
-			frog.respawn();
+			frog.respawn(); // frog.touchEnd
 			level.scoreEnd();
 		} else {
 			endDeath(frog);
@@ -55,6 +55,8 @@ public enum CollisionHandler {
 	public void endDeath(Frog frog) {
 		frog.setDeathType(DeathType.ENDDEATH);
 	}
+
+	// SETTER
 
 	public void setLevel(Level level) {
 		this.level = level;

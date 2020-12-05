@@ -11,17 +11,12 @@ import java.util.ArrayList;
  */
 public class Turtle extends AutoActor {
 
-	/** Array of sprites */
-	private ArrayList<Image> sprites;
-
 	public Turtle(int x, int y, double speed) {
 		super(FilePath.IMG_TURTLE_1,x, y, ActorDimensions.TURTLE_W, A_ACTOR_HEIGHT, speed);
-		initSprites();
 	}
 
 	public Turtle(Turtle source) {
 		super(source);
-		initSprites();
 	}
 
 	public AutoActor clone() {
@@ -43,17 +38,13 @@ public class Turtle extends AutoActor {
 		setImage(sprites.get(frame));
 	}
 
-	private void initSprites() {
-
-		sprites =
-			new ArrayList<>() {
-				{
-					add(new Image(FilePath.IMG_TURTLE_1, ActorDimensions.TURTLE_W, A_ACTOR_HEIGHT, true, true));
-					add(new Image(FilePath.IMG_TURTLE_2, ActorDimensions.TURTLE_W, A_ACTOR_HEIGHT, true, true));
-					add(new Image(FilePath.IMG_TURTLE_3, ActorDimensions.TURTLE_W, A_ACTOR_HEIGHT, true, true));
-				}
-			};
-
-	}
+	/** Array of sprites */
+	private ArrayList<Image> sprites = new ArrayList<>() {
+		{
+			add(new Image(FilePath.IMG_TURTLE_1, ActorDimensions.TURTLE_W, A_ACTOR_HEIGHT, true, true));
+			add(new Image(FilePath.IMG_TURTLE_2, ActorDimensions.TURTLE_W, A_ACTOR_HEIGHT, true, true));
+			add(new Image(FilePath.IMG_TURTLE_3, ActorDimensions.TURTLE_W, A_ACTOR_HEIGHT, true, true));
+		}
+	};
 
 }

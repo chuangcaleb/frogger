@@ -1,7 +1,8 @@
-package frogger.model.state;
+package frogger.model;
 
 import frogger.constant.Keystroke;
 import frogger.controller.GameController;
+import frogger.util.CollisionHandler;
 import frogger.util.SceneSwitcher;
 import javafx.animation.AnimationTimer;
 import javafx.scene.input.KeyEvent;
@@ -13,38 +14,59 @@ import javafx.scene.layout.Pane;
 public class Game {
 
 	private final Level level;
-	private GameController gameController;
+	private final GameController gameController;
+	private final String nickname;
 
-	public Game(GameController gameController, Pane root) {
+	public Game(GameController gameController, Pane root, String nickname) {
 
 		this.gameController = gameController;
 		this.level = new Level(root); // constructs level one
+		this.nickname = nickname;
+
+		System.out.println(nickname);
 
 	}
 
 	/**
 	 * The AnimationTimer to keep track of time during gameplay.
 	 */
-	private AnimationTimer timer = new AnimationTimer() {
+	private final AnimationTimer timer = new AnimationTimer() {
+
 		@Override
 		public void handle(long now) {
+
 			level.tick(now);
-			if (checkEnds()) finishLevel();
+			gameController.updateDisplay(level.getFrog().getScore());
+			if (allEndsActive()) finishLevel();
+
 		}
+
 	};
 
 	/**
 	 * Starts the timer; called at init.
 	 */
 	public void startGame() {
-		timer.start();
+
 		gameController.updateLevelNum(level.getLevelNumber());
+
+		timer.start();
+	}
+
+	private void finishLevel() {
+
+		timer.stop();
+		level.getFrog().addScore(1000);
+		SceneSwitcher.INSTANCE.popupScore(this,level.getLevelNumber());
+
 	}
 
 	public void nextLevel() {
-		timer.start();
+
 		level.prepareNewLevel();
 		gameController.updateLevelNum(level.getLevelNumber());
+
+		timer.start();
 	}
 
 	/**
@@ -54,14 +76,9 @@ public class Game {
 		timer.stop();
 	}
 
-	private void finishLevel() {
-		timer.stop();
-		SceneSwitcher.INSTANCE.popupScore(this,level.getLevelNumber());
-	}
-
 	// CONDITIONALS
 
-	public boolean checkEnds() {
+	public boolean allEndsActive() {
 		 return (level.getNumEndsActivated() == 5);
 	}
 

@@ -6,6 +6,9 @@ import frogger.constant.*;
 
 import javafx.scene.image.Image;
 
+/**
+* {@code Frog} is a MoveableActor that can be controlled as the player character.
+*/
 public class Frog extends MovableActor {
 
 	/** Array of sprites */
@@ -14,16 +17,13 @@ public class Frog extends MovableActor {
 	private ArrayList<Image> landDeathSprites;
 	private ArrayList<Image> waterDeathSprites;
 
-	/** Frog dimensions */
+	/** Import frog dimensions */
 	public static final int FROG_L = ActorDimensions.FROG_L;
 	/** Starting x-coordinate of player */
 	public static final int STARTING_X = 214;
 	/** Starting y-coordinate of player */
 	public static final int STARTING_Y = 483;
 
-	int points = 0;
-	/** how many frogs at the end */
-	int end = 0;
 	/** whether to prompt the second animation frame.*/
 	private boolean isJumping = false;
 	/** whether to restrict movement */
@@ -35,21 +35,22 @@ public class Frog extends MovableActor {
 
 	/** cause of death */
 	private DeathType deathType;
-	int deathFrameIndex = 0;
+	/** index of death animation frame */
+	private int deathFrameIndex = 0;
 
 	/** no clear usage. Player reaches end? */
 	boolean stop = false;
 
-	/** whether score has changed. no use */
-	boolean changeScore = false;
+	/** the score */
+	private int score = 0;
+
 	/** y-coord tracker. Decreases with each step... to increment score? */
-	double w = Global.STAGE_HEIGHT;
-
+	private double highestY = STARTING_Y;
 	/** ArrayList of intersecting End objects */
-	ArrayList<End> inter = new ArrayList<>();
-	boolean hasMoved = false;
-	private int lives = 3;
+//	ArrayList<End> inter = new ArrayList<>(); // remove
+	private boolean hasMoved = false;
 
+	private int lives = 3;
 	public Frog() {
 
 		// set image of sprite by passing parameters
@@ -69,6 +70,10 @@ public class Frog extends MovableActor {
 			case UP -> {
 				moveY(-movement);
 				setImage((isJumping) ? facingSprites.get(0) : leapingSprites.get(0));
+				if (isJumping && getY() < highestY) {
+					addScore(10);
+					highestY = getY();
+				}
 			}
 			case LEFT -> {
 				if (getX() > 8) moveX(-movement);
@@ -121,6 +126,9 @@ public class Frog extends MovableActor {
 		hasMoved = false;
 		noMove = (lives == 0);
 
+		// score
+		highestY = STARTING_Y;
+
 	}
 
 	private void playDeathAnim(long now, DeathType deathType) {
@@ -145,6 +153,23 @@ public class Frog extends MovableActor {
 	public void rideActor(double speed) {
 		moveX(speed);
 	}
+
+
+	// SCORING
+
+	public int getScore() {
+		return score;
+	}
+
+	public void addScore(int amount) {
+		score += amount;
+	}
+
+	public void removeScore(int amount) {
+		score = Math.max(0, score - amount);
+	}
+
+	// LIBRARY
 
 	private void initSprites() {
 
@@ -199,22 +224,18 @@ public class Frog extends MovableActor {
 		this.deathType = deathType;
 	}
 
-	public boolean getStop() {
-		return end==5;
-	}
+//	public int getPoints() {
+//		return points;
+//	}
 
-	public int getPoints() {
-		return points;
-	}
-
-	public boolean changeScore() {
-		if (changeScore) {
-			changeScore = false;
-			return true;
-		}
-		return false;
-
-	}
+//	public boolean changeScore() {
+//		if (changeScore) {
+//			changeScore = false;
+//			return true;
+//		}
+//		return false;
+//
+//	}
 
 
 }

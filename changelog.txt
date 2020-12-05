@@ -3,8 +3,7 @@
 # >>>>>>>>>>>>>>>>>>>>>>>>
 
 - document
-- score: bring back highest y
-- onClick to yellow fill
+- collision refactor
 
 LONG-TERM OBJECTIVES
 - README
@@ -15,26 +14,34 @@ X Start Screen w/ picture -> Info button explaining game op
 > High Score popup at the end of every round, showing scores from each round, highest at the top
 > Refactor code w/ design patterns
 X Organize the code to adhere to the MVC pattern
-- Create a permanent high score list (using a file to store scores)
+- Create a permanent high scoring list (using a file to store scores)
 - Add interesting levels to the game (either follow the original Frogger game levels or come up with your own ideas)
 - Add meaningful JUnit tests
 - Use build files (Ant or Maven or Gradle)
 
-! Turtles have to be offset -3 on y-axes
-! if player holds down key, will be stuck in second animation
-! if player does a diagonal combo, the frog will be stuck in second state
-! now does not increment by 1
+- lives, timer,
+- onClick to yellow fill
 
 
-##################################
-# 0.12 Scores /12/20
-##################################
 
+###################################
+# 0.12 Scoring and Nickname 5/12/20
+###################################
+
+Scoring
+- scoring functions in Frog
+- scoring scenarios: forward step (10), score End (50), score 5 ends (1000)
+- Level and GameController to update and show
+
+Nickname
+- home.fxml text field
+- listens and restricts input
+- toggle confirmation button that enables the start button
+
+misc
 - deleted Digit.java
-
-
-
-
+- Turtles: initialised sprites straight away w/o function call
+- removed /model/state, and just put Game and Level under /model
 
 
 # 0.11b Removed "out" production folder from being committed to remote 5/12/20
@@ -52,7 +59,7 @@ New view
 
 Game and Level
 - numEndsActivated counter
-- when Game's tick detects 5 ends activated, stops game and pop up high score box
+- when Game's tick detects 5 ends activated, stops game and pop up high scoring box
 - clicking continue will load the next consecutive level
 
 LevelBuilder
@@ -325,6 +332,19 @@ MISC
 - build files folder
 - ensured build files
 
+
+
+! Turtles have to be offset -3 on y-axes
+! if player holds down key, will be stuck in second animation
+! if player does a diagonal combo, the frog will be stuck in second state
+! now does not increment by 1
+
+X Every forward step scores 10 points,
+X and every frog arriving safely home scores 50 points.
+10 points are also awarded per each unused 1⁄2 second of time.
+Guiding a lady frog home or eating a fly scores 200 points each,
+X and when all 5 frogs reach home to end the level the player earns 1,000 points.
+A single bonus frog is 20,000 points. (lives?)
 
 
 # UI Ideas

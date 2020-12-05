@@ -4,15 +4,13 @@ import frogger.Main;
 import frogger.constant.FilePath;
 import frogger.controller.GameController;
 import frogger.controller.ScorePopupController;
-import frogger.model.state.Game;
-import frogger.model.state.Level;
+import frogger.model.Game;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import java.io.FilenameFilter;
 import java.io.IOException;
 
 /**
@@ -65,13 +63,13 @@ public enum SceneSwitcher {
 	/**
 	 * Switches to the Game view, whilst initialising a new game.
 	 */
-	public void switchToGame() {
+	public void switchToGame(String nickname) {
 
 		changeScene(FilePath.FXML_GAME);
 
 		// Initialize Game
 		GameController gameController = loader.getController();
-		Game game = new Game(gameController,root);
+		Game game = new Game(gameController,root, nickname);
 
 		// KeyEvent handlers
 		scene.addEventHandler(KeyEvent.KEY_PRESSED, game::keyPressed);
