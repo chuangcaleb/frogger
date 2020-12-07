@@ -4,12 +4,12 @@ import frogger.constant.DeathType;
 import frogger.model.actor.*;
 import frogger.model.Level;
 
-/*
+/**
  * {@code CollisionHandler} is a utility class that handles the consequences of collisions.
  */
 public class CollisionHandler {
 
-	private Level level;
+	private final Level level;
 
 	public CollisionHandler(Level level) {
 		this.level = level;

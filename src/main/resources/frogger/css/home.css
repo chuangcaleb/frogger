@@ -17,6 +17,8 @@
     -fx-effect: dropshadow(three-pass-box, #444444, 15, 0, 0, 0);
     -fx-opacity: 0.90;
     -fx-font-family: 'Early GameBoy';
+    -fx-text-alignment: center;
+    -fx-wrap-text: true;
 }
 
 .menu_button:hover {
@@ -31,8 +33,6 @@
 .static_menu_button {
     -fx-text-fill: white;
 }
-
-
 
 .static_text {
     -fx-alignment: center;

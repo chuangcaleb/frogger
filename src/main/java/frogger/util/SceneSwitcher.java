@@ -27,11 +27,10 @@ public enum SceneSwitcher {
 	/** The scene for the root Node. */
 	private Scene scene;
 
-
-	//	/**
-//	 * Changes the scene of primaryStage according to the Level parameter.
-//	 * @param world The new Level root for the new Scene that is to be switched in.
-//	 */
+	/**
+	 * Changes the scene of primaryStage according to the Level parameter.
+	 * @param fxml The fxml file for the new root that is to be switched in.
+	 */
 	private void changeScene(String fxml) {
 
 		try {

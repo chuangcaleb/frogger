@@ -12,7 +12,6 @@ public class ScorePopupController {
 	public Label levelNumLabel;
 
 	private Game game;
-
 	private Stage stage;
 
 	private int levelNum;

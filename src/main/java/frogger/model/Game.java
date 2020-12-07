@@ -3,6 +3,7 @@ package frogger.model;
 import frogger.constant.Keystroke;
 import frogger.controller.GameController;
 import frogger.util.CollisionHandler;
+import frogger.util.HiscoreWriter;
 import frogger.util.SceneSwitcher;
 import javafx.animation.AnimationTimer;
 import javafx.scene.input.KeyEvent;
@@ -23,8 +24,6 @@ public class Game {
 		this.level = new Level(root); // constructs level one
 		this.nickname = nickname;
 
-		System.out.println(nickname);
-
 	}
 
 	/**
@@ -35,9 +34,9 @@ public class Game {
 		@Override
 		public void handle(long now) {
 
-			level.tick(now);
-			gameController.updateDisplay(level.getFrog().getScore());
-			if (allEndsActive()) finishLevel();
+		level.tick(now);
+		gameController.updateDisplay(level.getFrog().getScore());
+		if (allEndsActive()) finishLevel();
 
 		}
 
@@ -49,14 +48,15 @@ public class Game {
 	public void startGame() {
 
 		gameController.updateLevelNum(level.getLevelNumber());
-
 		timer.start();
+
 	}
 
 	private void finishLevel() {
 
 		timer.stop();
 		level.getFrog().addScore(1000);
+		writeScore();
 		SceneSwitcher.INSTANCE.popupScore(this,level.getLevelNumber());
 
 	}
@@ -76,10 +76,19 @@ public class Game {
 		timer.stop();
 	}
 
+
+	private void writeScore() {
+		HiscoreWriter hiscoreWriter = new HiscoreWriter(level.getLevelNumber());
+		hiscoreWriter.write(nickname,level.getFrog().getScore());
+	}
+
+
+
 	// CONDITIONALS
 
+	// TODO: temp end at 1
 	public boolean allEndsActive() {
-		 return (level.getNumEndsActivated() == 5);
+		 return (level.getNumEndsActivated() == 1);
 	}
 
 	// KEY EVENT

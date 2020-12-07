@@ -2,8 +2,7 @@
 # Current Objectives // 460 548
 # >>>>>>>>>>>>>>>>>>>>>>>>
 
-- document
-- collision refactor
+- hiscore writing and reading
 
 LONG-TERM OBJECTIVES
 - README
@@ -14,13 +13,33 @@ X Start Screen w/ picture -> Info button explaining game op
 > High Score popup at the end of every round, showing scores from each round, highest at the top
 > Refactor code w/ design patterns
 X Organize the code to adhere to the MVC pattern
-- Create a permanent high scoring list (using a file to store scores)
+> Create a permanent high scoring list (using a file to store scores)
 - Add interesting levels to the game (either follow the original Frogger game levels or come up with your own ideas)
-- Add meaningful JUnit tests
+> Add meaningful JUnit tests
 - Use build files (Ant or Maven or Gradle)
 
-- lives, timer,
+- timer,
 - onClick to yellow fill
+
+
+####################################
+# 0.14 Maven & Junit Setup 7/12/20
+####################################
+
+- Maven framework integration
+	- commons.io dependency for file writing
+- Junit dependency
+- HiscoreWriter class that writes a string to file
+- HiscoreWriterTest to test that file is being written
+	- a simple test case to see if writing works
+- Build Script: mvn clean compile package exec:java
+
+misc
+- info screen
+- main menu button in game screen
+- css standardisation
+- now using IntelliJ Ultimate
+- added hiscore_data to .gitignore
 
 
 ####################################

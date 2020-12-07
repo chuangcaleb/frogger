@@ -6,4 +6,5 @@
 *.iml
 *.ipr
 .DS_Store
-/out/
+/target/
+/hiscore_data/

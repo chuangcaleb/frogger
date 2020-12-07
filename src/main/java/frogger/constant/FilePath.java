@@ -1,9 +1,13 @@
 package frogger.constant;
 
+import java.io.File;
+
 /**
  * {@code FilePath} is a class that stores public static final Strings of the filepaths of resources.
  */
 public class FilePath {
+
+	public static final String HISCORES_DIR = "hiscore_data" + File.separator;
 
 	public static final String FXML_HOME = "/frogger/view/home.fxml";
 	public static final String FXML_INFO = "/frogger/view/info.fxml";
