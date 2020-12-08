@@ -2,7 +2,11 @@
 # Current Objectives // 460 548
 # >>>>>>>>>>>>>>>>>>>>>>>>
 
-- hiscore writing and reading
+- to set all scores at %06d?
+- endgame total score
+- death message
+- junit tests?
+- javadocs
 
 LONG-TERM OBJECTIVES
 - README
@@ -13,13 +17,31 @@ X Start Screen w/ picture -> Info button explaining game op
 > High Score popup at the end of every round, showing scores from each round, highest at the top
 > Refactor code w/ design patterns
 X Organize the code to adhere to the MVC pattern
-> Create a permanent high scoring list (using a file to store scores)
+>> Create a permanent high scoring list (using a file to store scores)
 - Add interesting levels to the game (either follow the original Frogger game levels or come up with your own ideas)
 > Add meaningful JUnit tests
-- Use build files (Ant or Maven or Gradle)
+X Use build files (Ant or Maven or Gradle)
 
 - timer,
-- onClick to yellow fill
+- points popup display
+- more levels?
+- fly?
+- highscore from homepage
+
+
+####################################
+# 0.15 Level Hiscores 8/12/20
+####################################
+
+- total score and level score
+- new HiscoreReader that takes reads file, sorts top 10 entries, converts into string with newlines
+- passes to ScorePopupController that sets Label with String
+- ranks according to number of entries
+
+- remove 100 score upon death
+- fix wetTurtle's sunk frame
+- cleaned up Main
+- test file for HiscoreReader
 
 
 ####################################
@@ -364,6 +386,7 @@ MISC
 ! if player holds down key, will be stuck in second animation
 ! if player does a diagonal combo, the frog will be stuck in second state
 ! now does not increment by 1
+! scorepopup Continue button is only clickable on bottom half
 
 X Every forward step scores 10 points,
 X and every frog arriving safely home scores 50 points.

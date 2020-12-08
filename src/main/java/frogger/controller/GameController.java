@@ -10,7 +10,7 @@ public class GameController {
 	@FXML
 	private Label levelNumLabel;
 	@FXML
-	public Label scoreLabel;
+	private Label scoreLabel;
 
 	@FXML
 	public void toHome(){

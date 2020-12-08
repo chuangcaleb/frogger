@@ -2,7 +2,6 @@ package frogger.model;
 
 import frogger.constant.Keystroke;
 import frogger.controller.GameController;
-import frogger.util.CollisionHandler;
 import frogger.util.HiscoreWriter;
 import frogger.util.SceneSwitcher;
 import javafx.animation.AnimationTimer;
@@ -17,6 +16,8 @@ public class Game {
 	private final Level level;
 	private final GameController gameController;
 	private final String nickname;
+
+	private int totalScore = 0;
 
 	public Game(GameController gameController, Pane root, String nickname) {
 
@@ -55,15 +56,21 @@ public class Game {
 	private void finishLevel() {
 
 		timer.stop();
+
 		level.getFrog().addScore(1000);
+		gameController.updateDisplay(level.getFrog().getScore());
+
 		writeScore();
-		SceneSwitcher.INSTANCE.popupScore(this,level.getLevelNumber());
+
+		totalScore += level.getFrog().getScore();
+		SceneSwitcher.INSTANCE.popupScore(this,level.getLevelNumber(), level.getFrog().getScore(), totalScore);
+
 
 	}
 
 	public void nextLevel() {
 
-		level.prepareNewLevel();
+		level.prepareNextLevel();
 		gameController.updateLevelNum(level.getLevelNumber());
 
 		timer.start();
@@ -81,8 +88,6 @@ public class Game {
 		HiscoreWriter hiscoreWriter = new HiscoreWriter(level.getLevelNumber());
 		hiscoreWriter.write(nickname,level.getFrog().getScore());
 	}
-
-
 
 	// CONDITIONALS
 

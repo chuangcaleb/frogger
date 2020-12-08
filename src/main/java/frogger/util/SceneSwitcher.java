@@ -86,7 +86,7 @@ public enum SceneSwitcher {
 		changeScene(FilePath.FXML_INFO);
 	}
 
-	public void popupScore(Game game, int levelNum) {
+	public void popupScore(Game game, int levelNum, int levelScore, int totalScore) {
 		try {
 
 			FXMLLoader loader = new FXMLLoader((getClass().getResource(FilePath.FXML_SCORE)));
@@ -99,9 +99,7 @@ public enum SceneSwitcher {
 			scorePopupStage.setTitle("High Scores for Level " + levelNum);
 
 			ScorePopupController scorePopupController = loader.getController();
-			scorePopupController.setLevelNum(levelNum);
-			scorePopupController.setGame(game);
-			scorePopupController.setStage(scorePopupStage);
+			scorePopupController.passFields(scorePopupStage, game, levelNum, levelScore, totalScore);
 
 			scorePopupStage.show();
 

@@ -37,7 +37,7 @@ public class WetTurtle extends AutoActor {
 	public void animation(long now) {
 		int frame = (int) (now / 900000000 % 4);
 		setImage(sprites.get(frame));
-		sunk = (frame == 3);
+		sunk = (frame == 2);
 	}
 
 	public boolean isSunk() {

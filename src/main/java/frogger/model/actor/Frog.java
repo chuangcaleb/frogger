@@ -51,6 +51,7 @@ public class Frog extends MovableActor {
 	private boolean hasMoved = false;
 
 	private int lives = 3;
+
 	public Frog() {
 
 		// set image of sprite by passing parameters
@@ -58,6 +59,16 @@ public class Frog extends MovableActor {
 		initSprites();
 
 	}
+
+	@Override
+	public void tick(long now) {
+
+		// DEATH SEQUENCES
+		if (deathType == DeathType.LAND || deathType == DeathType.WATER || deathType == DeathType.ENDDEATH) playDeathAnim(now, deathType);
+
+	}
+
+	// MOVEMENT
 
 	public void leap(Direction dir, boolean keyPressed) {
 
@@ -98,15 +109,14 @@ public class Frog extends MovableActor {
 
 	}
 
-	@Override
-	public void tick(long now) {
-
-		// DEATH SEQUENCES
-		if (deathType == DeathType.LAND || deathType == DeathType.WATER || deathType == DeathType.ENDDEATH) playDeathAnim(now, deathType);
-
+	public void rideActor(double speed) {
+		moveX(speed);
 	}
 
+	// DEATH/RESPAWN HANDLING
+
 	public void die() {
+		removeScore(100);
 		respawn();
 	}
 
@@ -150,10 +160,11 @@ public class Frog extends MovableActor {
 
 	}
 
-	public void rideActor(double speed) {
-		moveX(speed);
+	public void initNewLevel() {
+		respawn();
+		toFront();
+		score = 0;
 	}
-
 
 	// SCORING
 
@@ -223,19 +234,5 @@ public class Frog extends MovableActor {
 	public void setDeathType(DeathType deathType) {
 		this.deathType = deathType;
 	}
-
-//	public int getPoints() {
-//		return points;
-//	}
-
-//	public boolean changeScore() {
-//		if (changeScore) {
-//			changeScore = false;
-//			return true;
-//		}
-//		return false;
-//
-//	}
-
 
 }

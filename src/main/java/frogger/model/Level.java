@@ -57,20 +57,19 @@ public class Level {
 	/**
 	 * Resets Actors and change to the next stage
 	 */
-	public void prepareNewLevel() {
+	public void prepareNextLevel() {
 
 		numEndsActivated = 0;
 		levelNumber++;
 
 		root.getChildren().removeAll(autoActors);
 		createObstacles();
-
 		readyNewLevel();
 
 	}
 
 	/**
-	 * Adds only the autoActors to the visible pane and CollisionChecker, called after every subsequent round
+	 *
 	 */
 	private void createObstacles() {
 		autoActors = LevelBuilder.INSTANCE.build(levelNumber);
@@ -80,8 +79,7 @@ public class Level {
 
 	private void readyNewLevel() {
 
-		frog.respawn();
-		frog.toFront();
+		frog.initNewLevel();
 		ends.forEach(End::reset);
 
 	}

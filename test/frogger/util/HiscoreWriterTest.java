@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class HiscoreWriterTest {
 
 	@Test
-	public void testWriter() {
+	public void testWriteNew() {
 
 		HiscoreWriter hiscoreWriter = new HiscoreWriter(0);
 		hiscoreWriter.write("test1", 3);
@@ -37,78 +37,6 @@ class HiscoreWriterTest {
 		}
 
 	}
-
-//	@Test
-//	public void testUnsorted() {
-//
-//		HiscoreWriter hiscoreWriter = new HiscoreWriter(0);
-//		hiscoreWriter.write("C",4);
-//		hiscoreWriter.write("A",2);
-//		hiscoreWriter.write("F",1);
-//		hiscoreWriter.write("A",3);
-//		hiscoreWriter.write("X",1);
-//
-//		try {
-//			boolean isUnsorted = false;
-//			List<String> lines = FileUtils.readLines(new File(FilePath.HISCORES_DIR + "hiscores_lv0"), StandardCharsets.UTF_8);
-//
-//			int previous = -1;
-//
-//			for (String line : lines) {
-//
-//				int next = Integer.parseInt(line.split(",", 2)[1]);
-//
-//				if (previous != -1 && previous < next) {
-//					isUnsorted = true;
-//					System.out.println(previous + " vs " + next);
-//				}
-//				previous = next;
-//
-//			}
-//
-//			assertTrue(isUnsorted);
-//
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//
-//	}
-
-//	@Test
-//	public void testSort() {
-//
-//		// inserts scores out of order
-//		HiscoreWriter hiscoreWriter = new HiscoreWriter(0);
-//		hiscoreWriter.write("C",2);
-//		hiscoreWriter.write("A",4);
-//		hiscoreWriter.write("F",7);
-//		hiscoreWriter.write("A",4);
-//		hiscoreWriter.write("X",8);
-//
-//		try { // they should be in order when read
-//			boolean isUnsorted = false;
-//			List<String> lines = FileUtils.readLines(new File(FilePath.HISCORES_DIR + "hiscores_lv0"), StandardCharsets.UTF_8);
-//
-//			int previous = -1;
-//
-//			for (String line : lines) {
-//
-//				int next = Integer.parseInt(line.split(",", 2)[1]);
-//				if (previous != -1 && previous < next) {
-//					isUnsorted = true;
-//					System.out.println(previous + " vs " + next);
-//				}
-//				previous = next;
-//
-//			}
-//
-//			assertFalse(isUnsorted);
-//
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//
-//	}
 
 	@AfterEach
 	public void cleanupEach() {

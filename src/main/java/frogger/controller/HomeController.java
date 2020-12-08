@@ -14,15 +14,13 @@ import javafx.scene.paint.Color;
 public class HomeController {
 
 	@FXML
-	public Button startBtn;
+	private Button startBtn;
 	@FXML
-	public Button infoBtn;
+	private TextField nicknameField;
 	@FXML
-	public Button quitBtn;
+	private Label enterNickLabel;
 	@FXML
-	public TextField nicknameField;
-	public Label enterNickLabel;
-	public Button confirmBtn;
+	private Button confirmBtn;
 
 	private final int maxLength = 8;
 
