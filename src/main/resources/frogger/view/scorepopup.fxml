@@ -10,14 +10,17 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" stylesheets="@../css/scorepopup.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frogger.controller.ScorePopupController">
    <bottom>
-      <Button fx:id="continueBtn" mnemonicParsing="false" onAction="#continueGame" prefHeight="35.0" prefWidth="122.0" styleClass="menu_button" text="Continue" BorderPane.alignment="CENTER" />
+      <Button fx:id="actionBtn" mnemonicParsing="false" onAction="#nextLevel" prefHeight="30.0" prefWidth="131.0" styleClass="menu_button" text="CONTINUE" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="10.0" />
+         </BorderPane.margin></Button>
    </bottom>
    <top>
       <VBox prefHeight="126.0" prefWidth="300.0" BorderPane.alignment="CENTER">
          <children>
             <TextFlow prefHeight="30.0" prefWidth="300.0" textAlignment="CENTER">
                <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="header" text="LEVEL " />
+                  <Text fx:id="levelHeaderText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="header" text="LEVEL " />
                   <Text fx:id="levelNumText" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="header" text="0" wrappingWidth="49.22900390625" />
                </children>
                <VBox.margin>
@@ -34,7 +37,7 @@
                   <Insets top="10.0" />
                </padding>
             </TextFlow>
-            <Label alignment="CENTER" prefHeight="25.0" prefWidth="303.0" styleClass="subheading" text="HIGH SCORES" textFill="WHITE">
+            <Label alignment="CENTER" prefHeight="25.0" prefWidth="303.0" styleClass="subheading" text="ALL-TIME HIGH SCORES" textFill="WHITE">
                <VBox.margin>
                   <Insets top="30.0" />
                </VBox.margin>
@@ -43,12 +46,12 @@
       </VBox>
    </top>
    <left>
-      <Label fx:id="rankLabel" alignment="TOP_RIGHT" prefHeight="220.0" prefWidth="93.0" styleClass="list" text="1st" textAlignment="RIGHT" textFill="GREY" BorderPane.alignment="CENTER" />
+      <Label fx:id="rankLabel" alignment="TOP_RIGHT" prefHeight="180.0" prefWidth="82.0" styleClass="list" text="1st" textAlignment="RIGHT" textFill="GREY" BorderPane.alignment="TOP_CENTER" />
    </left>
    <center>
-      <Label fx:id="nicknameLabel" alignment="TOP_CENTER" prefHeight="220.0" prefWidth="104.0" styleClass="list" text="mmmmmmmm" textAlignment="CENTER" textFill="LIME" BorderPane.alignment="CENTER" />
+      <Label fx:id="nicknameLabel" alignment="TOP_CENTER" prefHeight="180.0" prefWidth="113.0" styleClass="list" text="mmmmmmmm" textAlignment="CENTER" textFill="LIME" BorderPane.alignment="TOP_CENTER" />
    </center>
    <right>
-      <Label fx:id="hiscoresLabel" alignment="TOP_LEFT" prefHeight="220.0" prefWidth="96.0" styleClass="list" text="00000" textFill="RED" BorderPane.alignment="CENTER" />
+      <Label fx:id="hiscoresLabel" alignment="TOP_LEFT" prefHeight="180.0" prefWidth="102.0" styleClass="list" text="00000" textFill="RED" BorderPane.alignment="TOP_CENTER" />
    </right>
 </BorderPane>

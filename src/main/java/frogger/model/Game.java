@@ -14,6 +14,7 @@ import javafx.scene.layout.Pane;
 public class Game {
 
 	private final Level level;
+
 	private final GameController gameController;
 	private final String nickname;
 
@@ -58,13 +59,11 @@ public class Game {
 		timer.stop();
 
 		level.getFrog().addScore(1000);
-		gameController.updateDisplay(level.getFrog().getScore());
+		int levelScore = level.getFrog().getScore();
 
-		writeScore();
-
-		totalScore += level.getFrog().getScore();
-		SceneSwitcher.INSTANCE.popupScore(this,level.getLevelNumber(), level.getFrog().getScore(), totalScore);
-
+		gameController.updateDisplay(levelScore);
+		totalScore += levelScore;
+		SceneSwitcher.INSTANCE.popupScore(this);
 
 	}
 
@@ -74,26 +73,32 @@ public class Game {
 		gameController.updateLevelNum(level.getLevelNumber());
 
 		timer.start();
+
 	}
 
 	/**
 	 * Ends the timer, besides the end game screen; called when player loses.
 	 */
 	private void finishGame() {
-		timer.stop();
+			timer.stop();
 	}
 
+	public String getNickname() {
+		return nickname;
+	}
 
-	private void writeScore() {
-		HiscoreWriter hiscoreWriter = new HiscoreWriter(level.getLevelNumber());
-		hiscoreWriter.write(nickname,level.getFrog().getScore());
+	public Level getLevel() {
+		return level;
+	}
+
+	public int getTotalScore() {
+		return totalScore;
 	}
 
 	// CONDITIONALS
 
-	// TODO: temp end at 1
 	public boolean allEndsActive() {
-		 return (level.getNumEndsActivated() == 1);
+		 return (level.getNumEndsActivated() == 5);
 	}
 
 	// KEY EVENT

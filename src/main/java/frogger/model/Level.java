@@ -40,21 +40,6 @@ public class Level {
     }
 
 	/**
-	 * Instantiates all the new Actors for the first level
-	 */
-	private void loadFrogAndEnds() {
-
-		frog = new Frog();
-		ends = createEnds();
-
-		collisionChecker = new CollisionChecker(frog,ends,new CollisionHandler(this));
-
-		root.getChildren().addAll(ends);
-		root.getChildren().add(frog);
-
-	}
-
-	/**
 	 * Resets Actors and change to the next stage
 	 */
 	public void prepareNextLevel() {
@@ -69,7 +54,22 @@ public class Level {
 	}
 
 	/**
-	 *
+	 * Instantiates all Frog and Ends for the first level and all levels
+	 */
+	private void loadFrogAndEnds() {
+
+		frog = new Frog();
+		ends = createEnds();
+
+		collisionChecker = new CollisionChecker(frog,ends,new CollisionHandler(this));
+
+		root.getChildren().addAll(ends);
+		root.getChildren().add(frog);
+
+	}
+
+	/**
+	 * Load in a fresh set of AutoActors according to the level number.
 	 */
 	private void createObstacles() {
 		autoActors = LevelBuilder.INSTANCE.build(levelNumber);

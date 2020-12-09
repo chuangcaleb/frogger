@@ -2,10 +2,7 @@ package frogger.util;
 
 import frogger.constant.FilePath;
 import org.apache.commons.io.FileUtils;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,8 +12,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class HiscoreReaderTest {
 
-	@BeforeAll
-	public static void setDummyScores() {
+	@BeforeEach
+	public void setDummyScores() {
 
 		ArrayList<String> writeinScores =
 				new ArrayList<>() {

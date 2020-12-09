@@ -2,31 +2,53 @@
 # Current Objectives // 460 548
 # >>>>>>>>>>>>>>>>>>>>>>>>
 
-- to set all scores at %06d?
-- endgame total score
 - death message
 - junit tests?
-- javadocs
+- javadocs (refer to java's)
 
 LONG-TERM OBJECTIVES
-- README
+>> Create a permanent high scoring list (using a file to store scores)
+> Refactor code w/ design patterns
+> Add meaningful JUnit tests
 - high level class diagram
 - Javadocs
 - Video
-X Start Screen w/ picture -> Info button explaining game op
-> High Score popup at the end of every round, showing scores from each round, highest at the top
-> Refactor code w/ design patterns
-X Organize the code to adhere to the MVC pattern
->> Create a permanent high scoring list (using a file to store scores)
+- README
 - Add interesting levels to the game (either follow the original Frogger game levels or come up with your own ideas)
-> Add meaningful JUnit tests
+X High Score popup at the end of every round, showing scores from each round, highest at the top
 X Use build files (Ant or Maven or Gradle)
+X Organize the code to adhere to the MVC pattern
+X Start Screen w/ picture -> Info button explaining game op
 
 - timer,
 - points popup display
 - more levels?
 - fly?
 - highscore from homepage
+- new high score
+
+
+####################################
+# 0.16 Total Hiscores 9/12/20
+####################################
+
+ScorePopupController
+- moved here HiscoreWriter method init from Game
+- when fields loaded in, if at final level, then write total scores and changes event of continue button
+	- change display to total score, loads total sores
+
+Game
+- added getters for nickname, level and total score
+	- ScorePopupController's method signatures are much cleaner
+
+scorepopup.css
+- element covered over action button, moved out
+- background border
+
+- fixed HiscoreReaderTest fro BeforeAll to BeforeEach so both tests work together
+- set all scores to %06d
+- lowered speed for all lanes by 1
+
 
 
 ####################################
@@ -387,6 +409,7 @@ MISC
 ! if player does a diagonal combo, the frog will be stuck in second state
 ! now does not increment by 1
 ! scorepopup Continue button is only clickable on bottom half
+! LaneBuilder's xPerc seems to gap between 100 and 0
 
 X Every forward step scores 10 points,
 X and every frog arriving safely home scores 50 points.

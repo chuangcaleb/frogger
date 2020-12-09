@@ -6,6 +6,7 @@ import frogger.constant.Global;
 import frogger.model.actor.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static java.lang.Math.*;
 // first lane is 104
@@ -18,14 +19,15 @@ public enum LaneBuilder {
 
 	public ArrayList<AutoActor> construct(String actorType, double speed, int[] startXPerc, int laneNum) {
 
+		final double STAGE_FW_UNIT = (double) ((2 * Global.STAGE_WRAP) + Global.STAGE_WIDTH)/100;
+
 		// Initialize
 		AutoActor prototype;
 		ArrayList<AutoActor> lane = new ArrayList<>();
-//		int[] startX;
 
 		// Convert startXPerc into startX
 		double[] startX = new double[startXPerc.length];
-		for (int i = 0; i < startXPerc.length ; i++) startX[i] = startXPerc[i] * ((double) (2 * Global.STAGE_WRAP + Global.STAGE_WIDTH)/100);
+		for (int i = 0; i < startXPerc.length ; i++) startX[i] = startXPerc[i] * STAGE_FW_UNIT - Global.STAGE_WRAP;
 
 		// Initialize startY according to lane number
 		double startY = 75 + (laneNum * 34);
@@ -84,7 +86,7 @@ public enum LaneBuilder {
 		prototype.setSpeed(speed);
 		lane.add(prototype);
 
-//		System.out.println(laneNum + ": " + Arrays.toString(startX));
+		System.out.println(laneNum + ": " + Arrays.toString(startX));
 
 		// Clone the prototype, differing x-coordinate
 		for (int i = 1 ; i < startXPerc.length ; i++) {
