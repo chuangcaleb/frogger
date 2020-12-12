@@ -1,8 +1,9 @@
-package frogger.model;
+package frogger.model.state;
 
 import frogger.constant.DeathType;
 import frogger.constant.Keystroke;
 import frogger.controller.GameController;
+import frogger.model.level.Level;
 import frogger.util.SceneSwitcher;
 import javafx.animation.AnimationTimer;
 import javafx.scene.input.KeyEvent;
@@ -13,7 +14,7 @@ import javafx.scene.layout.Pane;
  */
 public class Game {
 
-	private final Level level;
+	protected Level level;
 	private final GameController gameController;
 	private final String nickname;
 
@@ -22,7 +23,7 @@ public class Game {
 	public Game(GameController gameController, Pane root, String nickname) {
 
 		this.gameController = gameController;
-		this.level = new Level(root, this); // constructs level one
+		initLevel(root);
 		this.nickname = nickname;
 
 		root.addEventHandler(KeyEvent.KEY_PRESSED, this::keyPressed);
@@ -33,7 +34,7 @@ public class Game {
 	/**
 	 * The AnimationTimer to keep track of time during gameplay.
 	 */
-	private final AnimationTimer timer = new AnimationTimer() {
+	protected final AnimationTimer timer = new AnimationTimer() {
 
 		@Override
 		public void handle(long now) {
@@ -44,6 +45,10 @@ public class Game {
 		}
 
 	};
+
+	protected void initLevel(Pane root) {
+		this.level = new Level(root, this, 1); // constructs Level and level one
+	}
 
 	/**
 	 * Starts the timer; called at init.

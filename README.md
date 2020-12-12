@@ -87,9 +87,10 @@ Ensures there is never more than one instance of the following:
 - Required "Enter nickname" field in the Main Menu that locks out Start button if empty
 - LevelBuilder can easily construct new levels
 - Frog dies if it floats offscreen or doesn't jump into the End properly
-  - Appropriate death messages for all death types
+  - Appropriate custom randomized death messages for all death types
 - Custom font
 - JUnit tests
+- Tutorial Screen
 
 
 

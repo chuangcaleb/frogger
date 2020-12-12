@@ -25,7 +25,7 @@
                <Font size="15.0" />
             </font></Label>
          <Label fx:id="levelNumLabel" layoutX="437.0" layoutY="21.0" styleClass="number" text="0" />
-         <Label fx:id="scoreLabel" layoutX="185.0" layoutY="21.0" styleClass="number" text="00000" />
+         <Label fx:id="scoreNumberLabel" layoutX="185.0" layoutY="21.0" styleClass="number" text="00000" />
         </Pane>
         <Pane prefHeight="453.0" prefWidth="460.0">
          <children>

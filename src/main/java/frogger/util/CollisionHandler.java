@@ -1,15 +1,9 @@
 package frogger.util;
 
 import frogger.constant.DeathType;
-import frogger.model.Game;
+import frogger.model.state.Game;
 import frogger.model.actor.*;
-import javafx.application.Platform;
 import javafx.concurrent.Task;
-import javafx.concurrent.WorkerStateEvent;
-import javafx.event.EventHandler;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * {@code CollisionHandler} is a utility class that handles the consequences of collisions.
@@ -25,6 +19,7 @@ public class CollisionHandler {
 
 	private void frogDies(Frog frog, DeathType deathType) {
 		frog.setDeathType(deathType);
+		frog.removeScore(100);
 		game.updateDeath(deathType);
 
 		// Complicated way to just reset the death message after a delay
@@ -56,7 +51,7 @@ public class CollisionHandler {
 			frog.touchEnd();
 			numEndsActivated++;
 
-			if (numEndsActivated == 2) {
+			if (numEndsActivated == 5) {
 				game.finishLevel();
 				numEndsActivated = 0;
 			}

@@ -14,9 +14,9 @@ public class GameController {
 	@FXML
 	private Label levelNumLabel;
 	@FXML
-	private Label scoreLabel;
+	private Label scoreNumberLabel;
 	@FXML
-	private Label deathMsgLabel;
+	protected Label deathMsgLabel;
 
 	@FXML
 	public void toHome(){
@@ -28,7 +28,7 @@ public class GameController {
 	}
 
 	public void updateScore(int score) {
-		scoreLabel.setText(String.format("%05d", score));
+		scoreNumberLabel.setText(String.format("%05d", score));
 	}
 
 	public void updateDeathMsg(DeathType deathType) {

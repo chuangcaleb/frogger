@@ -43,8 +43,6 @@ public class Frog extends MovableActor {
 	/** ArrayList of intersecting End objects */
 	private boolean hasMoved = false;
 
-	private final int lives = 3;
-
 	public Frog() {
 
 		// set image of sprite by passing parameters
@@ -73,10 +71,7 @@ public class Frog extends MovableActor {
 			case UP -> {
 				moveY(-movement);
 				setImage((isJumping) ? facingSprites.get(0) : leapingSprites.get(0));
-				if (isJumping && getY() < highestY) {
-					addScore(10);
-					highestY = getY();
-				}
+				if (isJumping && getY() < highestY) setNewHighest();
 			}
 			case LEFT -> {
 				if (getX() > 8) moveX(-movement);
@@ -101,6 +96,11 @@ public class Frog extends MovableActor {
 
 	}
 
+	protected void setNewHighest() {
+		addScore(10);
+		highestY = getY();
+	}
+
 	public void rideActor(double speed) {
 		moveX(speed);
 	}
@@ -115,7 +115,7 @@ public class Frog extends MovableActor {
 	public void respawn() {
 
 		// death type reset
-		deathType = DeathType.ALIVE;
+		setDeathType(DeathType.ALIVE);
 
 		// sprite properties
 		setX(STARTING_X);
@@ -126,7 +126,7 @@ public class Frog extends MovableActor {
 		// movement flags
 		isJumping = false;
 		hasMoved = false;
-		noMove = (lives == 0);
+		noMove = false;  // TODO: noMove true if time is zero
 
 		// score
 		highestY = STARTING_Y;
@@ -147,7 +147,6 @@ public class Frog extends MovableActor {
 				deathFrameIndex++;
 			}
 		} else { //  once animation completes
-			removeScore(100);
 			respawn();
 		}
 

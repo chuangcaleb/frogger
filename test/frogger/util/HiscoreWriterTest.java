@@ -21,13 +21,13 @@ class HiscoreWriterTest {
 	@Test
 	public void testWriteNew() {
 
-		HiscoreWriter hiscoreWriter = new HiscoreWriter(0);
+		HiscoreWriter hiscoreWriter = new HiscoreWriter(100);
 		hiscoreWriter.write("test1", 3);
 		hiscoreWriter.write("test2", 5);
 
 		try {
 
-			List<String> lines = FileUtils.readLines(new File(FilePath.HISCORES_DIR + "hiscores_lv0"), StandardCharsets.UTF_8);
+			List<String> lines = FileUtils.readLines(new File(FilePath.HISCORES_DIR + "hiscores_lv100"), StandardCharsets.UTF_8);
 
 			assertEquals("test1,00003",lines.get(0));
 			assertEquals("test2,00005",lines.get(1));
@@ -40,7 +40,7 @@ class HiscoreWriterTest {
 
 	@AfterEach
 	public void cleanupEach() {
-		File testFile = new File(FilePath.HISCORES_DIR + "hiscores_lv0");
+		File testFile = new File(FilePath.HISCORES_DIR + "hiscores_lv100");
 		testFile.delete();
 	}
 

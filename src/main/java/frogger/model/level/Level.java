@@ -1,12 +1,13 @@
-package frogger.model;
+package frogger.model.level;
 
 import java.util.ArrayList;
 
+import frogger.constant.LevelConfigs;
+import frogger.model.state.Game;
 import frogger.model.actor.*;
 
 import frogger.util.CollisionChecker;
 import frogger.util.CollisionHandler;
-import frogger.util.LevelBuilder;
 import javafx.scene.layout.Pane;
 
 /**
@@ -17,22 +18,22 @@ import javafx.scene.layout.Pane;
  */
 public class Level {
 
-	private final Pane root;
-
+	protected final Pane root;
 	private final CollisionChecker collisionChecker;
 
-	private Frog frog;
-	private ArrayList<PanningActor> panningActors;
+	protected Frog frog;
 	private ArrayList<End> ends;
+	protected ArrayList<PanningActor> panningActors;
 
-	private int levelNumber = 1;
+	private int levelNumber;
 
-	public Level(Pane root, Game game) {
+	public Level(Pane root, Game game, int startingLevel) {
 
-    	// link root
 		this.root = root;
+		this.levelNumber = startingLevel;
 
-		loadFrogAndEnds();
+		loadFrog();
+		loadEnds();
 		collisionChecker = new CollisionChecker(frog,ends,new CollisionHandler(game));
 
 		createObstacles();
@@ -56,26 +57,27 @@ public class Level {
 	/**
 	 * Instantiates all Frog and Ends for the first level and all levels
 	 */
-	private void loadFrogAndEnds() {
-
+	protected void loadFrog() {
 		frog = new Frog();
-		ends = createEnds();
-
-		root.getChildren().addAll(ends);
 		root.getChildren().add(frog);
+	}
 
+	private void loadEnds() {
+		ends = createEnds();
+		root.getChildren().addAll(ends);
 	}
 
 	/**
 	 * Load in a fresh set of AutoActors according to the level number.
 	 */
-	private void createObstacles() {
-		panningActors = LevelBuilder.INSTANCE.build(levelNumber);
-		collisionChecker.setPanningActors(panningActors);
-		root.getChildren().addAll(panningActors);
+	protected void createObstacles() {
+		panningActors = LevelConfigs.INSTANCE.getLibrary().get(levelNumber);
 	}
 
 	private void readyActors() {
+
+		collisionChecker.setPanningActors(panningActors);
+		root.getChildren().addAll(panningActors);
 
 		frog.initNewLevel();
 		ends.forEach(End::reset);

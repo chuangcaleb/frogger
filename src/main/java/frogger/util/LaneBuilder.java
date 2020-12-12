@@ -18,7 +18,7 @@ public enum LaneBuilder {
 
 	public ArrayList<PanningActor> construct(String actorType, double speed, int[] startXPerc, int laneNum) {
 
-		final double STAGE_FW_UNIT = (double) ((2 * Global.STAGE_WRAP) + Global.STAGE_WIDTH)/100;
+		final double STAGE_FW_UNIT = (double) ((4 * Global.STAGE_WRAP) + Global.STAGE_WIDTH)/100;
 
 		// Initialize
 		PanningActor prototype;
@@ -26,7 +26,7 @@ public enum LaneBuilder {
 
 		// Convert startXPerc into startX
 		double[] startX = new double[startXPerc.length];
-		for (int i = 0; i < startXPerc.length ; i++) startX[i] = startXPerc[i] * STAGE_FW_UNIT - Global.STAGE_WRAP;
+		for (int i = 0; i < startXPerc.length ; i++) startX[i] = (startXPerc[i] * STAGE_FW_UNIT) - Global.STAGE_WRAP;
 
 		// Initialize startY according to lane number
 		double startY = 75 + (laneNum * 34);

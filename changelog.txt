@@ -2,21 +2,19 @@
 # Current Objectives // 460 548
 # >>>>>>>>>>>>>>>>>>>>>>>>
 
-- info screen
-- lives
 - cleanup
-- junit tests?
 - javadocs (refer to java's)
-- add arrow keys
+- class diagram
+- readme
 
 LONG-TERM OBJECTIVES
-> Refactor code w/ design patterns
-> Add meaningful JUnit tests
+> README
 - high level class diagram
 - Javadocs
 - Video
-- README
 - Add interesting levels to the game (either follow the original Frogger game levels or come up with your own ideas)
+X Refactor code w/ design patterns
+X Add meaningful JUnit tests
 X Create a permanent high scoring list (using a file to store scores)
 X High Score popup at the end of every round, showing scores from each round, highest at the top
 X Use build files (Ant or Maven or Gradle)
@@ -24,11 +22,30 @@ X Organize the code to adhere to the MVC pattern
 X Start Screen w/ picture -> Info button explaining game op
 
 - timer,
-- points popup display
 - more levels?
 - fly?
 - highscore from homepage
 - new high score
+
+####################################
+# 0.18 LevelConfig & Tutorial 12/12/20
+####################################
+
+LevelConfig
+- changed LevelBuilder into LevelConfig, a singleton under const, as a library of an ArrayList of an ArrayList of Panning Actors
+	- This means CollisionHandler can refer to LevelConfig's library size
+
+Tutorial
+- Extension of familiar classes
+	- Info extends Game
+	- TutorialLevel extends Level
+	- TutorialFrog extends Frog
+	- InfoController extends GameController
+- Methods overridden to exact new functionalities
+- Changed some methods and fields from private to protected to implement extension
+
+- LaneBuilder's x coordinate wrap multiplier 2 -> 4
+- moved removeScore(100) from playDeathAnim() to CollisionHandler.frogDies()
 
 
 ####################################

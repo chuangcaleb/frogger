@@ -3,14 +3,14 @@ package frogger.util;
 import frogger.Main;
 import frogger.constant.FilePath;
 import frogger.controller.GameController;
+import frogger.controller.InfoController;
 import frogger.controller.ScorePopupController;
-import frogger.model.Game;
+import frogger.model.state.Game;
+import frogger.model.state.Info;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -53,10 +53,6 @@ public enum SceneSwitcher {
 	public void switchToHome() {
 
 		changeScene(FilePath.FXML_HOME);
-//		Level world = new Level(new Game());
-//		// add event handlers for this scene
-//		scene.addEventHandler(KeyEvent.KEY_PRESSED, world::keyPressed);
-//		scene.addEventHandler(KeyEvent.KEY_RELEASED, world::keyReleased);
 
 	}
 
@@ -71,10 +67,6 @@ public enum SceneSwitcher {
 		GameController gameController = loader.getController();
 		Game game = new Game(gameController,root, nickname);
 
-		// KeyEvent handlers
-//		scene.addEventHandler(KeyEvent.KEY_PRESSED, game::keyPressed);
-//		scene.addEventHandler(KeyEvent.KEY_RELEASED, game::keyReleased);
-
 		// Start
 		game.startGame();
 	}
@@ -84,6 +76,13 @@ public enum SceneSwitcher {
 	 */
 	public void switchToInfo() {
 		changeScene(FilePath.FXML_INFO);
+
+		// Initialize Info
+		InfoController infoController = loader.getController();
+		Info info = new Info(infoController, root);
+
+		info.startGame();
+
 	}
 
 	public void popupScore(Game game) {

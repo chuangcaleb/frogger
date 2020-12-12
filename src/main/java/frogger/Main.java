@@ -1,5 +1,6 @@
 package frogger;
 
+import frogger.util.MusicPlayer;
 import frogger.util.SceneSwitcher;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -23,7 +24,7 @@ public class Main extends Application {
 		primaryStage.setTitle("Frogger");
 
 		// TODO: unmute the music later before final product
-//		MusicPlayer.INSTANCE.playMusic();
+		MusicPlayer.INSTANCE.playMusic();
 		SceneSwitcher.INSTANCE.switchToHome();
 
 	}

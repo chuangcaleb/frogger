@@ -1,6 +1,7 @@
 package frogger.controller;
 
-import frogger.model.Game;
+import frogger.constant.LevelConfigs;
+import frogger.model.state.Game;
 import frogger.util.HiscoreReader;
 import frogger.util.HiscoreWriter;
 import frogger.util.SceneSwitcher;
@@ -12,7 +13,7 @@ import javafx.stage.Stage;
 
 public class ScorePopupController {
 
-	private final int FINAL_LEVEL = 5;
+	private final int FINAL_LEVEL = LevelConfigs.INSTANCE.getLibrary().size() - 1;
 
 	@FXML
 	private Text levelHeaderText;
@@ -94,7 +95,7 @@ public class ScorePopupController {
 		loadEntries(99); // lv99 is total score fie
 
 		actionBtn.setOnAction(e -> switchToHome());
-		actionBtn.setText("MAIN MENU"); // TODO: Check height
+		actionBtn.setText("MAIN MENU");
 
 	}
 

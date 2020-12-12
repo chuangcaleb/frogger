@@ -26,7 +26,7 @@ class HiscoreReaderTest {
 					}
 				};
 
-		File scoreFile = new File(FilePath.HISCORES_DIR + "hiscores_lv0");
+		File scoreFile = new File(FilePath.HISCORES_DIR + "hiscores_lv100");
 		try {
 			FileUtils.writeLines(scoreFile,writeinScores, System.getProperty("line.separator"),true);
 		} catch (IOException e) {
@@ -38,7 +38,7 @@ class HiscoreReaderTest {
 	@Test
 	public void testSortUnsorted() {
 
-		HiscoreReader hiscoreReader = new HiscoreReader(0);
+		HiscoreReader hiscoreReader = new HiscoreReader(100);
 
 		String hiscoresNewlined = hiscoreReader.getHiscores();
 		String[] hiscores = hiscoresNewlined.split("\n");
@@ -62,7 +62,7 @@ class HiscoreReaderTest {
 	@Test
 	public void testRanksTillFifth() {
 
-		HiscoreReader hiscoreReader = new HiscoreReader(0);
+		HiscoreReader hiscoreReader = new HiscoreReader(100);
 		String hiscoresNewlined = hiscoreReader.getRanks();
 
 		assertEquals("1st\n2nd\n3rd\n4th\n5th\n", hiscoresNewlined);
@@ -71,7 +71,7 @@ class HiscoreReaderTest {
 
 	@AfterAll
 	public static void cleanupAll() {
-		File testFile = new File(FilePath.HISCORES_DIR + "hiscores_lv0");
+		File testFile = new File(FilePath.HISCORES_DIR + "hiscores_lv100");
 		testFile.delete();
 
 		File dir = new File(FilePath.HISCORES_DIR);
