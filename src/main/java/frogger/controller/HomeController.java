@@ -51,6 +51,7 @@ public class HomeController {
 					tempString = tempString.substring(0, maxLength); // cut at 8 characters
 				}
 				textField.setText(tempString);
+
 			}
 		});
 

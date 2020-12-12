@@ -1,8 +1,8 @@
 package frogger.model;
 
+import frogger.constant.DeathType;
 import frogger.constant.Keystroke;
 import frogger.controller.GameController;
-import frogger.util.HiscoreWriter;
 import frogger.util.SceneSwitcher;
 import javafx.animation.AnimationTimer;
 import javafx.scene.input.KeyEvent;
@@ -14,7 +14,6 @@ import javafx.scene.layout.Pane;
 public class Game {
 
 	private final Level level;
-
 	private final GameController gameController;
 	private final String nickname;
 
@@ -23,8 +22,11 @@ public class Game {
 	public Game(GameController gameController, Pane root, String nickname) {
 
 		this.gameController = gameController;
-		this.level = new Level(root); // constructs level one
+		this.level = new Level(root, this); // constructs level one
 		this.nickname = nickname;
+
+		root.addEventHandler(KeyEvent.KEY_PRESSED, this::keyPressed);
+		root.addEventHandler(KeyEvent.KEY_RELEASED, this::keyReleased);
 
 	}
 
@@ -37,8 +39,7 @@ public class Game {
 		public void handle(long now) {
 
 		level.tick(now);
-		gameController.updateDisplay(level.getFrog().getScore());
-		if (allEndsActive()) finishLevel();
+		gameController.updateScore(level.getFrog().getScore());
 
 		}
 
@@ -54,15 +55,14 @@ public class Game {
 
 	}
 
-	private void finishLevel() {
+	public void finishLevel() {
 
 		timer.stop();
 
-		level.getFrog().addScore(1000);
-		int levelScore = level.getFrog().getScore();
-
-		gameController.updateDisplay(levelScore);
+		int levelScore = level.getFrog().endLevel();
+		gameController.updateScore(levelScore);
 		totalScore += levelScore;
+
 		SceneSwitcher.INSTANCE.popupScore(this);
 
 	}
@@ -76,12 +76,18 @@ public class Game {
 
 	}
 
+	public void updateDeath(DeathType deathType) {
+		gameController.updateDeathMsg(deathType);
+	}
+
 	/**
 	 * Ends the timer, besides the end game screen; called when player loses.
 	 */
 	private void finishGame() {
 			timer.stop();
 	}
+
+	// GETTERS
 
 	public String getNickname() {
 		return nickname;
@@ -93,12 +99,6 @@ public class Game {
 
 	public int getTotalScore() {
 		return totalScore;
-	}
-
-	// CONDITIONALS
-
-	public boolean allEndsActive() {
-		 return (level.getNumEndsActivated() == 5);
 	}
 
 	// KEY EVENT

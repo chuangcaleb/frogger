@@ -15,7 +15,7 @@ public enum DeathType {
 	// Sinks on WetTurtle
 	WATER,
 
-	// Rides water AutoActor offscreen
+	// Rides water PanningActor offscreen
 	OFFSCREEN,
 
 	// Hop into end bush

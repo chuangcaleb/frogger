@@ -21,8 +21,6 @@ public class FilePath {
 	public static final String IMG_END = "/frogger/images/bg/End.png";
 	public static final String IMG_END_A = "/frogger/images/bg/FrogEnd.png";
 
-	public static final String IMG_DIGIT = "/frogger/images/text/";
-
 	public static final String IMG_CAR_L = "/frogger/images/car/carLeft.png";
 	public static final String IMG_CAR_R = "/frogger/images/car/carRight.png";
 

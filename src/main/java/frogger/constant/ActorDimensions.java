@@ -1,7 +1,7 @@
 package frogger.constant;
 
 /*
-* {@code ActorDimensions} is a class that holds the constants of the AutoActor's sprite dimensions.
+* {@code ActorDimensions} is a class that holds the constants of the PanningActor's sprite dimensions.
 */
 public class ActorDimensions {
 

@@ -19,23 +19,24 @@ public class Level {
 
 	private final Pane root;
 
-	private CollisionChecker collisionChecker;
+	private final CollisionChecker collisionChecker;
 
 	private Frog frog;
-	private ArrayList<AutoActor> autoActors;
+	private ArrayList<PanningActor> panningActors;
 	private ArrayList<End> ends;
 
 	private int levelNumber = 1;
-	private int numEndsActivated = 0;
 
-	public Level(Pane root) {
+	public Level(Pane root, Game game) {
 
     	// link root
 		this.root = root;
 
 		loadFrogAndEnds();
+		collisionChecker = new CollisionChecker(frog,ends,new CollisionHandler(game));
+
 		createObstacles();
-		readyNewLevel();
+		readyActors();
 
     }
 
@@ -44,12 +45,11 @@ public class Level {
 	 */
 	public void prepareNextLevel() {
 
-		numEndsActivated = 0;
 		levelNumber++;
 
-		root.getChildren().removeAll(autoActors);
+		root.getChildren().removeAll(panningActors);
 		createObstacles();
-		readyNewLevel();
+		readyActors();
 
 	}
 
@@ -61,8 +61,6 @@ public class Level {
 		frog = new Frog();
 		ends = createEnds();
 
-		collisionChecker = new CollisionChecker(frog,ends,new CollisionHandler(this));
-
 		root.getChildren().addAll(ends);
 		root.getChildren().add(frog);
 
@@ -72,12 +70,12 @@ public class Level {
 	 * Load in a fresh set of AutoActors according to the level number.
 	 */
 	private void createObstacles() {
-		autoActors = LevelBuilder.INSTANCE.build(levelNumber);
-		collisionChecker.setAutoActors(autoActors);
-		root.getChildren().addAll(autoActors);
+		panningActors = LevelBuilder.INSTANCE.build(levelNumber);
+		collisionChecker.setPanningActors(panningActors);
+		root.getChildren().addAll(panningActors);
 	}
 
-	private void readyNewLevel() {
+	private void readyActors() {
 
 		frog.initNewLevel();
 		ends.forEach(End::reset);
@@ -88,19 +86,14 @@ public class Level {
 
 		// frog tick
 		frog.tick(now);
-		// AutoActor tick
-		for (AutoActor anAutoActor : autoActors) {
-			anAutoActor.tick(now);
+		// PanningActor tick
+		for (PanningActor aPanningActor : panningActors) {
+			aPanningActor.tick(now);
 		}
 
 		// Collision Handling
 		collisionChecker.tick();
 
-	}
-
-	public void scoreEnd() {
-		numEndsActivated++;
-		frog.addScore(50);
 	}
 
 	// GETTER AND SETTER
@@ -115,10 +108,6 @@ public class Level {
 
 	public int getLevelNumber() {
 		return levelNumber;
-	}
-
-	public int getNumEndsActivated() {
-		return numEndsActivated;
 	}
 
 	// LIBRARY

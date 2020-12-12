@@ -2,12 +2,14 @@
 # Current Objectives // 460 548
 # >>>>>>>>>>>>>>>>>>>>>>>>
 
-- death message
+- info screen
+- lives
+- cleanup
 - junit tests?
 - javadocs (refer to java's)
+- add arrow keys
 
 LONG-TERM OBJECTIVES
->> Create a permanent high scoring list (using a file to store scores)
 > Refactor code w/ design patterns
 > Add meaningful JUnit tests
 - high level class diagram
@@ -15,6 +17,7 @@ LONG-TERM OBJECTIVES
 - Video
 - README
 - Add interesting levels to the game (either follow the original Frogger game levels or come up with your own ideas)
+X Create a permanent high scoring list (using a file to store scores)
 X High Score popup at the end of every round, showing scores from each round, highest at the top
 X Use build files (Ant or Maven or Gradle)
 X Organize the code to adhere to the MVC pattern
@@ -26,6 +29,26 @@ X Start Screen w/ picture -> Info button explaining game op
 - fly?
 - highscore from homepage
 - new high score
+
+
+####################################
+# 0.17 Refac & Death Msg 12/12/20
+####################################
+
+Refactoring
+- Moved numEndsActivated handling from Level to CollisionHandler
+- Some refactoring about Frog and Game's handling of touchEnd
+
+Death message
+- CollisionHandler.dies() to handle death message passing to game controller
+- randomised death messages according to deathEvent in GameController
+- death messages library in constant
+- getRandMsg()
+
+- removed frog.initSprites(), just init'ed the sprites straight away
+- made HiscoreReaderTest cleaner
+- moved addEventHandler to Game, kept locally
+- readme draft
 
 
 ####################################
@@ -46,8 +69,10 @@ scorepopup.css
 - background border
 
 - fixed HiscoreReaderTest fro BeforeAll to BeforeEach so both tests work together
-- set all scores to %06d
+- set all scores to %05d
 - lowered speed for all lanes by 1
+- added @Override to the clone()
+- renamed AutoActor to PanningActor
 
 
 
@@ -91,8 +116,8 @@ misc
 ####################################
 
 - changed CollisionChecker and CollisionHandler to not be singletons anymore, but rather new instances are initiated from Level
-	 this should make things tidier and remove the need for setter methods
-- changed ScorePopupController's init() to initialize(), saving a line of code in SceneSwitcher
+	 > this should make things tidier, and remove the need for setter methods
+- changed ScorePopupController's init() to initialize(), saving a line of code in SceneSwitcher (since initialize is auto-called)
 
 ###################################
 # 0.12 Scoring and Nickname 5/12/20
@@ -403,12 +428,13 @@ MISC
 - ensured build files
 
 
-
-! Turtles have to be offset -3 on y-axes
+#########################
+# KNOWN BUGS
+#########################
+! Turtles have to be offset -3 on y-axes. Functionality still holds.
 ! if player holds down key, will be stuck in second animation
 ! if player does a diagonal combo, the frog will be stuck in second state
 ! now does not increment by 1
-! scorepopup Continue button is only clickable on bottom half
 ! LaneBuilder's xPerc seems to gap between 100 and 0
 
 X Every forward step scores 10 points,
@@ -417,21 +443,3 @@ X and every frog arriving safely home scores 50 points.
 Guiding a lady frog home or eating a fly scores 200 points each,
 X and when all 5 frogs reach home to end the level the player earns 1,000 points.
 A single bonus frog is 20,000 points. (lives?)
-
-
-# UI Ideas
-
-> Enter Name?
-
-Main Menu
-> Play
-    > Difficulty Select
-> Info
-> Toggle Music/Sound
-> High Scores
-> Quit
-
-Death Screen
-> Score
-> Play Again
-> Main Menu

@@ -1,31 +1,67 @@
 package frogger.util;
 
 import frogger.constant.DeathType;
+import frogger.model.Game;
 import frogger.model.actor.*;
-import frogger.model.Level;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * {@code CollisionHandler} is a utility class that handles the consequences of collisions.
  */
 public class CollisionHandler {
 
-	private final Level level;
+	private final Game game;
+	private int numEndsActivated = 0;
 
-	public CollisionHandler(Level level) {
-		this.level = level;
+	public CollisionHandler(Game game) {
+		this.game = game;
 	}
 
+	private void frogDies(Frog frog, DeathType deathType) {
+		frog.setDeathType(deathType);
+		game.updateDeath(deathType);
+
+		// Complicated way to just reset the death message after a delay
+		Task<Void> sleeper = new Task<>() {
+			@Override
+			protected Void call() {
+				try {
+					Thread.sleep(2000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				return null;
+			}
+		};
+		sleeper.setOnSucceeded(event -> game.updateDeath(frog.getDeathType()));
+		new Thread(sleeper).start();
+	}
+
+	// Handlers for each collision
+
 	public void offscreen(Frog frog) {
-		frog.setDeathType(DeathType.OFFSCREEN);
+		frogDies(frog, DeathType.OFFSCREEN);
 		frog.respawn();
 	}
 
 	public void collideWithEnd(Frog frog, End end) {
 		if (!end.isActivated()) {
 			end.activate();
-			frog.respawn(); // frog.touchEnd
-			level.scoreEnd();
-		} else {
+			frog.touchEnd();
+			numEndsActivated++;
+
+			if (numEndsActivated == 2) {
+				game.finishLevel();
+				numEndsActivated = 0;
+			}
+
+		} else { // if colliding with an already activated end, kill frog
 			endDeath(frog);
 		}
 
@@ -41,22 +77,25 @@ public class CollisionHandler {
 
 	public void collideWithWetTurtle(Frog frog, WetTurtle wetTurtle) {
 		if (wetTurtle.isSunk()) {
-			frog.setDeathType(DeathType.WATER);
+			frogDies(frog,DeathType.WATER);
 		} else {
 			frog.rideActor(wetTurtle.getSpeed());
 		}
 	}
 
 	public void collideWithCar(Frog frog) {
-		frog.setDeathType(DeathType.LAND);
+		frogDies(frog,DeathType.LAND);
 	}
 
+
+	// deaths called by CollisionChecker
+
 	public void drown(Frog frog) {
-		frog.setDeathType(DeathType.WATER);
+		frogDies(frog, DeathType.WATER);
 	}
 
 	public void endDeath(Frog frog) {
-		frog.setDeathType(DeathType.ENDDEATH);
+		frogDies(frog, DeathType.ENDDEATH);
 	}
 
 }

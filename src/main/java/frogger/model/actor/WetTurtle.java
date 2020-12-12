@@ -7,9 +7,9 @@ import javafx.scene.image.Image;
 import java.util.ArrayList;
 
 /**
- * {@code WetTurtle} is an AutoActor that moves horizontally in water, that is "sunk" every fourth frame.
+ * {@code WetTurtle} is an PanningActor that moves horizontally in water, that is "sunk" every fourth frame.
  */
-public class WetTurtle extends AutoActor {
+public class WetTurtle extends PanningActor {
 
 	/** Flag whether isSunk */
 	private boolean sunk = false;
@@ -21,7 +21,8 @@ public class WetTurtle extends AutoActor {
 		super(source);
 	}
 
-	public AutoActor clone() {
+	@Override
+	public PanningActor clone() {
 		return new WetTurtle(this);
 	}
 

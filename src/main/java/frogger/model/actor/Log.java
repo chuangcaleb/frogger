@@ -1,9 +1,9 @@
 package frogger.model.actor;
 
 /**
- * {@code Log} is an AutoActor that moves horizontally in water.
+ * {@code Log} is an PanningActor that moves horizontally in water.
  */
-public class Log extends AutoActor {
+public class Log extends PanningActor {
 
 	public Log(String imageLink, int x, int y, double speed, int width) {
 		super(imageLink,x, y, width, A_ACTOR_HEIGHT, speed);
@@ -14,7 +14,8 @@ public class Log extends AutoActor {
 		super(source);
 	}
 
-	public AutoActor clone() {
+	@Override
+	public PanningActor clone() {
 		return new Log(this);
 	}
 

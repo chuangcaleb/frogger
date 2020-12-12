@@ -1,9 +1,9 @@
 package frogger.model.actor;
 
 /**
- * {@code Car} is an AutoActor that moves horizontally on land.
+ * {@code Car} is an PanningActor that moves horizontally on land.
  */
-public class Car extends AutoActor {
+public class Car extends PanningActor {
 
 	public Car(String imageLink, int x, int y, double speed, int width) {
 		super(imageLink,x, y, width, A_ACTOR_HEIGHT, speed);
@@ -14,7 +14,8 @@ public class Car extends AutoActor {
 		super(source);
 	}
 
-	public AutoActor clone() {
+	@Override
+	public PanningActor clone() {
 		return new Car(this);
 	}
 

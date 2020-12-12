@@ -72,8 +72,8 @@ public enum SceneSwitcher {
 		Game game = new Game(gameController,root, nickname);
 
 		// KeyEvent handlers
-		scene.addEventHandler(KeyEvent.KEY_PRESSED, game::keyPressed);
-		scene.addEventHandler(KeyEvent.KEY_RELEASED, game::keyReleased);
+//		scene.addEventHandler(KeyEvent.KEY_PRESSED, game::keyPressed);
+//		scene.addEventHandler(KeyEvent.KEY_RELEASED, game::keyReleased);
 
 		// Start
 		game.startGame();

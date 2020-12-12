@@ -6,7 +6,6 @@ import frogger.constant.Global;
 import frogger.model.actor.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import static java.lang.Math.*;
 // first lane is 104
@@ -17,13 +16,13 @@ import static java.lang.Math.*;
 public enum LaneBuilder {
 	INSTANCE;
 
-	public ArrayList<AutoActor> construct(String actorType, double speed, int[] startXPerc, int laneNum) {
+	public ArrayList<PanningActor> construct(String actorType, double speed, int[] startXPerc, int laneNum) {
 
 		final double STAGE_FW_UNIT = (double) ((2 * Global.STAGE_WRAP) + Global.STAGE_WIDTH)/100;
 
 		// Initialize
-		AutoActor prototype;
-		ArrayList<AutoActor> lane = new ArrayList<>();
+		PanningActor prototype;
+		ArrayList<PanningActor> lane = new ArrayList<>();
 
 		// Convert startXPerc into startX
 		double[] startX = new double[startXPerc.length];
@@ -32,52 +31,44 @@ public enum LaneBuilder {
 		// Initialize startY according to lane number
 		double startY = 75 + (laneNum * 34);
 
-		//	 Create prototype
+		// Create prototype
 		// Logs only move right, turtles move left
 		switch (actorType) {
 			case "Car"  -> {
 				if (speed < 0) prototype = prototypeLibrary.get(0).clone();
 				else prototype = prototypeLibrary.get(1).clone();
-//				startX = generateX(numActors,ActorDimensions.GRID_UNIT_W);
 			}
 			case "ShortTruck" -> {
 				if (speed < 0) prototype = prototypeLibrary.get(2).clone();
 				else prototype =  prototypeLibrary.get(3).clone();
-//				startX = generateX(numActors,ActorDimensions.SHORT_TRUCK_W);
 			}
 			case "LongTruck" -> {
 				if (speed < 0) prototype = prototypeLibrary.get(4).clone();
 				else prototype = prototypeLibrary.get(5).clone();
-//				startX = generateX(numActors,ActorDimensions.LONG_TRUCK_W);
 			}
 			case "ShortLog" -> {
 				prototype = prototypeLibrary.get(6).clone();
-//				startX = generateX(numActors,ActorDimensions.SHORT_LOG_W);
 				speed = abs(speed);
 			}
 			case "MedLog" -> {
 				prototype = prototypeLibrary.get(7).clone();
-//				startX = generateX(numActors,ActorDimensions.MED_LOG_W);
 				speed = abs(speed);
 			}
 			case "LongLog" -> {
 				prototype = prototypeLibrary.get(8).clone();
-//				startX = generateX(numActors,ActorDimensions.LONG_LOG_W);
 				speed = abs(speed);
 			}
 			case "Turtle" -> {
 				prototype = prototypeLibrary.get(9).clone();
-//				startX = generateX(numActors,ActorDimensions.TURTLE_W);
 				speed = - abs(speed);
 				startY -= 4;
 			}
 			case "WetTurtle" -> {
 				prototype = prototypeLibrary.get(10).clone();
-//				startX = generateX(numActors,ActorDimensions.TURTLE_W);
 				speed = - abs(speed);
 				startY -= 4;
 			}
-			default -> throw new IllegalStateException("Unexpected value: " + actorType); //TODO: return empty list, print exception
+			default -> throw new IllegalStateException("Unexpected value: " + actorType);
 		}
 
 		// Configure the prototype
@@ -86,11 +77,11 @@ public enum LaneBuilder {
 		prototype.setSpeed(speed);
 		lane.add(prototype);
 
-		System.out.println(laneNum + ": " + Arrays.toString(startX));
+//		System.out.println(laneNum + ": " + Arrays.toString(startX));
 
 		// Clone the prototype, differing x-coordinate
 		for (int i = 1 ; i < startXPerc.length ; i++) {
-			AutoActor newActor = prototype.clone();
+			PanningActor newActor = prototype.clone();
 			newActor.setX(startX[i]);
 			lane.add(newActor);
 		}
@@ -99,34 +90,8 @@ public enum LaneBuilder {
 
 	}
 
-	// TODO: randomised x positions?
-//	private int[] generateX(int numActors, int width) {
-//
-//		final int rightBound = Global.STAGE_WIDTH + Global.STAGE_WRAP;
-//
-//		// initialise array
-//		int[] startX = new int[numActors];
-//		// distanceLeft is full width from right edge
-//		int distanceLeft = rightBound;
-//
-//		// for each actor in the lane,
-//		for (int i = 0 ; i < numActors ; i++) {
-//
-//			// calculate offset
-//			int offset = (int) (random()*((distanceLeft)/(numActors - i)));
-//			// left x-coordinate of next AutoActor is right bound minus width minus offset
-//			startX[i] = rightBound - width - offset;
-//			// distance left is the left x-coord of this actor
-//			distanceLeft = startX[i];
-//			System.out.println(distanceLeft + " -> " + distanceLeft/(numActors - i) + " -> " + offset);
-//
-//		}
-//
-//		return startX;
-//	}
-
 	// Preloads AutoActors
-	private final ArrayList<AutoActor> prototypeLibrary =
+	private final ArrayList<PanningActor> prototypeLibrary =
 			new ArrayList<>() {
 				{
 					add(new Car(FilePath.IMG_CAR_L, 0, 0, 0, ActorDimensions.GRID_UNIT_W));

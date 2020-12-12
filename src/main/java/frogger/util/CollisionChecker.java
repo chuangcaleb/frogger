@@ -21,7 +21,7 @@ public class CollisionChecker {
 
 	private Frog frog;
 	private ArrayList<End> ends;
-	private ArrayList<AutoActor> autoActors;
+	private ArrayList<PanningActor> panningActors;
 
 	public CollisionChecker(Frog frog, ArrayList<End> ends, CollisionHandler collisionHandler) {
 		this.frog = frog;
@@ -56,23 +56,23 @@ public class CollisionChecker {
 	private void checkAuto(Bounds frogBounds) {
 		boolean isRiding = false;
 		
-		for (AutoActor autoActor : autoActors) {
-			Bounds aActorBounds = autoActor.localToScene(autoActor.getBoundsInLocal());
+		for (PanningActor panningActor : panningActors) {
+			Bounds aActorBounds = panningActor.localToScene(panningActor.getBoundsInLocal());
 			if (frogBounds.intersects(aActorBounds)) {
 				
-				if (autoActor instanceof Log) {
-					collisionHandler.collideWithLog(frog, (Log) autoActor);
+				if (panningActor instanceof Log) {
+					collisionHandler.collideWithLog(frog, (Log) panningActor);
 					isRiding = true;
 				}
-				else if (autoActor instanceof Turtle) {
-					collisionHandler.collideWithTurtle(frog, (Turtle) autoActor);
+				else if (panningActor instanceof Turtle) {
+					collisionHandler.collideWithTurtle(frog, (Turtle) panningActor);
 					isRiding = true;
 				}
-				else if (autoActor instanceof WetTurtle) {
-					collisionHandler.collideWithWetTurtle(frog, (WetTurtle) autoActor);
+				else if (panningActor instanceof WetTurtle) {
+					collisionHandler.collideWithWetTurtle(frog, (WetTurtle) panningActor);
 					isRiding = true;
 				}
-				else if (autoActor instanceof Car) {
+				else if (panningActor instanceof Car) {
 					collisionHandler.collideWithCar(frog);
 				}
 
@@ -98,8 +98,8 @@ public class CollisionChecker {
 
 	// SETTER METHODS
 
-	public void setAutoActors(ArrayList<AutoActor> autoActors) {
-		this.autoActors = autoActors;
+	public void setPanningActors(ArrayList<PanningActor> panningActors) {
+		this.panningActors = panningActors;
 	}
 
 }

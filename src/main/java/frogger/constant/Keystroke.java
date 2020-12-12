@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * {@code Keystroke} is a class that has a HashMap that matches the WASD KeyCode to their direction.
+ * {@code Keystroke} is a class that defines a HashMap that matches the WASD KeyCode to their direction.
  */
 public class Keystroke {
 

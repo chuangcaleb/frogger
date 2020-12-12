@@ -7,9 +7,9 @@ import javafx.scene.image.Image;
 import java.util.ArrayList;
 
 /**
- * {@code Turtle} is an AutoActor that moves horizontally in water.
+ * {@code Turtle} is an PanningActor that moves horizontally in water.
  */
-public class Turtle extends AutoActor {
+public class Turtle extends PanningActor {
 
 	public Turtle(int x, int y, double speed) {
 		super(FilePath.IMG_TURTLE_1,x, y, ActorDimensions.TURTLE_W, A_ACTOR_HEIGHT, speed);
@@ -19,7 +19,8 @@ public class Turtle extends AutoActor {
 		super(source);
 	}
 
-	public AutoActor clone() {
+	@Override
+	public PanningActor clone() {
 		return new Turtle(this);
 	}
 

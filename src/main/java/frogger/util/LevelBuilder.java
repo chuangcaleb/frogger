@@ -1,6 +1,6 @@
 package frogger.util;
 
-import frogger.model.actor.AutoActor;
+import frogger.model.actor.PanningActor;
 
 import java.util.ArrayList;
 
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public enum LevelBuilder {
 	INSTANCE;
 
-	public ArrayList<AutoActor> build(int levelNum) {
+	public ArrayList<PanningActor> build(int levelNum) {
 
 		switch (levelNum) {
 			case 1 -> {
@@ -34,7 +34,7 @@ public enum LevelBuilder {
 		}
 	}
 
-	private ArrayList<AutoActor> buildLevelOne() {
+	private ArrayList<PanningActor> buildLevelOne() {
 		return new ArrayList<>() {
 			{
 				addAll(LaneBuilder.INSTANCE.construct("Turtle", -3, new int[]{0,30,50,75,90}, 1));
@@ -53,7 +53,7 @@ public enum LevelBuilder {
 		};
 	}
 
-	private ArrayList<AutoActor> buildLevelTwo() {
+	private ArrayList<PanningActor> buildLevelTwo() {
 		return new ArrayList<>() {
 			{
 				addAll(LaneBuilder.INSTANCE.construct("LongLog", 4, new int[]{20,95}, 1));
@@ -71,7 +71,7 @@ public enum LevelBuilder {
 		};
 	}
 
-	private ArrayList<AutoActor> buildLevelThree() {
+	private ArrayList<PanningActor> buildLevelThree() {
 		return new ArrayList<>() {
 			{
 				addAll(LaneBuilder.INSTANCE.construct("Turtle", -5, new int[]{0,20,45,60,85}, 1));
@@ -80,16 +80,16 @@ public enum LevelBuilder {
 				addAll(LaneBuilder.INSTANCE.construct("Turtle", -5, new int[]{5,35,70,90}, 4));
 				addAll(LaneBuilder.INSTANCE.construct("Turtle", -6, new int[]{0,30,50,75}, 5));
 
-				addAll(LaneBuilder.INSTANCE.construct("Car", 3, new int[]{0,30,50,75}, 7));
-				addAll(LaneBuilder.INSTANCE.construct("ShortTruck", -2, new int[]{20,50,85}, 8));
-				addAll(LaneBuilder.INSTANCE.construct("Car", 4, new int[]{0,22,40,75}, 9));
-				addAll(LaneBuilder.INSTANCE.construct("Car", -3, new int[]{30,50,75,90}, 10));
-				addAll(LaneBuilder.INSTANCE.construct("ShortTruck", 2, new int[]{0,40,75}, 11));
+				addAll(LaneBuilder.INSTANCE.construct("Car", -5, new int[]{0,30,55,70}, 7));
+				addAll(LaneBuilder.INSTANCE.construct("Car", 5, new int[]{0,50,75}, 8));
+				addAll(LaneBuilder.INSTANCE.construct("ShortTruck", 4, new int[]{0,40,75}, 9));
+				addAll(LaneBuilder.INSTANCE.construct("ShortTruck", -3, new int[]{0,50,75}, 10));
+				addAll(LaneBuilder.INSTANCE.construct("Car", 3, new int[]{0,30,50,75}, 11));
 			}
 		};
 	}
 
-	private ArrayList<AutoActor> buildLevelFour() {
+	private ArrayList<PanningActor> buildLevelFour() {
 			return new ArrayList<>() {
 				{
 					addAll(LaneBuilder.INSTANCE.construct("MedLog", 6, new int[]{15,43,60,89}, 1));
@@ -98,16 +98,16 @@ public enum LevelBuilder {
 					addAll(LaneBuilder.INSTANCE.construct("MedLog", 5, new int[]{10,30,80}, 4));
 					addAll(LaneBuilder.INSTANCE.construct("WetTurtle", -4, new int[]{5,35,55,70,90}, 5));
 
-					addAll(LaneBuilder.INSTANCE.construct("Car", -5, new int[]{0,30,55,70}, 7));
-					addAll(LaneBuilder.INSTANCE.construct("Car", 5, new int[]{0,50,75}, 8));
-					addAll(LaneBuilder.INSTANCE.construct("ShortTruck", 4, new int[]{0,40,75}, 9));
-					addAll(LaneBuilder.INSTANCE.construct("ShortTruck", -3, new int[]{0,50,75}, 10));
-					addAll(LaneBuilder.INSTANCE.construct("Car", 3, new int[]{0,30,50,75}, 11));
+					addAll(LaneBuilder.INSTANCE.construct("Car", 3, new int[]{0,30,50,75}, 7));
+					addAll(LaneBuilder.INSTANCE.construct("ShortTruck", -2, new int[]{20,50,85}, 8));
+					addAll(LaneBuilder.INSTANCE.construct("Car", 4, new int[]{0,22,40,75}, 9));
+					addAll(LaneBuilder.INSTANCE.construct("Car", -3, new int[]{30,50,75,90}, 10));
+					addAll(LaneBuilder.INSTANCE.construct("ShortTruck", 2, new int[]{0,40,75}, 11));
 				}
 			};
 		}
 
-	private ArrayList<AutoActor> buildLevelFive() {
+	private ArrayList<PanningActor> buildLevelFive() {
 				return new ArrayList<>() {
 					{
 						addAll(LaneBuilder.INSTANCE.construct("MedLog", 5, new int[]{0,33,67}, 1));

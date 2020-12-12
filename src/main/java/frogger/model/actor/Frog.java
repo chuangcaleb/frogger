@@ -11,12 +11,6 @@ import javafx.scene.image.Image;
 */
 public class Frog extends MovableActor {
 
-	/** Array of sprites */
-	private ArrayList<Image> facingSprites;
-	private ArrayList<Image> leapingSprites;
-	private ArrayList<Image> landDeathSprites;
-	private ArrayList<Image> waterDeathSprites;
-
 	/** Import frog dimensions */
 	public static final int FROG_L = ActorDimensions.FROG_L;
 	/** Starting x-coordinate of player */
@@ -47,16 +41,14 @@ public class Frog extends MovableActor {
 	/** y-coord tracker. Decreases with each step... to increment score? */
 	private double highestY = STARTING_Y;
 	/** ArrayList of intersecting End objects */
-//	ArrayList<End> inter = new ArrayList<>(); // remove
 	private boolean hasMoved = false;
 
-	private int lives = 3;
+	private final int lives = 3;
 
 	public Frog() {
 
 		// set image of sprite by passing parameters
 		super(FilePath.IMG_FROG_ROOT, STARTING_X, STARTING_Y, FROG_L, FROG_L);
-		initSprites();
 
 	}
 
@@ -68,13 +60,13 @@ public class Frog extends MovableActor {
 
 	}
 
-	// MOVEMENT
+	// MOVEMENT AND COLLISION
 
 	public void leap(Direction dir, boolean keyPressed) {
 
-		// escape if not yet made a move when key is being released
+		// break if not yet made a move when key is being released
 		if (!hasMoved && !keyPressed) return;
-		// escape if movement is locked and in stationary frame
+		// break if movement is locked and in stationary frame
 		if (noMove && !isJumping) return;
 
 		switch (dir) {
@@ -113,12 +105,12 @@ public class Frog extends MovableActor {
 		moveX(speed);
 	}
 
-	// DEATH/RESPAWN HANDLING
-
-	public void die() {
-		removeScore(100);
+	public void touchEnd() {
+		addScore(50);
 		respawn();
 	}
+
+	// DEATH/RESPAWN HANDLING
 
 	public void respawn() {
 
@@ -154,8 +146,9 @@ public class Frog extends MovableActor {
 				// next death frame
 				deathFrameIndex++;
 			}
-		} else { // call die() once animation complete
-			die();
+		} else { //  once animation completes
+			removeScore(100);
+			respawn();
 		}
 
 	}
@@ -164,6 +157,12 @@ public class Frog extends MovableActor {
 		respawn();
 		toFront();
 		score = 0;
+	}
+
+	public int endLevel() {
+		noMove = true;
+		addScore(1000);
+		return getScore();
 	}
 
 	// SCORING
@@ -182,9 +181,7 @@ public class Frog extends MovableActor {
 
 	// LIBRARY
 
-	private void initSprites() {
-
-		facingSprites =
+	private final ArrayList<Image> facingSprites =
 			new ArrayList<>() {
 				{
 					add(new Image(FilePath.IMG_FROG_PATH + "Up.png", FROG_L, FROG_L, true, true));
@@ -194,7 +191,7 @@ public class Frog extends MovableActor {
 				}
 			};
 
-		leapingSprites =
+	private final ArrayList<Image> leapingSprites =
 			new ArrayList<>() {
 				{
 					add(new Image(FilePath.IMG_FROG_PATH + "UpJump.png", FROG_L, FROG_L, true, true));
@@ -204,7 +201,7 @@ public class Frog extends MovableActor {
 				}
 			};
 
-		landDeathSprites =
+	private final ArrayList<Image> landDeathSprites =
 			new ArrayList<>() {
 				{
 					add(new Image(FilePath.IMG_DEATH_ROOT + "cardeath1.png", FROG_L, FROG_L, true, true));
@@ -213,7 +210,7 @@ public class Frog extends MovableActor {
 				}
 			};
 
-		waterDeathSprites =
+	private final ArrayList<Image> waterDeathSprites =
 			new ArrayList<>() {
 				{
 					add(new Image(FilePath.IMG_DEATH_ROOT + "waterdeath1.png", FROG_L, FROG_L, true, true));
@@ -222,8 +219,6 @@ public class Frog extends MovableActor {
 					add(new Image(FilePath.IMG_DEATH_ROOT + "waterdeath4.png", FROG_L, FROG_L, true, true));
 				}
 			};
-
-	}
 
 	// GETTER AND SETTER
 

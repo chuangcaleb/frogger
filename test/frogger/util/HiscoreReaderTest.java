@@ -12,8 +12,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class HiscoreReaderTest {
 
-	@BeforeEach
-	public void setDummyScores() {
+	@BeforeAll
+	public static void setDummyScores() {
 
 		ArrayList<String> writeinScores =
 				new ArrayList<>() {
@@ -69,14 +69,11 @@ class HiscoreReaderTest {
 
 	}
 
-	@AfterEach
-	public void cleanupEach() {
-		File testFile = new File(FilePath.HISCORES_DIR + "hiscores_lv0");
-		testFile.delete();
-	}
-
 	@AfterAll
 	public static void cleanupAll() {
+		File testFile = new File(FilePath.HISCORES_DIR + "hiscores_lv0");
+		testFile.delete();
+
 		File dir = new File(FilePath.HISCORES_DIR);
 		if (dir.listFiles() == null) { // if directory empty, delete directory too
 			dir.delete();
