@@ -1,16 +1,451 @@
 # >>>>>>>>>>>>>>>>>>>>>>>>
-# Current Objectives
+# Current Objectives // 460 548
 # >>>>>>>>>>>>>>>>>>>>>>>>
 
-- frogger subfolder resources
-- resize screen
-- refactor java files
-- resources
+- class diagram
 
+LONG-TERM OBJECTIVES
+> README
+- high level class diagram
+- Javadocs
+- Video
+- Add interesting levels to the game (either follow the original Frogger game levels or come up with your own ideas)
+X Refactor code w/ design patterns
+X Add meaningful JUnit tests
+X Create a permanent high scoring list (using a file to store scores)
+X High Score popup at the end of every round, showing scores from each round, highest at the top
+X Use build files (Ant or Maven or Gradle)
+X Organize the code to adhere to the MVC pattern
+X Start Screen w/ picture -> Info button explaining game op
+
+- timer,
+- more levels?
+- fly?
+- highscore from homepage
+- new high score
+
+######################################
+# 0.19 Final Cleanup 16/12/20
+######################################
+
+- cleaned up code,
+- cleared warnings
+- defined constants locally
+
+- comments
+- javaDocs
+
+Feats
+- TutorialFrog: doesnt reset progress to 100 if at 101
+- LevelConfigs#getLibrary() removed
+  	- #levelConfigLibrary -> static final LEVEL_CONFIG_LIBRARY, using that as ref instead of INSTANCE
+- LaneBuilder now reports invalid startXPerc inputs
+
+Refactoring
+- renamed Global to StageDimensions
+- ScorePopupController#passFields renamed to init()
+	- #FINAL_LEVEL -> #LAST_LEVEL, semantics of constant formatting
+- HomeController#dsiplayConfirmationButton() -> showConfirmationButton()
+- SceneSwitcher -> StageManager
+- magic numbers in LaneBuilder
+- CollisionChecker#checkAuto -> checkPanning
+	- aActorBounds -> pActorBounds
+- Test cases to remove access modifier in Junit5
+- Tightened access modifiers
+- MovableActor#A_ACTOR_HEIGHT -> PanningActor#P_ACTOR_HEIGHT
+	- PanningActors no longer take in a height argument, since height is standard
+- All PanningActor's constructor takes speed as an integer instead of double
+	- The actual PanningActor#speed is still double, since #setSpeed multiplies by 0.1
+- Frog's keyPressed -> keystrokeDownwards
+	- Frog breaks movement if at all it has noMove
+	- Frog endLevel does not return score; another method is called. Single responsibility
+	- Intro'd a ton of new constants
+- ActorDimensions#GRID_UNIT_W -> CAR_W
+- Turtles FilePaths to be like Frog's, root and default, saving constants
+-
+
+Sprites
+- set all sprites to be static final, instead of instantiated every time a new object is instantiated
+
+- renamed file Frogger Main Song Theme (loop).mp3 -> FroggerTheme_loop.mp3
+- FilePath
+
+######################################
+# 0.18 LevelConfig & Tutorial 12/12/20
+######################################
+
+LevelConfig
+- changed LevelBuilder into LevelConfig, a singleton under const, as a library of an ArrayList of an ArrayList of Panning Actors
+	- This means CollisionHandler can refer to LevelConfig's library size
+
+Tutorial
+- Extension of familiar classes
+	- Info extends Game
+	- TutorialLevel extends Level
+	- TutorialFrog extends Frog
+	- InfoController extends GameController
+- Methods overridden to exact new functionalities
+- Changed some methods and fields from private to protected to implement extension
+
+- LaneBuilder's x coordinate wrap multiplier 2 -> 4
+- moved removeScore(100) from playDeathAnim() to CollisionHandler.frogDies()
+
+
+####################################
+# 0.17 Refac & Death Msg 12/12/20
+####################################
+
+Refactoring
+- Moved numEndsActivated handling from Level to CollisionHandler
+- Some refactoring about Frog and Game's handling of touchEnd
+
+Death message
+- CollisionHandler.dies() to handle death message passing to game controller
+- randomised death messages according to deathEvent in GameController
+- death messages library in constant
+- getRandMsg()
+
+- removed frog.initSprites(), just init'ed the sprites straight away
+- made HiscoreReaderTest cleaner
+- moved addEventHandler to Game, kept locally
+- readme draft
+
+
+####################################
+# 0.16 Total Hiscores 9/12/20
+####################################
+
+ScorePopupController
+- moved here HiscoreWriter method init from Game
+- when fields loaded in, if at final level, then write total scores and changes event of continue button
+	- change display to total score, loads total sores
+
+Game
+- added getters for nickname, level and total score
+	- ScorePopupController's method signatures are much cleaner
+
+scorepopup.css
+- element covered over action button, moved out
+- background border
+
+- fixed HiscoreReaderTest fro BeforeAll to BeforeEach so both tests work together
+- set all scores to %05d
+- lowered speed for all lanes by 1
+- added @Override to the clone()
+- renamed AutoActor to PanningActor
+
+
+
+####################################
+# 0.15 Level Hiscores 8/12/20
+####################################
+
+- total score and level score
+- new HiscoreReader that takes reads file, sorts top 10 entries, converts into string with newlines
+- passes to ScorePopupController that sets Label with String
+- ranks according to number of entries
+
+- remove 100 score upon death
+- fix wetTurtle's sunk frame
+- cleaned up Main
+- test file for HiscoreReader
+
+
+####################################
+# 0.14 Maven & Junit Setup 7/12/20
+####################################
+
+- Maven framework integration
+	- commons.io dependency for file writing
+- Junit dependency
+- HiscoreWriter class that writes a string to file
+- HiscoreWriterTest to test that file is being written
+	- a simple test case to see if writing works
+- Build Script: mvn clean compile package exec:java
+
+misc
+- info screen
+- main menu button in game screen
+- css standardisation
+- now using IntelliJ Ultimate
+- added hiscore_data to .gitignore
+
+
+####################################
+# 0.13 Collision Refactoring 5/12/20
+####################################
+
+- changed CollisionChecker and CollisionHandler to not be singletons anymore, but rather new instances are initiated from Level
+	 > this should make things tidier, and remove the need for setter methods
+- changed ScorePopupController's init() to initialize(), saving a line of code in SceneSwitcher (since initialize is auto-called)
+
+###################################
+# 0.12 Scoring and Nickname 5/12/20
+###################################
+
+Scoring
+- scoring functions in Frog
+- scoring scenarios: forward step (10), score End (50), score 5 ends (1000)
+- Level and GameController to update and show
+
+Nickname
+- home.fxml text field
+- listens and restricts input
+- toggle confirmation button that enables the start button
+
+misc
+- deleted Digit.java
+- Turtles: initialised sprites straight away w/o method call
+- removed /model/state, and just put Game and Level under /model
+
+
+# 0.11b Removed "out" production folder from being committed to remote 5/12/20
+
+
+##################################
+# 0.11 Level Progression 3/12/20
+##################################
+
+New view
+- scorepopup .fxml and .css and controller
+- new SceneSwitcher method
+- refactored Game and Level to accommodate loading of new levels and waiting for popup prompt
+- continue button to call Game.nextLevel()
+
+Game and Level
+- numEndsActivated counter
+- when Game's tick detects 5 ends activated, stops game and pop up high scoring box
+- clicking continue will load the next consecutive level
+
+LevelBuilder
+- built three more levels
+
+Game fxml view
+- added level number display at top right
+- changed some css styles
+
+CollisionHandler
+- player will die when stood on an isSunk WetTurtle
+- scoring an End will have method call to Level
+
+misc
+- fixed water death anim by reimporting death sprites again
+
+##################################
+# 0.10 Collision and Death 3/12/20
+##################################
+
+- initSprites Death Animation for Frog
+
+CollisionChecker
+- is a singleton utility class that checks for collisions every tick.
+- stores references to Level's Actors
+
+CollisionHandler
+- is a singleton utility class that handles the consequences of collisions.
+- handles all collision possibilities
+
+- Restructured Level to init CollisionChecker with Actors at the start of every round
+
+Frog
+- added Death sprites to initSprites()
+- all Death Sequences
+- Respawn Sequence
+- rideActor()
+- respawn()
+- reset()
+
+End
+- all implementations
+
+refactor
+- moved tick() from Actor to MovableActor
+
+misc
+- death pictures were corrupted, reimported them
+- reworded some enums of DeathType
+- resized FrogEnd.png
+
+###############################
+# 0.10 LevelBuilder 2/12/20
+###############################
+
+util and Actors
+- LevelBuilder is a singleton utility class that builds an ArrayList of AutoActors using LaneBuilder
+	- two levels
+- renamed LaneConstructor to LaneBuilder
+- changed the widths of all the sprites, making sure they're big enough
+- refactored the heights and widths measurements out
+x tried randomly generating x-positions for autoactors. too much code
+- stored AutoActorDims const file, which is referenced by LaneBuilder and Turtle(s) to load sprites
+- GRID_SIZE_L (renamed to A_ACTOR_HEIGHT) shaved down to 28
+- Frog dimensions shrunk to 22x22
+- removed width field from MovableActor
+
+const
+- DeathTypes added three more types, as well as comments
+- Global added STAGE_WRAP
+
+- deleted frogger.model.view
+
+
+###############################
+# 0.9 Lane Constructor 28/11/20
+###############################
+
+- resized End.png from 62x62 to 62x70
+- re-downloaded truck1R truck2R.png and /logs
+- fixed FilePath to /turtles, removed TurtleAnim4.png
+- fixed Turtle and WetTurtle's sprite dimension parameters
+
+- Level.createEnds() to init the End Actors in position
+
+- Level
+	> drawAllActors() to only draw the obstacles, since frog and Ends already drawn
+	> advanceLevel() skeleton for eventual advancing level
+	> tick() for all Actors in Level
+
+- Refactoring the Actor hierarchy to implement the Prototype design pattern
+- MovableActor
+	> Renamed DynamicActor -> MovableActor
+	> only has move() (to remove??)
+- AutoActor
+	> Renamed Obstacle -> AutoActor
+	> prototype constructor
+	> abstr clone()
+- Each AutoActor (Car, Log, etc) now has a subclass prototype constructor and a clone() that creates a new object from source
+
+- new LaneConstructor singleton utility class that uses Prototype design pattern
+	+ since all lanes have the same objects, only differing in x-coordinate
+	+ it copies imageLink URL, y-coord height, width, speed (and x-coord, that will be overwritten)
+	- initializes lane's y coordinate according to lane number
+	- switch case to determine which AutoActor to load from prototype library, besides init the speed
+	- configure prototype
+	- Clone prototype
+	- return arraylist of lane's AutoActors
+
+
+
+###############################
+# 0.8 JavaFXML and MVC 25/11/20
+###############################
+
+- Used SceneBuilder to create game.fxml, home.fxml and info.fxml
+- changed SceneSwitcher to pass fxml files instead of Worlds, and uses fxml to load each root, and makes a Scene with that root
+- properly made Controller classes to handle events of buttons from the view, that calls switchScene()
+- added the Game model to handle the data and logic during the game
+
+- added constant/Global.java to keep track of global variables if they needed to be changed
+- renamed act() to tick()
+
+- moved all the images under resources/images ###
+- resources/view
+- resources/css
+- added resources/fonts/EarlyGameboy.ttf for custom fonts
+- Removed iKogsKW.png
+
+- commented out Home.java and State.java
+- renamed World.java to Level.java
+
+
+######################################################
+# 0.7 Resources, DyanamicActors and Obstacles 23/11/20
+######################################################
+
+- Deleted BackgroundImage
+- Renamed Actor into DynamicActor and made it inherit a new class called Actor
+    > Actor is for all general sprite objects to add into World
+    > DynamicActor are for non-static sprites that need to have tick updates and collision checks
+- updated Actor, DynamicActor and World to have their declarations and methods to use the new proper class types
+    > applied Liskov's Substitution Principle: Actor can be replaced with DynamicActor
+- removed the String imageLink parameter for all constructors of the subclasses of Actor, since they all have their own default sprite (except log and car)
+- updated the constructors and some FilePaths for obstacles
+- animation methods for Turtles
+- added class Car.java, similar to Log
+
+- renamed WetTurtles images
+
+
+#####################################################
+# 0.6 Refactored Structure and Frog Movement 20/11/20
+#####################################################
+
+REFACTORED STRUCTURE
+- removed HomeController and HomeView (they are still there, commented out, if there might be use for them)
+- made Main.java call a new class, SceneSwitcher, a singleton that handles switching scenes
+- SceneSwitcher has switchScene() which takes a World and sets its Scene for Main.primaryStage, besides assigning event handler for keystrokes to the World
+- World has two methods, keyPressed and keyReleased as the event handler methods which calls frog.leap
+
+CONSTANTS
+- Direction.java is an enum that keeps the list of cardinal directions
+- Keystroke.java is a class that has a HashMap that matches the WASD KeyCode to their direction
+- FilePath.java is a class that stores public static final Strings of the filepaths of resources
+
+FROG SPRITES AND MOVEMENT REDESIGNED
+- changed Frog's constructor to include starting co-ords and image size
+- two new ArrayLists, facingSprites and leapingSprites
+- initSprites() loads these arrays with newly instantiated Images
+- leap() takes in direction and which key event is coming in
+    > handles exceptions
+    > switch statement for each scenario
+        > checks for ignoring key events that try to escape boundaries
+
+MISC
+- added more parameters to Actor's constructor (+ double startX, double startY, int width, int height)
+- cleaned up temporary debug code
+- general documentation for all affected code
 
 
 ###########################################
-# 0.2 Basic Project Organisation 15/11/20
+# 0.5 First MVC Module and Music 18/11/20
+###########################################
+
+- cleaned up Main.java
+- under java/frogger, introduced folders const, util, controller and view
+- new HomeView.java and HomeController.java to handle main menu page display and logic respectively (according to MVC pattern)
+- Refactored out MyStage
+    > HomeView to handle its World extension
+    > MusicPlayer to handle music methods
+
+- new MusicPlayer.java as a singleton to handle background music
+    > Instead of singleton object, made it as singleton class
+- Renamed main/resources/frogger/sound folder to music
+
+
+###########################################
+# 0.4 Frog Movement and Cleanup 16/11/20
+###########################################
+
+- Actor.java
+    > STAGE_HEIGHT and STAGE_WIDTH constants
+    > Javadoc comments
+- Animal.java
+    > Javadoc comments
+    > WATER_HEIGHT
+    > GRID_UNIT_L
+    > changed rebound value from 2*movement to just movement. Follows the grid.
+    > player rebounds on top and bottom boundary
+    ! if player spams downwards on any boundary, will misalign with grid because of second animation
+- Refactored Animal class renamed to Frog
+- Main.java: Renamed animal to frog
+
+
+###########################################
+# 0.3 Element Sizes 15/11/20
+###########################################
+
+- resize scene/stage to have a proper grid-like pattern
+    H: 40 + 32 + 5*32=160 + 32 + (2+32+2)*5=180 + 52 + 52 == 548
+    W: 22 + 13*32 + 22 = 460
+- Resized GameBackground.png
+- Animal.java
+    > both movement directions to have speed of 17
+    > static final int for starting coordinates
+>> Still need to do boundary wrap checking and fitting
+
+
+###########################################
+# 0.2 Project Workspace Cleanup 15/11/20
 ###########################################
 
 - updated .gitignore and removed .DS_Store from repo. Hope it works
@@ -27,7 +462,7 @@
 ###########################################
 
 - javadocs 'docs' folder
-- file structure reorganisation
+- file structure reorganisation according to MVC pattern
     > made src/java/frogger as source root directory
     > put all the non-java files into "resources" folder
         > further sub-categorized according to resource type
@@ -51,3 +486,20 @@
 - set up workspace
 - build files folder
 - ensured build files
+
+
+#########################
+# KNOWN BUGS
+#########################
+! Turtles have to be offset -3 on y-axes. Functionality still holds.
+! if player holds down key, will be stuck in second animation
+! if player does a diagonal combo, the frog will be stuck in second state
+! now does not increment by 1
+! LaneBuilder's xPerc seems to gap between 100 and 0
+
+X Every forward step scores 10 points,
+X and every frog arriving safely home scores 50 points.
+10 points are also awarded per each unused 1⁄2 second of time.
+Guiding a lady frog home or eating a fly scores 200 points each,
+X and when all 5 frogs reach home to end the level the player earns 1,000 points.
+A single bonus frog is 20,000 points. (lives?)

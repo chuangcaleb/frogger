@@ -6,3 +6,6 @@
 *.iml
 *.ipr
 .DS_Store
+/target/
+/hiscore_data/
+/src/test/

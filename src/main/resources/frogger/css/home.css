@@ -1,0 +1,66 @@
+@font-face {
+    src: url("../font/EarlyGameBoy.ttf");
+}
+
+.root {
+    -fx-background-image: url("../images/bg/GameBackground.png");
+    -fx-background-size: 100%;
+}
+
+.menu_button {
+    -fx-alignment: center;
+    -fx-background-color: transparent;
+    -fx-background-size: 80%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-border-color: gray;
+    -fx-border-width: 1px;
+    -fx-padding: 5px;
+    -fx-effect: dropshadow(three-pass-box, #444444, 15, 0, 0, 0);
+    -fx-opacity: 0.90;
+    -fx-font-family: 'Early GameBoy';
+    -fx-text-alignment: center;
+    -fx-wrap-text: true;
+}
+
+.menu_button:hover {
+    -fx-background-size: 95%;
+    -fx-opacity:1;
+    -fx-cursor: hand;
+    -fx-text-fill: aqua;
+}
+
+.static_menu_button {
+    -fx-text-fill: white;
+}
+
+.static_text {
+    -fx-alignment: center;
+    -fx-padding: 5px;
+    -fx-effect: dropshadow(three-pass-box, #444444, 15, 0, 0, 0);
+    -fx-opacity: 0.90;
+    -fx-text-fill: white;
+    -fx-font-family: 'Early GameBoy';
+}
+
+.text_field {
+    -fx-background-color: transparent;
+    -fx-background-size: 80%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-border-color: white;
+    -fx-border-width: 2px;
+    -fx-padding: 5px;
+    -fx-effect: dropshadow(three-pass-box, #444444, 15, 0, 0, 0);
+    -fx-text-fill: lime;
+    -fx-font-size: 13px;
+    -fx-text-alignment: center;
+    -fx-font-family: 'Early GameBoy';
+}
+
+.title {
+	-fx-font-size: 50px;
+    -fx-alignment: center;
+    -fx-text-fill: linear-gradient(to top, green, #ffcc00) ;
+    -fx-font-family: 'Early GameBoy';
+}
