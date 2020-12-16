@@ -4,15 +4,19 @@ import frogger.model.actor.PanningActor;
 import frogger.util.LaneBuilder;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
-public enum LevelConfigs {
-	INSTANCE;
+/**
+ * {@code LevelConfigs} is a class that constructs, stores and returns the lanes of PanningActors for each level.
+ */
+public class LevelConfigs {
 
-	public ArrayList<ArrayList<PanningActor>> getLibrary() {
-		return levelConfigLibrary;
-	}
-
-	private final ArrayList<ArrayList<PanningActor>> levelConfigLibrary =
+	/**
+	 * The library that contains an ArrayList of levels,
+	 *   each level itself being an ArrayList which appends together the different PanningActors of the 10 lanes,
+	 *   each lane being preconfigured with values using {@link LaneBuilder}.
+	 */
+	public static final ArrayList<ArrayList<PanningActor>> LEVEL_CONFIG_LIBRARY =
 		new ArrayList<>() {
 			{
 				add(new ArrayList<>(){ // default empty level
@@ -21,7 +25,7 @@ public enum LevelConfigs {
 
 				add(new ArrayList<>() { // Level One
 					{
-						addAll(LaneBuilder.INSTANCE.construct("Turtle", -3, new int[]{0, 30, 50, 75, 90}, 1));
+						addAll(LaneBuilder.INSTANCE.construct("Turtle", -3, new int[]{-100, 30, 50, 75, 90}, 1));
 						addAll(LaneBuilder.INSTANCE.construct("LongLog", 4, new int[]{20, 55, 90}, 2));
 						addAll(LaneBuilder.INSTANCE.construct("Turtle", -5, new int[]{5, 35, 55, 70, 90}, 3));
 						addAll(LaneBuilder.INSTANCE.construct("MedLog", 2, new int[]{10, 40, 60, 80}, 4));

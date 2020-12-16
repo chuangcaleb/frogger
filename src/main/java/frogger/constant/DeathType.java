@@ -1,28 +1,32 @@
 package frogger.constant;
 
 /**
- * {@code DeathType} is an enum that tracks the type of death of the player/frog.
+ * {@code DeathType} is an enum that tracks the type of death of the player/Frog.
  */
 public enum DeathType {
 
-	// Frog is currently alive; default state
+	/** Frog is currently alive; default state */
 	ALIVE,
 
-	// Intersects with Car
+	/** Intersects with Car */
 	LAND,
 
-	// Falls in water
-	// Sinks on WetTurtle
+	/**
+	 * Falls in river;
+	 * sinks on WetTurtle
+	 */
 	WATER,
 
-	// Rides water PanningActor offscreen
+	/** Rides a Log, Turtle or WetTurtle and goes offscreen */
 	OFFSCREEN,
 
-	// Hop into end bush
-	// Hop into occupied End
+	/**
+	 * Hop into the end bush;
+	 * hop into an occupied End
+ 	 */
 	ENDDEATH,
 
-	// Time runs out
+	/** Time runs out (Currently unused) */
 	TIMER
 
 }

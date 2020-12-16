@@ -1,38 +1,60 @@
 package frogger.model.state;
 
-import frogger.constant.DeathType;
 import frogger.constant.Keystroke;
 import frogger.controller.GameController;
 import frogger.model.level.Level;
-import frogger.util.SceneSwitcher;
+import frogger.util.StageManager;
 import javafx.animation.AnimationTimer;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 
 /**
  * {@code Game} is the model that handles the data and logic during the game.
+ *
+ * @see GameController
+ * @see Level
  */
 public class Game {
 
-	protected Level level;
-	private final GameController gameController;
-	private final String nickname;
+	/** The level to start a game session at */
+	private final int STARTING_LEVEL = 1;
 
+	/** The Level object */
+	protected Level level;
+	/** The associated GameController for the model */
+	private final GameController gameController;
+	/** The nickname of the player */
+	private final String nickname;
+	/** The total score accumulated over this game session */
 	private int totalScore = 0;
 
-	public Game(GameController gameController, Pane root, String nickname) {
+	//  ######################################## CONSTRUCTOR ########################################
 
-		this.gameController = gameController;
+	/**
+	 * Constructor to instantiate a new {@code Game} model.
+	 *
+	 * @param root the root pane
+	 * @param gameController the GameController
+	 * @param nickname the player's nickname
+	 */
+	public Game(Pane root, GameController gameController, String nickname) {
+
+		// Creates a new Level based on the root pane
 		initLevel(root);
+		// Assigns to fields
+		this.gameController = gameController;
 		this.nickname = nickname;
 
+		// Add event handlers for keyboard input
 		root.addEventHandler(KeyEvent.KEY_PRESSED, this::keyPressed);
 		root.addEventHandler(KeyEvent.KEY_RELEASED, this::keyReleased);
 
 	}
 
+	//  ######################################## INITIALIZATION ########################################
+
 	/**
-	 * The AnimationTimer to keep track of time during gameplay.
+	 * The AnimationTimer to call each tick during gameplay.
 	 */
 	protected final AnimationTimer timer = new AnimationTimer() {
 
@@ -46,12 +68,17 @@ public class Game {
 
 	};
 
+	/**
+	 * Initializes and assigns a new Level object with the right starting level.
+	 *
+	 * @param root the root pane loaded from fxml
+	 */
 	protected void initLevel(Pane root) {
-		this.level = new Level(root, this, 1); // constructs Level and level one
+		this.level = new Level(root, this, STARTING_LEVEL); // constructs Level and starting level
 	}
 
 	/**
-	 * Starts the timer; called at init.
+	 * Initializes a new game.
 	 */
 	public void startGame() {
 
@@ -60,18 +87,31 @@ public class Game {
 
 	}
 
+	//  ###################################### LEVEL HANDLING ########################################
+
+	/**
+	 * Sequence to handle when the player has completed a level by scoring all 5 ends.
+	 * <p>Waits for user input from pop-up before calling {@link #nextLevel()}.</p>
+	 */
 	public void finishLevel() {
 
+		// Handles actors
 		timer.stop();
+		level.getFrog().endLevel();
 
-		int levelScore = level.getFrog().endLevel();
+		// Update scores
+		int levelScore = level.getFrog().getScore();
 		gameController.updateScore(levelScore);
 		totalScore += levelScore;
 
-		SceneSwitcher.INSTANCE.popupScore(this);
+		// Pop-up high scores
+		StageManager.INSTANCE.popupScore(this);
 
 	}
 
+	/**
+	 * Prepares the next level.
+	 */
 	public void nextLevel() {
 
 		level.prepareNextLevel();
@@ -81,36 +121,34 @@ public class Game {
 
 	}
 
-	public void updateDeath(DeathType deathType) {
-		gameController.updateDeathMsg(deathType);
+	//  ################################### SETTERS/GETTERS ######################################
+
+	/** @return the associated GameController for the model */
+	public GameController getGameController() {
+		return gameController;
 	}
 
-	/**
-	 * Ends the timer, besides the end game screen; called when player loses.
-	 */
-	private void finishGame() {
-			timer.stop();
-	}
-
-	// GETTERS
-
+	/** @return the nickname of the player */
 	public String getNickname() {
 		return nickname;
 	}
 
+	/** @return the level object */
 	public Level getLevel() {
 		return level;
 	}
 
+	/** @return the total score accumulated over this game session */
 	public int getTotalScore() {
 		return totalScore;
 	}
 
-	// KEY EVENT
+	//  ###################################### KEY EVENTS ######################################
 
 	/**
-	 * Handles the event when key is pressed.
-	 * @param event the KEY_PRESSED event.
+	 * Handles the event of when a key is pressed.
+	 *
+	 * @param event the KEY_PRESSED KeyEvent
 	 */
 	public void keyPressed(KeyEvent event) {
 
@@ -120,8 +158,9 @@ public class Game {
 	}
 
 	/**
-	 * Handles event when key is released.
-	 * @param event the KEY_RELEASED event.
+	 * Handles the event of when a key is released.
+	 *
+	 * @param event the KEY_RELEASED KeyEvent
 	 */
 	public void keyReleased(KeyEvent event) {
 

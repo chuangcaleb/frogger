@@ -1,6 +1,6 @@
 package frogger.controller;
 
-import frogger.util.SceneSwitcher;
+import frogger.util.StageManager;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,7 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 
 /**
- * {@code HomeController} is a Controller that handles logic of elements in the Home state
+ * {@code HomeController} is the Controller that handles logic of elements in the Home screen.
  */
 public class HomeController {
 
@@ -22,8 +22,10 @@ public class HomeController {
 	@FXML
 	private Button confirmBtn;
 
-	private final int maxLength = 8;
+	/** The maximum character length for a nickname*/
+	private final int MAX_LENGTH = 8;
 
+	/** Initializes the UI. */
 	@FXML
 	public void initialize() {
 
@@ -36,37 +38,49 @@ public class HomeController {
 
 	}
 
+	/**
+	 *  Initializes a text listener.
+	 * @param textField the text field to listen to
+	 */
 	private void initTextListener(TextField textField) {
 		textField.textProperty().addListener((obs, oldValue, newValue) -> {
 
-			if (newValue.isBlank()) {
-				hideConfirmButton();
-			} else {
-				displayConfirmButton();
+			// if field is blank, hide confirm button
+			if (newValue.isBlank()) hideConfirmButton();
+			// else field has content, allow confirmation after filter
+			else {
 
+				// Filter the field
 				String tempString = newValue;
 				tempString = tempString.toUpperCase(); // convert to uppercase
 				tempString = tempString.replaceAll("[^a-zA-Z]", ""); // letters only
-				if (tempString.length() > maxLength) {
-					tempString = tempString.substring(0, maxLength); // cut at 8 characters
-				}
+				if (tempString.length() > MAX_LENGTH) tempString = tempString.substring(0, MAX_LENGTH); // cut at 8 characters
+
+				// Show field and confirm button
 				textField.setText(tempString);
+				showConfirmationButton();
 
 			}
 		});
 
 	}
 
+	/** Hide confirmation button. */
 	private void hideConfirmButton() {
 		enterNickLabel.setVisible(true);
 		confirmBtn.setVisible(false);
 	}
 
-	private void displayConfirmButton() {
+	/** Show confirmation button. */
+	private void showConfirmationButton() {
 		enterNickLabel.setVisible(false);
 		confirmBtn.setVisible(true);
 	}
 
+	/**
+	 * Toggles the UI between a pending confirmation state and a confirmation state.
+	 * <p>Triggered onAction of the {@link HomeController#confirmBtn} button.</p>
+	 */
 	@FXML
 	private void toggleConfirm() {
 		if (confirmBtn.getUserData() == "pending") {
@@ -94,19 +108,22 @@ public class HomeController {
 		}
 	}
 
+	/** Switches the scene to the Game screen, starting a game. */
 	@FXML
 	public void toGame(){
-		SceneSwitcher.INSTANCE.switchToGame(nicknameField.getText());
+		StageManager.INSTANCE.switchToGame(nicknameField.getText());
 	}
 
+	/** Switches the scene to the Info screen, starting a tutorial. */
 	@FXML
 	public void toInfo(){
-		SceneSwitcher.INSTANCE.switchToInfo();
+		StageManager.INSTANCE.switchToInfo();
 	}
 
+	/** Terminates the entire app. */
 	@FXML
 	public void quit(){
-		Platform.exit();
+		StageManager.INSTANCE.quit();
 	}
 
 }

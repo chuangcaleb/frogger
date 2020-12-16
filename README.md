@@ -5,7 +5,9 @@
  **Chuang Caleb hcycc2 20204134**
 
 ## Table Of Contents
-
+- Build and Run
+- Source File Structure
+- Summary Report
 
 ## Build and Run
 
@@ -41,8 +43,9 @@ _(insert structure)_
 - PanningActor extends MovableActor to also pan, wrap and clone 
   - Car, Log and Turtles inherits PanningActor
   - pulled up common methods from aforementioned classes
-- Enforces Liskov's Substitution Principle by preventing classes from inheriting unnecessary functions: e.g. Frog shouldn't be viewing clone
-- The commonly inherited superclass means we can generalize objects—e.g. detect a collision between a Frog and any PanningActor—before determining the exact concrete class
+- Enforces Liskov's Substitution Principle by preventing classes from inheriting unnecessary functions: e.g. Frog shouldn't be viewing clone()
+- The tutorial feature basically uses and extends the same code as Game, Level, Frog and GameController... so Info, TutorialLevel, TutorialFrog and InfoController extends those classes respectively
+- The commonly inherited superclass means we can generalize objects—e.g. detect a collision between a Frog and any PanningActor—before having to determine the exact concrete class
 
 #### Structure
 - `java` and `resources` folder
@@ -51,13 +54,14 @@ _(insert structure)_
 #### ```frogger.constant``` package
 - Shared constants between different classes that cannot have a local scope
 - Long constants that would clutter a class
-- Predefined datatypes
+- Predefined datatypes 
+- Pre-configured libraries that are easily updated
 
 
 ### Design Patterns ###
 
 #### MVC Pattern
-Each set of MVC for each user interface is decoupled and stored in:
+Each set of MVC (Home, Info, ScorePopup and Game) for each user interface is decoupled where necessary and stored in:
 - Model: ```frogger.model```
 - Controller: ```frogger.controller``` 
 - View: _.fxml_ files under ```resources/frogger/view```
@@ -67,7 +71,6 @@ Ensures there is never more than one instance of the following:
 - ```SceneSwitcher```
 - ```MusicPlayer```
 - ```LaneBuilder```
-- ```LevelBuilder```
 
 #### Factory, Prototype and Builder Pattern
 - LaneBuilder's build() method is a Factory Method as it creates (an ArrayList of abstract PanningActor) objects without specifying its concrete class
@@ -83,14 +86,14 @@ Ensures there is never more than one instance of the following:
 - Resized all image resources and scaled player movement to a follow a 13x11 square grid, each 32x32 pixels
 - Code prevents players from intentionally leaping out of bounds
 - Main Menu and Info screens
-- High Score popup window at the end of every round—Cumulative High Score at the end of the game
+- High Score popup window at the end of every round + Cumulative High Score after the last level
 - Required "Enter nickname" field in the Main Menu that locks out Start button if empty
 - LevelBuilder can easily construct new levels
 - Frog dies if it floats offscreen or doesn't jump into the End properly
   - Appropriate custom randomized death messages for all death types
 - Custom font
 - JUnit tests
-- Tutorial Screen
+- Interactive tutorial
 
 
 

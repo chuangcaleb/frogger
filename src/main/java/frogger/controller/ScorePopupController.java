@@ -4,16 +4,24 @@ import frogger.constant.LevelConfigs;
 import frogger.model.state.Game;
 import frogger.util.HiscoreReader;
 import frogger.util.HiscoreWriter;
-import frogger.util.SceneSwitcher;
+import frogger.util.StageManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * {@code ScorePopupController} is the Controller that handles logic of elements in the ScorePopup screen
+ */
 public class ScorePopupController {
 
-	private final int FINAL_LEVEL = LevelConfigs.INSTANCE.getLibrary().size() - 1;
+	/**
+	 * The local constant that determines which level should continue towards the ending total score screen.
+	 *
+	 * @see LevelConfigs#LEVEL_CONFIG_LIBRARY
+	 */
+	private final int LAST_LEVEL = LevelConfigs.LEVEL_CONFIG_LIBRARY.size() - 1;
 
 	@FXML
 	private Text levelHeaderText;
@@ -32,54 +40,89 @@ public class ScorePopupController {
 	@FXML
 	private Button actionBtn;
 
-	private Game game;
+	/** The Stage object to close. */
 	private Stage stage;
+	/** The Game model to trigger the next level. */
+	private Game game;
 
-	public void passFields(Stage stage, Game game) {
+	/**
+	 * Initializes the controller with the required fields, then writing the newest scores
+	 *
+	 * @param stage the associated stage object
+	 * @param game  the associated game model
+	 */
+	public void init(Stage stage, Game game) {
 
+		// Loads fields
 		this.stage = stage;
 		this.game = game;
+
+		// Loads data from game
 		int levelNum = game.getLevel().getLevelNumber();
 		int levelScore = game.getLevel().getFrog().getScore();
 		int totalScore = game.getTotalScore();
 
+		// Sets the on-screen text according to data
 		levelNumText.setText(String.valueOf(levelNum));
 		levelScoreText.setText(String.format("%05d", levelScore));
 		totalScoreText.setText(String.format("%05d", totalScore));
+
+		// Writes score to file, then loads the updated hiscore list
 		writeScore(levelNum,game.getNickname(),levelScore);
 		loadEntries(levelNum);
 
-		// if at final level, button shows total high scores
-		if (levelNum == FINAL_LEVEL) {
+		// If this is the final level, write total scores to file,
+		// 	and set button event to trigger total hiscores display
+		if (levelNum == LAST_LEVEL) {
 			writeScore(99,game.getNickname(),totalScore);
 			actionBtn.setOnAction(e -> initTotalHiscores(totalScore));
 		}
 
 	}
 
-	private void loadEntries(int levelNum) {
-
-		HiscoreReader hiscoreReader = new HiscoreReader(levelNum);
-
-		nicknameLabel.setText(hiscoreReader.getNicknames());
-		hiscoresLabel.setText(hiscoreReader.getHiscores());
-		rankLabel.setText(hiscoreReader.getRanks());
-
-	}
-
+	/**
+	 * Writes an entry into a hiscore file.
+	 *
+	 * @param levelNum  the level number of the hiscore file
+	 * @param nickname  the nickname of the player
+	 * @param score 	the score attained by the player
+	 * @see HiscoreWriter
+	 */
 	private void writeScore(int levelNum, String nickname, int score) {
 		HiscoreWriter hiscoreWriter = new HiscoreWriter(levelNum);
 		hiscoreWriter.write(nickname,score);
 	}
 
-	@FXML
-	public void nextLevel() {
+	/**
+	* Loads entries from a hiscore file.
+	*
+	 * @param levelNum the level number to determine which high score file to read from
+	* @see HiscoreReader
+	*/
+	private void loadEntries(int levelNum) {
 
-		game.nextLevel();
-		stage.close();
+		HiscoreReader hiscoreReader = new HiscoreReader(levelNum);
+
+		rankLabel.setText(hiscoreReader.getRanks());
+		nicknameLabel.setText(hiscoreReader.getNicknames());
+		hiscoresLabel.setText(hiscoreReader.getHiscores());
 
 	}
 
+	/** Advances the game to the next level, closing the popup Stage. */
+	@FXML
+	public void nextLevel() {
+
+		stage.close();
+		game.nextLevel();
+
+	}
+
+	/**
+	 * Initializes the total hiscores screen display.
+	 *
+	 * @param totalScore the total score to display
+	 */
 	@FXML
 	public void initTotalHiscores(int totalScore) {
 
@@ -92,17 +135,17 @@ public class ScorePopupController {
 
 		totalScoreText.setText("");
 
-		loadEntries(99); // lv99 is total score fie
+		loadEntries(99); // lv99 is the total hiscore file
 
-		actionBtn.setOnAction(e -> switchToHome());
+		// Set the action button to close the popup
+		// 	and switch back to the main menu
+		actionBtn.setOnAction(e -> {
+			stage.close();
+			StageManager.INSTANCE.switchToHome();
+			}
+		);
 		actionBtn.setText("MAIN MENU");
 
-	}
-
-	@FXML
-	public void switchToHome() {
-		SceneSwitcher.INSTANCE.switchToHome();
-		stage.close();
 	}
 
 

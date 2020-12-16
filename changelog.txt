@@ -2,10 +2,7 @@
 # Current Objectives // 460 548
 # >>>>>>>>>>>>>>>>>>>>>>>>
 
-- cleanup
-- javadocs (refer to java's)
 - class diagram
-- readme
 
 LONG-TERM OBJECTIVES
 > README
@@ -27,9 +24,55 @@ X Start Screen w/ picture -> Info button explaining game op
 - highscore from homepage
 - new high score
 
-####################################
+######################################
+# 0.19 Final Cleanup 16/12/20
+######################################
+
+- cleaned up code,
+- cleared warnings
+- defined constants locally
+
+- comments
+- javaDocs
+
+Feats
+- TutorialFrog: doesnt reset progress to 100 if at 101
+- LevelConfigs#getLibrary() removed
+  	- #levelConfigLibrary -> static final LEVEL_CONFIG_LIBRARY, using that as ref instead of INSTANCE
+- LaneBuilder now reports invalid startXPerc inputs
+
+Refactoring
+- renamed Global to StageDimensions
+- ScorePopupController#passFields renamed to init()
+	- #FINAL_LEVEL -> #LAST_LEVEL, semantics of constant formatting
+- HomeController#dsiplayConfirmationButton() -> showConfirmationButton()
+- SceneSwitcher -> StageManager
+- magic numbers in LaneBuilder
+- CollisionChecker#checkAuto -> checkPanning
+	- aActorBounds -> pActorBounds
+- Test cases to remove access modifier in Junit5
+- Tightened access modifiers
+- MovableActor#A_ACTOR_HEIGHT -> PanningActor#P_ACTOR_HEIGHT
+	- PanningActors no longer take in a height argument, since height is standard
+- All PanningActor's constructor takes speed as an integer instead of double
+	- The actual PanningActor#speed is still double, since #setSpeed multiplies by 0.1
+- Frog's keyPressed -> keystrokeDownwards
+	- Frog breaks movement if at all it has noMove
+	- Frog endLevel does not return score; another method is called. Single responsibility
+	- Intro'd a ton of new constants
+- ActorDimensions#GRID_UNIT_W -> CAR_W
+- Turtles FilePaths to be like Frog's, root and default, saving constants
+-
+
+Sprites
+- set all sprites to be static final, instead of instantiated every time a new object is instantiated
+
+- renamed file Frogger Main Song Theme (loop).mp3 -> FroggerTheme_loop.mp3
+- FilePath
+
+######################################
 # 0.18 LevelConfig & Tutorial 12/12/20
-####################################
+######################################
 
 LevelConfig
 - changed LevelBuilder into LevelConfig, a singleton under const, as a library of an ArrayList of an ArrayList of Panning Actors
@@ -152,7 +195,7 @@ Nickname
 
 misc
 - deleted Digit.java
-- Turtles: initialised sprites straight away w/o function call
+- Turtles: initialised sprites straight away w/o method call
 - removed /model/state, and just put Game and Level under /model
 
 
