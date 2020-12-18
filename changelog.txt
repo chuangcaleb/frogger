@@ -22,9 +22,16 @@ X Start Screen w/ picture -> Info button explaining game op
 - highscore from homepage
 - new high score
 
-######################################
+#####################
+# 1.1 Hotfix 18/12/20
+#####################
+
+- Commented out all occurrences of DeathType.TIMER
+
+
+#######################
 # 1.0 Release 18/12/20
-######################################
+#######################
 
 - Added Table of Contents to README
 - Commented out DeathMessages#TimerDeathMessages

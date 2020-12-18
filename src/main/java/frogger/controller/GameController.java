@@ -62,7 +62,6 @@ public class GameController {
 			case WATER -> deathMsgLabel.setText(getRandMsg(DeathMessages.waterDeathMsgs));
 			case OFFSCREEN -> deathMsgLabel.setText(getRandMsg(DeathMessages.offscreenDeathMsgs));
 			case ENDDEATH -> deathMsgLabel.setText(getRandMsg(DeathMessages.endDeathMsgs));
-			case TIMER -> deathMsgLabel.setText(getRandMsg(DeathMessages.timerDeathMsgs));
 		}
 	}
 

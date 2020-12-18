@@ -26,7 +26,7 @@ public enum DeathType {
  	 */
 	ENDDEATH,
 
-	/** Time runs out (Currently unused) */
-	TIMER
+//	/** Time runs out (Currently unused) */
+//	TIMER
 
 }
