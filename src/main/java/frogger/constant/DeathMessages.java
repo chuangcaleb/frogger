@@ -52,14 +52,14 @@ public class DeathMessages {
 				}
 			};
 
-	/** The list of death messages for a death by timeout. Unused, but for a later add-on, perhaps? */
-	public static final ArrayList<String> timerDeathMsgs =
-			new ArrayList<>() {
-				{
-					add("You took too long and died of old age.");
-					add("ERROR: timer.long.Overflow");
-					add("Time flies, but you didn't.");
-				}
-			};
+//	/** The list of death messages for a death by timeout. Unused, but for a later add-on, perhaps? */
+//	public static final ArrayList<String> timerDeathMsgs =
+//			new ArrayList<>() {
+//				{
+//					add("You took too long and died of old age.");
+//					add("ERROR: timer.long.Overflow");
+//					add("Time flies, but you didn't.");
+//				}
+//			};
 	
 }

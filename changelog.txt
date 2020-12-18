@@ -1,15 +1,13 @@
 # >>>>>>>>>>>>>>>>>>>>>>>>
-# Current Objectives // 460 548
+# Current Objectives
 # >>>>>>>>>>>>>>>>>>>>>>>>
 
-- class diagram
-
 LONG-TERM OBJECTIVES
-> README
-- high level class diagram
-- Javadocs
-- Video
 - Add interesting levels to the game (either follow the original Frogger game levels or come up with your own ideas)
+X high level class diagram
+X Video
+X Javadocs
+X README
 X Refactor code w/ design patterns
 X Add meaningful JUnit tests
 X Create a permanent high scoring list (using a file to store scores)
@@ -23,6 +21,13 @@ X Start Screen w/ picture -> Info button explaining game op
 - fly?
 - highscore from homepage
 - new high score
+
+######################################
+# 1.0 Release 18/12/20
+######################################
+
+- Added Table of Contents to README
+- Commented out DeathMessages#TimerDeathMessages
 
 ######################################
 # 0.19 Final Cleanup 16/12/20
@@ -62,13 +67,13 @@ Refactoring
 	- Intro'd a ton of new constants
 - ActorDimensions#GRID_UNIT_W -> CAR_W
 - Turtles FilePaths to be like Frog's, root and default, saving constants
--
 
 Sprites
 - set all sprites to be static final, instead of instantiated every time a new object is instantiated
 
 - renamed file Frogger Main Song Theme (loop).mp3 -> FroggerTheme_loop.mp3
 - FilePath
+
 
 ######################################
 # 0.18 LevelConfig & Tutorial 12/12/20
@@ -488,15 +493,21 @@ MISC
 - ensured build files
 
 
+
+
+
+
 #########################
 # KNOWN BUGS
 #########################
 ! Turtles have to be offset -3 on y-axes. Functionality still holds.
 ! if player holds down key, will be stuck in second animation
 ! if player does a diagonal combo, the frog will be stuck in second state
-! now does not increment by 1
-! LaneBuilder's xPerc seems to gap between 100 and 0
+! now does not increment linearly by 1
+! LaneBuilder's xPerc needs to (4 * StageDimensions.STAGE_WRAP) instead of * 2
 
+
+# SCORING
 X Every forward step scores 10 points,
 X and every frog arriving safely home scores 50 points.
 10 points are also awarded per each unused 1⁄2 second of time.

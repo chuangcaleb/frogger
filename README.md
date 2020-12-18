@@ -5,21 +5,42 @@
  **Chuang Caleb hcycc2 20204134**
 
 ## Table Of Contents
-- Build and Run
-- Source File Structure
-- Summary Report
+* [Build and Run](#build-and-run)
+* [Source File Structure](#source-file-structure)
+* [Summary Report (500 words)](#summary-report--500-words-)
+    + [Key Refactorings](#key-refactorings)
+    + [Design Patterns](#design-patterns)
+    + [New Additions](#new-additions)
 
 ## Build and Run
 
 Tested on:
 - macOS (Java 15 + JavaFX 11)
-- 
+- Windows (Java 15 + JavaFX 11)
 
 Build Script:\
 `mvn clean compile package exec:java`
 
 ## Source File Structure
-_(insert structure)_
+
+* [src/main](./src/main)
+    * [java](./src/main/java)
+        * [frogger](./src/main/java/frogger)
+            * [constant](./src/main/java/frogger/constant)
+            * [controller](./src/main/java/frogger/controller)
+            * [model](./src/main/java/frogger/model)
+                * [actor](./src/main/java/frogger/model/actor)
+                * [level](./src/main/java/frogger/model/level)
+                * [state](./src/main/java/frogger/model/state)
+            * [util](./src/main/java/frogger/util)
+    * [resources](./src/main/resources)
+        * [frogger](./src/main/resources/frogger)
+            * [css](./src/main/resources/frogger/css)
+            * [font](./src/main/resources/frogger/font)
+            * [images](./src/main/resources/frogger/images)
+            * [music](./src/main/resources/frogger/music)
+            * [view](./src/main/resources/frogger/view)
+
 
 ## Summary Report (500 words)
 
